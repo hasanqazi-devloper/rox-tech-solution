@@ -13,10 +13,42 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "ROX Tech Solutions | Premier Tech, Vape & Repair Hub in Cashel, Ireland",
-  description: "Your go-to local destination for electronics, everyday accessories, vape products and professional device repair assistance in Cashel, County Tipperary, Ireland.",
+  description:
+    "Your go-to local destination for electronics, everyday accessories, vape products and professional device repair assistance in Cashel, County Tipperary, Ireland.",
+
   // 👑 Site Icons Configuration Engine
   icons: {
+    icon: "/fav.png",
     shortcut: "/fav.png",
+    apple: "/fav.png",
+  },
+
+  // 🖼️ Open Graph (WhatsApp, Facebook, LinkedIn Link Previews)
+  openGraph: {
+    title: "ROX Tech Solutions | Premier Tech, Vape & Repair Hub in Cashel",
+    description:
+      "Your go-to local destination for electronics, everyday accessories, vape products and professional device repair assistance in Cashel.",
+    url: "https://roxtechsolutions.com", // Apni actual domain yahan likhein
+    siteName: "ROX Tech Solutions",
+    images: [
+      {
+        url: "/feature.jpg", // public folder mein rakhi hui image ka path
+        width: 1200,
+        height: 630,
+        alt: "ROX Tech Solutions Cashel Storefront Banner",
+      },
+    ],
+    locale: "en_IE",
+    type: "website",
+  },
+
+  // 🐦 Twitter Card Metadata
+  twitter: {
+    card: "summary_large_image",
+    title: "ROX Tech Solutions | Cashel, Ireland",
+    description:
+      "Premier tech accessories, vape products, and expert device repairs in Cashel.",
+    images: ["/feature.jpg"],
   },
 };
 
