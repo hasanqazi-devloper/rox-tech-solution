@@ -289,7 +289,7 @@ export default function VapeShopPage() {
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
               <img
-                src="/shop-2.jpeg"
+                src="/vape-hero-page.png"
                 alt="ROX Vape & Tech Hub Showcase"
                 className="w-full h-full object-cover object-right grayscale-[20%] lg:grayscale-0"
               />

@@ -44,7 +44,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
               <img
-                src="/shop-2.jpeg"
+                src="/about-hero.png"
                 alt="ROX Tech Store Showcase in Cashel"
                 className="w-full h-full object-cover object-right lg:grayscale-0"
               />
