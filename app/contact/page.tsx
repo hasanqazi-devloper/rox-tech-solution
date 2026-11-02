@@ -1,387 +1,445 @@
-'use client';
-import { ArrowDown } from 'lucide-react';
-import Image from 'next/image';
-import React, { useState } from 'react';
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
 import { 
-  Mail, 
-  Phone, 
   MapPin, 
+  MessageCircle, 
+  Clock, 
+  PhoneCall, 
+  Navigation, 
   Send, 
-  MessageSquare, 
-  ChevronDown,
-  Building2,
-  Clock,
-  Globe
-} from 'lucide-react';
+  ShoppingBag, 
+  Wrench, 
+  Info,
+  ChevronRight
+} from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    fullName: "",
+    email: "",
+    phone: "",
+    reason: "",
+    subject: "",
+    message: ""
   });
-
-  const [submitted, setSubmitted] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    alert("Thank you! Your message has been sent to ROX Tech Solutions.");
   };
 
-  // Official Management Posters / Profiles
-  const teamMembers = [
-    {
-      id: 'ali-fathi',
-      name: 'Ali Fathi Nasab',
-      persianName: 'علی فتحی نسب',
-      role: 'Managing Director (مدیرعامل)',
-      subTitle: 'Former Manager of Bank Keshavrazi (Khurasan Razavi)',
-      image: '/ali.webp',
-      phone: '+98 915 598 8780',
-      badge: 'Executive Leadership'
-    },
-    {
-      id: 'hossein-fathi',
-      name: 'Hossein Fathi Nasab',
-      persianName: 'حسین فتحی نسب',
-      role: 'Export Manager (کارشناس صادرات)',
-      subTitle: 'International Logistics & B2B Trade Specialist',
-      image: '/hossain.webp',
-      phone: '+98 912 532 3142',
-      badge: 'Export Operations'
-    },
-    {
-      id: 'naser-haji',
-      name: 'Naser Haji Abadi',
-      persianName: 'Naser Haji Abadi (ناصر حاجی آبادی)',
-      role: 'Sales Specialist (کارشناس فروش)',
-      subTitle: 'Domestic & Regional Market Supply',
-      image: '/farsi.webp',
-      phone: '+98 915 371 3610',
-      badge: 'Domestic Sales'
-    }
-  ];
-
-  const faqs = [
-    {
-      q: 'What is the Minimum Order Quantity (MOQ) for export?',
-      a: 'Our standard MOQ is one 20ft Full Container Load (FCL), which accommodates approximately 14 to 16 Metric Tons depending on product variety and vacuum packaging specifications.'
-    },
-    {
-      q: 'How do you handle Aflatoxin testing for European imports?',
-      a: 'Every export batch is sampled in accordance with ISO/EU protocols and tested via HPLC in accredited laboratories. Official Phytosanitary Certificates and Certificate of Analysis (COA) specifying B1 and Total Aflatoxin levels are provided with each shipment.'
-    },
-    {
-      q: 'Which Incoterms and payment terms are supported?',
-      a: 'We primarily quote on FOB Bandar Abbas, CIF destination port, or CFR terms. Payment methods include Wire Transfer (T/T), Irrevocable Letter of Credit (L/C), and milestone-based commercial arrangements.'
-    }
-  ];
-
   return (
-    <div className="bg-[#0B2B22] text-[#F4F0E6] min-h-screen selection:bg-[#C5922E] selection:text-[#0B2B22]">
+    <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
 
-      {/* 1. UNIFIED HERO SECTION */}
-   <section className="relative bg-[#0B2B22] text-[#F4F0E6] overflow-hidden py-16 md:py-16 border-b border-[#1A4337]">
-  {/* Background Image & Dark Overlay */}
-  <div className="absolute inset-0 z-0">
-    <Image
-      src="https://images.unsplash.com/photo-1756749442845-4973b7cede48?auto=format&fit=crop&w=1920&q=100"
-      alt="Pistachio Home Executive Communication & Trade Office"
-      fill
-      priority
-      unoptimized
-      className="object-cover object-center opacity-40 -scale-x-100"
-    />
-    <div className="absolute inset-0 bg-gradient-to-r from-[#0B2B22]/90 via-[#0B2B22]/60 to-transparent" />
-  </div>
+      {/* ================= 1. HERO SECTION ================= */}
+    <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
 
-  {/* Hero Content */}
-  <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-    <div className="max-w-3xl space-y-7 text-left">
-   
+  {/* ================= 1. DESKTOP HERO VIEW ================= */}
+  <div className="hidden lg:block">
+    <div className="absolute inset-0 w-full h-full flex justify-end">
+      <div className="relative w-full lg:w-[75%] h-full">
+        <img
+          src="/rox-contact.png"
+          alt="ROX Tech Solutions Interior Showcase"
+          className="w-full h-full object-cover object-right lg:grayscale-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
+      </div>
+    </div>
 
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight uppercase leading-tight">
-        <span className="text-[#F4F0E6]">CONTACT OUR </span>
-        <span className="text-[#C5922E] drop-shadow-[0_0_25px_rgba(197,146,46,0.3)]">EXECUTIVE TEAM</span>
-      </h1>
+    <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
+      <div className="max-w-xl space-y-6">
 
-      <p className="text-[#F4F0E6]/80 text-sm md:text-base leading-relaxed">
-        Directly connect with our board directors, export representatives, and sales managers for instant price quotes and supply agreements.
-      </p>
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+          <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+          <span>Cashel, Ireland</span>
+        </div>
 
-      <div className="pt-2">
-        <a
-          href="#team"
-          className="inline-flex items-center gap-3 bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] font-black text-xs uppercase tracking-wider px-8 py-4 rounded-xl transition-all duration-300 shadow-xl shadow-[#C5922E]/20 hover:shadow-[#C5922E]/40 transform active:scale-95 group"
-        >
-          <span>VIEW EXECUTIVE DIRECTORY</span>
-          <ArrowDown className="w-4 h-4 stroke-[3] transition-transform duration-300 group-hover:translate-y-1" />
-        </a>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
+          Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
+        </h1>
+
+        <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
+          Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
+        </p>
+
+        <div className="flex items-center gap-3 pt-2">
+          <a
+            href="https://wa.me/353000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+          >
+            <MessageCircle className="w-4 h-4 fill-white" />
+            <span>WhatsApp Us</span>
+          </a>
+
+          <a
+            href="https://maps.google.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#F97316] hover:bg-[#EA580C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+          >
+            <Navigation className="w-4 h-4" />
+            <span>Visit Our Store</span>
+          </a>
+        </div>
+
       </div>
     </div>
   </div>
+
+
+  {/* ================= 2. MOBILE HERO VIEW ================= */}
+  <div className="block lg:hidden px-5 py-8 space-y-6">
+    
+    <div className="space-y-4">
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+        <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+        <span>Cashel, Ireland</span>
+      </div>
+
+      <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
+        Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
+      </h1>
+
+      <p className="text-xs text-gray-700 font-medium leading-relaxed">
+        Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
+      </p>
+
+      <div className="flex items-center gap-2.5 pt-1">
+        <a
+          href="https://wa.me/353000000000"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+        >
+          <MessageCircle className="w-3.5 h-3.5 fill-white" />
+          <span>WhatsApp Us</span>
+        </a>
+
+        <a
+          href="https://maps.google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+        >
+          <Navigation className="w-3.5 h-3.5" />
+          <span>Visit Our Store</span>
+        </a>
+      </div>
+    </div>
+
+    <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
+      <img
+        src="/rox-contact.png"
+        alt="ROX Tech Solutions Interior Showcase"
+        className="w-full h-full object-cover object-center"
+      />
+    </div>
+
+  </div>
+
 </section>
 
-      {/* 2. MANAGEMENT POSTERS SECTION (INCREASED HEIGHT CARDS) */}
-      <section className="py-20 bg-[#133A2E] border-b border-[#1A4337]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
+
+      {/* ================= 2. QUICK INFO CARDS BAR ================= */}
+      <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+        <div className="max-w-[1680px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
           
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-black text-[#F4F0E6] tracking-tight">
-              Management &amp; Key Representatives
-            </h2>
-            <p className="text-xs text-[#C5922E] font-medium dir-rtl">
-              خانه پسته - هیئت مدیره و کارشناسان ارشد
-            </p>
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group cursor-pointer">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
+                <MapPin className="w-5 h-5 text-[#F97316]" />
+              </div>
+              <div className="space-y-0.5">
+                <h3 className="text-xs font-bold text-[#0F172A]">Location</h3>
+                <p className="text-[11px] text-gray-600">Cashel, County Tipperary, Ireland</p>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {teamMembers.map((member) => (
-              <div 
-                key={member.id}
-                className="bg-[#0B2B22] border border-[#1A4337] rounded-3xl overflow-hidden hover:border-[#C5922E]/60 transition-all duration-300 flex flex-col justify-between group shadow-xl"
-              >
-                {/* Poster Container - Height increased to h-[480px] for full poster display */}
-                <div className="relative h-[480px] w-full bg-[#0B2B22] overflow-hidden">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    priority
-                    className="object-contain object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="text-[10px] font-black uppercase tracking-widest bg-[#0B2B22]/90 text-[#C5922E] border border-[#1A4337] px-3 py-1 rounded-full backdrop-blur-md">
-                      {member.badge}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Info & Actions */}
-                <div className="p-6 space-y-4 bg-[#0B2B22] border-t border-[#1A4337]">
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-base font-black text-[#F4F0E6]">{member.name}</h3>
-                      <span className="text-xs text-[#C5922E] font-bold dir-rtl">{member.persianName}</span>
-                    </div>
-                    <p className="text-xs font-bold text-[#C5922E] tracking-wider uppercase">{member.role}</p>
-                    <p className="text-[11px] text-[#F4F0E6]/60 leading-relaxed">{member.subTitle}</p>
-                  </div>
-
-                  <div className="space-y-2 pt-2">
-                    <a
-                      href={`tel:${member.phone}`}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#133A2E] hover:bg-[#C5922E] text-[#F4F0E6] hover:text-[#0B2B22] border border-[#1A4337] font-bold text-xs py-3 rounded-xl transition-all duration-300"
-                    >
-                      <Phone className="w-3.5 h-3.5 text-[#C5922E] group-hover:text-[#0B2B22]" />
-                      <span>{member.phone}</span>
-                    </a>
-
-                    <a
-                      href={`https://wa.me/${member.phone.replace(/[^0-9]/g, '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#0B2B22] hover:bg-[#133A2E] text-[#C5922E] border border-[#1A4337] font-bold text-xs py-2.5 rounded-xl transition-all duration-300"
-                    >
-                      <MessageSquare className="w-3.5 h-3.5 fill-[#C5922E]" />
-                      <span>WhatsApp Direct</span>
-                    </a>
-                  </div>
-                </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-[#00D66C] transition group cursor-pointer">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0 border border-emerald-500/20">
+                <MessageCircle className="w-5 h-5 text-[#00D66C]" />
               </div>
-            ))}
+              <div className="space-y-0.5">
+                <h3 className="text-xs font-bold text-[#0F172A]">WhatsApp & Phone</h3>
+                <p className="text-[11px] text-gray-600">Get in touch via WhatsApp or phone for quick assistance.</p>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group cursor-pointer">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
+                <Clock className="w-5 h-5 text-[#F97316]" />
+              </div>
+              <div className="space-y-0.5">
+                <h3 className="text-xs font-bold text-[#0F172A]">Opening Hours</h3>
+                <p className="text-[11px] text-gray-600">Visit us during our regular opening hours for in-store support.</p>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
           </div>
 
         </div>
       </section>
 
-      {/* 3. HEAD OFFICE DETAILS & FORM */}
-      <section className="py-20 bg-[#0B2B22] border-b border-[#1A4337]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+      {/* ================= 3. MAIN CONTENT: FORM & SIDECARDS ================= */}
+      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+        <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Office Details */}
-          <div className="lg:col-span-5 space-y-8">
-            <div>
-              <span className="text-xs font-black uppercase tracking-widest text-[#C5922E]">Official Headquarters</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#F4F0E6] mt-1 tracking-tight">
-                Head Office &amp; Address
-              </h2>
-              <p className="text-xs text-[#F4F0E6]/70 mt-2 leading-relaxed">
-                Sabzevar, Pasdaran Ave, End of Pasdaran 5, Building 7, 2nd Floor
-                <br />
-                <span className="dir-rtl inline-block mt-1">سبزوار - خیابان پاسداران - انتهای پاسداران ۵ - ساختمان هفت - طبقه دوم</span>
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-[#133A2E] border border-[#1A4337] p-5 rounded-2xl flex items-start gap-4">
-                <div className="p-3 bg-[#0B2B22] border border-[#1A4337] rounded-xl text-[#C5922E] shrink-0">
-                  <MapPin className="w-5 h-5" />
+          {/* Left Side: Send Us a Message Form */}
+          <div className="lg:col-span-8 bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+            <div className="flex justify-between items-center">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                    Send Us a Message
+                  </h2>
                 </div>
-                <div>
-                  <h3 className="text-xs font-bold text-[#C5922E] uppercase tracking-wider">Office Location</h3>
-                  <p className="text-sm font-semibold text-[#F4F0E6] mt-0.5">Sabzevar, Razavi Khorasan, Iran</p>
-                </div>
-              </div>
-
-              <div className="bg-[#133A2E] border border-[#1A4337] p-5 rounded-2xl flex items-start gap-4">
-                <div className="p-3 bg-[#0B2B22] border border-[#1A4337] rounded-xl text-[#C5922E] shrink-0">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-xs font-bold text-[#C5922E] uppercase tracking-wider">Email Support</h3>
-                  <p className="text-sm font-semibold text-[#F4F0E6] mt-0.5">info@pistachiohome.com</p>
-                  <p className="text-[11px] text-[#F4F0E6]/60">ali_fathinasab@yahoo.com</p>
-                </div>
-              </div>
-
-              <div className="bg-[#133A2E] border border-[#1A4337] p-5 rounded-2xl flex items-start gap-4">
-                <div className="p-3 bg-[#0B2B22] border border-[#1A4337] rounded-xl text-[#C5922E] shrink-0">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-xs font-bold text-[#C5922E] uppercase tracking-wider">Working Hours</h3>
-                  <p className="text-sm font-semibold text-[#F4F0E6] mt-0.5">Saturday – Thursday: 8:00 AM – 6:00 PM</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Form */}
-          <div className="lg:col-span-7 bg-[#133A2E] border border-[#1A4337] rounded-3xl p-8 sm:p-10 shadow-2xl">
-            <div className="mb-6 space-y-2">
-              <span className="text-xs font-black uppercase tracking-widest text-[#C5922E]">Direct Communication</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#F4F0E6]">Send Us a Message</h2>
-              <p className="text-xs text-[#F4F0E6]/70 dir-rtl">
-                انتقادات و پیشنهادات خود را با ما در میان بگذارید
-              </p>
-            </div>
-
-            {submitted ? (
-              <div className="bg-[#0B2B22] border border-[#C5922E] rounded-2xl p-8 text-center space-y-4">
-                <div className="w-12 h-12 bg-[#C5922E] text-[#0B2B22] rounded-full flex items-center justify-center mx-auto font-black text-xl">
-                  ✓
-                </div>
-                <h3 className="text-xl font-black text-[#F4F0E6]">Message Delivered!</h3>
-                <p className="text-xs text-[#F4F0E6]/80 leading-relaxed max-w-md mx-auto">
-                  Thank you for reaching out to Pistachio Home. Our team will contact you shortly.
+                <p className="text-xs text-gray-600 pl-3">
+                  Fill out the form below and we&apos;ll get back to you as soon as possible.
                 </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="text-xs font-bold text-[#C5922E] underline uppercase tracking-wider pt-2"
-                >
-                  Send Another Message
-                </button>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold text-[#F4F0E6]/80 uppercase tracking-wider">Full Name (نام و نام خانوادگی) *</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Ali Reza"
-                      value={formData.fullName}
-                      onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                      className="w-full bg-[#0B2B22] border border-[#1A4337] focus:border-[#C5922E] rounded-xl px-4 py-3 text-xs text-[#F4F0E6] outline-none transition"
-                    />
-                  </div>
+              <span className="text-[10px] font-bold text-red-500">* Required fields</span>
+            </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold text-[#F4F0E6]/80 uppercase tracking-wider">Email (ایمیل) *</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="name@domain.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full bg-[#0B2B22] border border-[#1A4337] focus:border-[#C5922E] rounded-xl px-4 py-3 text-xs text-[#F4F0E6] outline-none transition"
-                    />
-                  </div>
-                </div>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-[#0F172A]">Full Name *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Your full name"
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
+                />
+              </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold text-[#F4F0E6]/80 uppercase tracking-wider">Phone (شماره تماس)</label>
-                    <input
-                      type="text"
-                      placeholder="+98..."
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="w-full bg-[#0B2B22] border border-[#1A4337] focus:border-[#C5922E] rounded-xl px-4 py-3 text-xs text-[#F4F0E6] outline-none transition"
-                    />
-                  </div>
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-[#0F172A]">Email Address *</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
+                />
+              </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold text-[#F4F0E6]/80 uppercase tracking-wider">Subject (موضوع پیام)</label>
-                    <input
-                      type="text"
-                      placeholder="Export Inquiry / Order"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                      className="w-full bg-[#0B2B22] border border-[#1A4337] focus:border-[#C5922E] rounded-xl px-4 py-3 text-xs text-[#F4F0E6] outline-none transition"
-                    />
-                  </div>
-                </div>
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-[#0F172A]">Phone Number (Optional)</label>
+                <input
+                  type="tel"
+                  placeholder="+353 ..."
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
+                />
+              </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold text-[#F4F0E6]/80 uppercase tracking-wider">Message (متن پیام)</label>
-                  <textarea
-                    rows={4}
-                    placeholder="Write your inquiry here..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full bg-[#0B2B22] border border-[#1A4337] focus:border-[#C5922E] rounded-xl px-4 py-3 text-xs text-[#F4F0E6] outline-none transition"
-                  />
-                </div>
+              <div className="space-y-1">
+                <label className="text-[11px] font-bold text-[#0F172A]">Reason for Contact *</label>
+                <select
+                  required
+                  value={formData.reason}
+                  onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
+                >
+                  <option value="" disabled>Select reason</option>
+                  <option value="repair">Device Repair</option>
+                  <option value="product">Product Inquiry</option>
+                  <option value="other">General Question</option>
+                </select>
+              </div>
 
+              <div className="sm:col-span-2 space-y-1">
+                <label className="text-[11px] font-bold text-[#0F172A]">Subject *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. iPhone 15 Pro repair"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
+                />
+              </div>
+
+              <div className="sm:col-span-2 space-y-1">
+                <label className="text-[11px] font-bold text-[#0F172A]">Message *</label>
+                <textarea
+                  rows={4}
+                  required
+                  placeholder="Tell us more about your enquiry..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none resize-none"
+                />
+              </div>
+
+              <div className="sm:col-span-2 pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] font-black text-xs uppercase tracking-wider py-4 rounded-xl transition-all duration-300 shadow-xl shadow-[#C5922E]/20"
+                  className="w-full sm:w-auto bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 px-8 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md"
                 >
-                  <Send className="w-4 h-4 fill-[#0B2B22]" />
-                  <span>Send Message (ارسال پیام)</span>
+                  <Send className="w-4 h-4" />
+                  <span>Submit Message</span>
                 </button>
-              </form>
-            )}
+                <p className="text-[11px] text-gray-500 text-center sm:text-right">
+                  🔒 Your information is safe with us. We&apos;ll only use it to respond to your enquiry.
+                </p>
+              </div>
+
+            </form>
+          </div>
+
+          {/* Right Side: Sidecards (Quick WhatsApp & Visit Store) */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* Quick WhatsApp Assistance Card */}
+            <div className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 shadow-sm space-y-4">
+              <div className="space-y-1">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                  Quick WhatsApp Assistance
+                </h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Need a faster reply? Chat with us on WhatsApp for product questions, repair enquiries or store visits.
+                </p>
+              </div>
+              <a
+                href="https://wa.me/353000000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md block text-center"
+              >
+                <MessageCircle className="w-4 h-4 fill-white" />
+                <span>WhatsApp Us →</span>
+              </a>
+            </div>
+
+            {/* Visit Our Store Card */}
+            <div className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 shadow-sm space-y-4">
+              <div className="space-y-1">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                  Visit Our Store
+                </h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  See our full range in person. Get expert advice and friendly support.
+                </p>
+              </div>
+              <div className="rounded-2xl overflow-hidden border border-gray-300 aspect-[16/10] bg-gray-50">
+                <img
+                  src="/shop-4.jpeg"
+                  alt="Cashel Store"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <a
+                  href="https://maps.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#F97316] hover:bg-[#EA580C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Get Directions</span>
+                </a>
+                <a
+                  href="https://wa.me/353000000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#00D66C] hover:bg-[#00B85C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                  <span>WhatsApp Us</span>
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>
       </section>
 
-      {/* 4. FAQ SECTION */}
-      <section className="py-20 bg-[#133A2E]">
-        <div className="max-w-4xl mx-auto px-6 space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-black text-[#F4F0E6]">Frequently Asked Questions</h2>
+
+      {/* ================= 4. HELPFUL LINKS SECTION ================= */}
+      <section className="w-full bg-white py-10 px-6 sm:px-10 lg:px-16">
+        <div className="max-w-[1680px] mx-auto space-y-6">
+          
+          <div className="flex items-center gap-2">
+            <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                Helpful Links
+              </h2>
+              <p className="text-[11px] text-gray-500">Quick access to our most popular pages.</p>
+            </div>
           </div>
 
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => (
-              <div 
-                key={idx}
-                className="bg-[#0B2B22] border border-[#1A4337] rounded-2xl overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-xs sm:text-sm text-[#F4F0E6] hover:text-[#C5922E] transition-colors"
-                >
-                  <span>{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-[#C5922E] shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
-                </button>
-
-                {openFaq === idx && (
-                  <div className="px-5 pb-5 pt-0 text-xs text-[#F4F0E6]/70 leading-relaxed border-t border-[#1A4337]/50">
-                    <p className="mt-3">{faq.a}</p>
-                  </div>
-                )}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <Link
+              href="/shop"
+              className="bg-gray-50 border border-gray-200 rounded-2xl p-5 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
+                  <ShoppingBag className="w-5 h-5 text-[#F97316]" />
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="text-xs font-bold text-[#0F172A]">Shop</h3>
+                  <p className="text-[11px] text-gray-600">Browse our products</p>
+                </div>
               </div>
-            ))}
+              <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
+            </Link>
+
+            <Link
+              href="/repairs"
+              className="bg-gray-50 border border-gray-200 rounded-2xl p-5 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
+                  <Wrench className="w-5 h-5 text-[#F97316]" />
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="text-xs font-bold text-[#0F172A]">Repairs</h3>
+                  <p className="text-[11px] text-gray-600">Get a repair quote</p>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
+            </Link>
+
+            <Link
+              href="/about"
+              className="bg-gray-50 border border-gray-200 rounded-2xl p-5 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
+                  <Info className="w-5 h-5 text-[#F97316]" />
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="text-xs font-bold text-[#0F172A]">About</h3>
+                  <p className="text-[11px] text-gray-600">Learn more about us</p>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
+            </Link>
+
           </div>
+
         </div>
       </section>
 

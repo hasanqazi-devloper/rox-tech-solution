@@ -1,170 +1,189 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Menu, X, ArrowUpRight, MessageSquare, Globe } from 'lucide-react';
-import Image from 'next/image';
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { 
+  MessageCircle, 
+  MapPin, 
+  Search, 
+  Menu, 
+  X, 
+  ShoppingBag 
+} from "lucide-react";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [lang, setLang] = useState<'EN' | 'FA' | 'AR'>('EN');
+  const [searchQuery, setSearchQuery] = useState("");
+  const pathname = usePathname();
 
-  const toggleLanguage = () => {
-    if (lang === 'EN') setLang('FA');
-    else if (lang === 'FA') setLang('AR');
-    else setLang('EN');
-  };
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Shop", href: "/shop" },
+    { name: "Vapes", href: "/vapes" },
+    { name: "Repairs", href: "/repairs" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+  ];
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 bg-[#051813]/95 backdrop-blur-xl border-b border-[#1A4337] shadow-2xl py-3.5 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between gap-4">
-
-        {/* 1. BRAND LOGO & BRANDING */}
-        <Link href="/" className="flex items-center gap-3.5 group shrink-0">
-          <div className="relative flex items-center transition-transform duration-300 group-hover:scale-105">
-            <Image
-              src="/logo.png"
-              alt="Pistachio Home Logo"
-              width={200}
-              height={70}
-              quality={100}
-              unoptimized
-              className="h-10 md:h-12 w-auto object-contain drop-shadow-[0_0_12px_rgba(197,146,46,0.25)] brightness-110 contrast-105"
-              priority
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-300 shadow-sm transition-all duration-300">
+      <div className="max-w-[2200px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+        
+        {/* ================= DESKTOP VIEW ================= */}
+        {/* 1. Brand Logo (Left Side - Desktop) */}
+        <Link href="/" className="hidden lg:flex items-center shrink-0 outline-none focus:outline-none">
+          <div className="relative h-10 sm:h-16 w-36 flex items-center">
+            <Image 
+              src="/rox-logo.png" 
+              alt="ROX Tech Solutions Logo" 
+              fill
+              className="object-contain object-left" 
+              priority 
             />
           </div>
-
-          {/* <div className="hidden sm:flex flex-col justify-center border-l-2 border-[#C5922E]/40 pl-3.5 py-0.5">
-            <div className="flex items-center gap-2">
-              <span className="text-base md:text-lg font-black tracking-[0.2em] uppercase leading-none text-[#EFECE6] group-hover:text-[#C5922E] transition-colors">
-                PISTACHIO <span className="text-[#C5922E] drop-shadow-[0_0_8px_rgba(197,146,46,0.4)]">HOME</span>
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5 mt-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C5922E] shadow-[0_0_6px_#C5922E] animate-pulse" />
-              <span className="text-[9px] font-bold tracking-[0.18em] text-[#EFECE6]/70 uppercase">
-                Premium B2B Export
-              </span>
-            </div>
-          </div> */}
         </Link>
 
-        {/* 2. DESKTOP NAVIGATION LINKS */}
-        <nav className="hidden lg:flex items-center gap-6 bg-[#133A2E]/90 border border-[#1A4337] rounded-full px-6 py-2 shadow-inner backdrop-blur-md">
-          {[
-            { name: 'Home', path: '/' },
-            { name: 'About', path: '/about' },
-            { name: 'Products', path: '/products' },
-            { name: 'Blog', path: '/blog' },
-            { name: 'Quality', path: '/quality' },
-            { name: 'Export', path: '/export' },
-            { name: 'Contact', path: '/contact' },
-          ].map((item) => (
-            <Link
-              key={item.name}
-              href={item.path}
-              className="text-xs font-bold uppercase tracking-wider text-[#EFECE6]/85 hover:text-[#C5922E] transition-colors relative group py-0.5"
-            >
-              {item.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#C5922E] group-hover:w-full transition-all duration-300 rounded-full" />
-            </Link>
-          ))}
-        </nav>
-
-        {/* 3. DESKTOP ACTION BUTTONS */}
-        <div className="hidden md:flex items-center gap-2.5 shrink-0">
-          {/* LANGUAGE SWITCHER */}
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1.5 text-xs font-bold text-[#C5922E] bg-[#C5922E]/10 border border-[#C5922E]/30 px-3 py-2 rounded-xl hover:bg-[#C5922E]/20 transition cursor-pointer"
-          >
-            <Globe className="w-3.5 h-3.5 text-[#C5922E]" />
-            <span>{lang}</span>
-          </button>
-
-          {/* WHATSAPP CTA */}
-          <a
-            href="https://wa.me/989125323122"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs font-bold text-[#EFECE6] bg-[#133A2E] border border-[#1A4337] px-3.5 py-2 rounded-xl hover:border-[#C5922E]/50 transition shadow-sm"
-          >
-            <MessageSquare className="w-3.5 h-3.5 text-[#C5922E]" />
-            <span>WhatsApp</span>
-          </a>
-
-          {/* RFQ QUOTE CTA */}
-          <a
-            href="#rfq"
-            className="relative inline-flex items-center gap-1 bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] text-xs font-black uppercase tracking-wider px-4 py-2 rounded-xl shadow-lg shadow-[#C5922E]/20 transition-all transform hover:scale-[1.02] active:scale-95 whitespace-nowrap"
-          >
-            <span>Quote</span>
-            <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
-          </a>
-        </div>
-
-        {/* 4. MOBILE HAMBURGER BUTTON */}
+        {/* ================= MOBILE VIEW ================= */}
+        {/* 1. Mobile Menu Toggle (Left) */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-white bg-[#133A2E] rounded-xl border border-[#1A4337] hover:border-[#C5922E]/50 transition cursor-pointer shrink-0"
+          className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none focus:outline-none focus:ring-0"
           aria-label="Toggle Menu"
         >
-          {mobileMenuOpen ? <X className="w-5 h-5 text-[#C5922E]" /> : <Menu className="w-5 h-5 text-[#EFECE6]" />}
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
 
+        {/* 2. Brand Logo (Center - Mobile) */}
+        <Link href="/" className="lg:hidden flex items-center justify-center shrink-0 absolute left-1/2 -translate-x-1/2 outline-none focus:outline-none">
+          <div className="relative h-10 w-28 flex items-center">
+            <Image 
+              src="/rox-logo.png" 
+              alt="ROX Tech Solutions Logo" 
+              fill
+              className="object-contain object-center" 
+              priority 
+            />
+          </div>
+        </Link>
+
+        {/* 2. Navigation Links (Center - Desktop) with Active Underline Effect */}
+        <nav className="hidden lg:flex items-center space-x-7 text-sm font-semibold text-[#0F172A]">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link 
+                key={link.name} 
+                href={link.href} 
+                className={`relative py-2 transition hover:text-[#F97316] outline-none focus:outline-none focus:ring-0 ${
+                  isActive ? "text-[#F97316] font-bold" : "text-[#0F172A]"
+                }`}
+              >
+                {link.name}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-[#F97316] rounded-full animate-fadeIn" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* 3. Search Bar (Desktop) */}
+        <div className="hidden md:flex items-center relative w-64 lg:w-72">
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 text-xs text-gray-800 placeholder-gray-400 focus:bg-white focus:border-[#F97316] outline-none transition"
+          />
+          <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
+        </div>
+
+        {/* ================= RIGHT ACTIONS ================= */}
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Mobile Search Icon Quick Toggle */}
+          <button className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none focus:outline-none">
+            <Search className="w-5 h-5" />
+          </button>
+
+          {/* Desktop WhatsApp Button */}
+          <a
+            href="https://wa.me/353000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex items-center gap-1.5 bg-[#22C55E] hover:bg-[#16A34A] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm transition outline-none focus:outline-none"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>WhatsApp Us</span>
+          </a>
+
+          {/* Desktop Visit Store Button */}
+          <Link
+            href="/contact"
+            className="hidden sm:flex items-center gap-1.5 bg-[#F97316] hover:bg-[#EA580C] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm transition outline-none focus:outline-none"
+          >
+            <MapPin className="w-4 h-4" />
+            <span>Visit Store</span>
+          </Link>
+
+          {/* Cart Icon with Badge */}
+          <div className="relative p-2 text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-full cursor-pointer transition">
+            <ShoppingBag className="w-5 h-5" />
+            <span className="absolute -top-1 -right-1 bg-[#F97316] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white pointer-events-none">
+              2
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* 5. MOBILE DRAWER */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#051813]/98 backdrop-blur-2xl border-b border-[#1A4337] px-6 py-6 space-y-5 animate-in slide-in-from-top duration-300 shadow-2xl">
-          <nav className="flex flex-col space-y-3.5 text-xs font-black uppercase tracking-wider text-[#EFECE6]/85">
-            {[
-              { name: 'Home', path: '/' },
-              { name: 'About', path: '/about' },
-              { name: 'Products', path: '/products' },
-              { name: 'Blog', path: '/blog' },
-              { name: 'Quality', path: '/quality' },
-              { name: 'Export', path: '/export' },
-              { name: 'Contact', path: '/contact' },
-            ].map((item) => (
-              <Link
-                key={item.name}
-                href={item.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[#C5922E] transition-colors py-1 border-b border-[#1A4337]/40"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+        <div className="lg:hidden bg-white border-b border-gray-300 px-4 pt-3 pb-6 space-y-4 shadow-xl animate-fadeIn">
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 text-xs text-gray-800 outline-none"
+            />
+            <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
+          </div>
 
-          <div className="pt-2 border-t border-[#1A4337] space-y-3">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center justify-center gap-2 w-full text-xs font-bold text-[#C5922E] bg-[#C5922E]/10 border border-[#C5922E]/20 py-2.5 rounded-xl"
-            >
-              <Globe className="w-4 h-4" />
-              <span>Language: {lang}</span>
-            </button>
+          <div className="flex flex-col space-y-3 font-bold text-sm text-[#0F172A]">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.name}
+                  href={link.href} 
+                  onClick={() => setMobileMenuOpen(false)} 
+                  className={`transition outline-none focus:outline-none ${isActive ? "text-[#F97316] pl-2 border-l-4 border-[#F97316]" : "hover:text-[#F97316]"}`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
 
+          <div className="pt-2 flex flex-col gap-2">
             <a
-              href="https://wa.me/989125323122"
+              href="https://wa.me/353000000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full text-xs font-bold text-[#EFECE6] bg-[#133A2E] border border-[#1A4337] py-2.5 rounded-xl"
+              className="flex items-center justify-center gap-2 bg-[#22C55E] text-white py-2.5 rounded-full font-bold text-xs outline-none focus:outline-none"
             >
-              <MessageSquare className="w-4 h-4 text-[#C5922E]" />
-              <span>WhatsApp Direct Desk</span>
+              <MessageCircle className="w-4 h-4" />
+              <span>WhatsApp Us</span>
             </a>
-
-            <a
-              href="#rfq"
+            <Link
+              href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] text-xs font-black uppercase tracking-wider py-3 rounded-xl shadow-md"
+              className="flex items-center justify-center gap-2 bg-[#F97316] text-white py-2.5 rounded-full font-bold text-xs outline-none focus:outline-none"
             >
-              <span>Get Bulk Quote</span>
-              <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-            </a>
+              <MapPin className="w-4 h-4" />
+              <span>Visit Store</span>
+            </Link>
           </div>
         </div>
       )}

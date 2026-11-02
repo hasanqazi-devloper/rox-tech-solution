@@ -1,97 +1,210 @@
-'use client';
+import Link from "next/link";
+import {
+  ArrowRight,
+  ShieldCheck,
+  Headphones,
+  MapPin,
+  Package,
+  Wrench,
+  UserCheck,
+  MessageSquare
+} from "lucide-react";
 
-import React from 'react';
-import Image from 'next/image';
-import { ArrowRight, Download, Sparkles, ShieldCheck, Ship, Award } from 'lucide-react';
-
-export default function Hero() {
+export default function HeroSection() {
   return (
-    <section className="relative bg-[#051813] text-[#EFECE6] overflow-hidden py-16 lg:py-18 border-b border-[#1A4337]">
-      
-      {/* BACKGROUND IMAGE WITH SUBTLE OVERLAY & GRADIENT */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1756749442845-4973b7cede48?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFBpc3RhY2hpbyUyMHBsYW50c3xlbnwwfHwwfHx8MA%3D%3D"
-          alt="International Export Logistics Background"
-          fill
-          priority
-          unoptimized
-          className="object-cover object-center opacity-50"
-        />
-        {/* Deep Green Gradient to keep text crisp & readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#051813] via-[#051813]/90 to-[#051813]/70" />
+    /* h-auto yahan add karna zaroori hai taaki mobile par auto height rahe */
+    <section className="w-full h-auto bg-[#C0C0C0] overflow-hidden flex flex-col items-center m-0 p-0">
+
+      {/* ================= DESKTOP / LAPTOP / 4K VIEW ================= */}
+      <div className="w-full bg-[#C0C0C0] flex justify-center">
+        <div 
+          className="hidden lg:block relative w-full max-w-[2700px] h-[540px] xl:h-[560px] 2xl:h-[900px] bg-cover bg-right 2xl:bg-[center_top_0.1rem] xl:bg-[center_top_0.1rem] bg-no-repeat bg-[url('/hero-banner.png')]"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#C0C0C0]/40 via-transparent to-transparent pointer-events-none" />
+
+          <div className="relative z-10 max-w-[1500px] 2xl:max-w-[2400px] mx-auto h-full px-8 lg:px-12 2xl:px-20 flex items-center">
+            <div className="w-full max-w-2xl 2xl:max-w-4xl space-y-5 2xl:space-y-8">
+
+              <div className="inline-flex items-center gap-1.5 2xl:gap-2.5 text-xs 2xl:text-base font-semibold text-gray-800 bg-white/90 backdrop-blur-sm px-3.5 py-1.5 2xl:px-6 2xl:py-2.5 rounded-full border border-gray-300 shadow-sm">
+                <MapPin className="w-3.5 h-3.5 2xl:w-5 2xl:h-5 text-[#F97316]" />
+                <span>Cashel, County Tipperary, Ireland</span>
+              </div>
+
+              <h1 className="text-4xl lg:text-5xl xl:text-5xl 2xl:text-7xl 3xl:text-8xl font-black text-[#0F172A] leading-tight tracking-tight">
+                Your Premier Tech & <br />
+                Repair Hub in Cashel
+              </h1>
+
+              <p className="text-gray-800 text-base xl:text-lg 2xl:text-2xl 3xl:text-3xl font-medium leading-relaxed max-w-xl 2xl:max-w-3xl">
+                Discover the latest technology, everyday accessories and reliable device repairs, backed by friendly local service in Cashel.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3.5 2xl:gap-5 pt-2">
+                <Link
+                  href="/shop"
+                  className="flex items-center gap-2 2xl:gap-3 bg-[#F97316] hover:bg-[#EA580C] text-white px-6 py-3 2xl:px-9 2xl:py-4 rounded-full font-bold text-sm 2xl:text-lg shadow-md transition transform hover:-translate-y-0.5"
+                >
+                  <span>Explore Products</span>
+                  <ArrowRight className="w-4 h-4 2xl:w-6 2xl:h-6" />
+                </Link>
+
+                <a
+                  href="https://wa.me/353000000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 2xl:gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-white px-6 py-3 2xl:px-9 2xl:py-4 rounded-full font-bold text-sm 2xl:text-lg shadow-md transition transform hover:-translate-y-0.5"
+                >
+                  <span>WhatsApp Us</span>
+                </a>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 2xl:gap-6 pt-6 2xl:pt-9 border-t border-gray-400/50 text-xs 2xl:text-base font-bold text-gray-800">
+                <div className="flex items-center gap-2 2xl:gap-3">
+                  <ShieldCheck className="w-4 h-4 2xl:w-6 2xl:h-6 text-[#0F172A] shrink-0" />
+                  <div>
+                    <p className="text-[#0F172A] leading-tight text-xs 2xl:text-base">Quality Products</p>
+                    <p className="text-[10px] 2xl:text-sm text-gray-700 font-normal">Trusted Brands</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 2xl:gap-3">
+                  <Headphones className="w-4 h-4 2xl:w-6 2xl:h-6 text-[#0F172A] shrink-0" />
+                  <div>
+                    <p className="text-[#0F172A] leading-tight text-xs 2xl:text-base">Expert Support</p>
+                    <p className="text-[10px] 2xl:text-sm text-gray-700 font-normal">Local Team</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 2xl:gap-3">
+                  <MapPin className="w-4 h-4 2xl:w-6 2xl:h-6 text-[#0F172A] shrink-0" />
+                  <div>
+                    <p className="text-[#0F172A] leading-tight text-xs 2xl:text-base">Local Service</p>
+                    <p className="text-[10px] 2xl:text-sm text-gray-700 font-normal">In Cashel</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* BACKGROUND GLOW ANIMATIONS */}
-      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#C5922E]/10 rounded-full blur-[140px] pointer-events-none animate-pulse z-0" />
-      <div className="absolute -bottom-10 right-1/4 w-80 h-80 bg-[#133A2E]/50 rounded-full blur-[120px] pointer-events-none z-0" />
-      
-      {/* Subtle Grid Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(#C5922E_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none z-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          
-          {/* LEFT COLUMN: HEADLINE & ACTIONS (6 COLS) */}
-          <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
-            
-            {/* Top Badge */}
-        
+      {/* ================= MOBILE & TABLET VIEW ================= */}
+      {/* h-auto yahan force ki hai taaki jitna content utni hi height bano */}
+      <div className="block lg:hidden w-full h-auto px-4 pt-4 pb-4 space-y-3">
 
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15] text-[#EFECE6]">
-              Premium Grade <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5922E] via-[#E2B755] to-amber-200 drop-shadow-sm">
-                Iranian Pistachios &amp; Nuts Bulk Supply
-              </span>
-            </h1>
-
-            {/* Sub-headline Paragraph */}
-            <p className="text-[#EFECE6]/80 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
-              Direct B2B supplier of authentic Akbari, Fandoghi, Kaleh Ghouchi, and Ahmad Aghaei pistachios under Pistachio Home. Supplying container loads with certified sorting for Middle East, Europe, CIS, and global wholesale markets.
-            </p>
-
-            {/* CTA Buttons Group */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-1 w-full">
-              <a
-                href="#rfq"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] px-7 py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-[#C5922E]/15 hover:shadow-[#C5922E]/30 transform active:scale-95"
-              >
-                <span>Request B2B Quote</span>
-                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-              </a>
-
-              <a
-                href="#products"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#133A2E]/80 hover:bg-[#1A4337] border border-[#1A4337] hover:border-[#C5922E]/40 text-[#EFECE6] px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all backdrop-blur-md"
-              >
-                <Download className="w-4 h-4 text-[#C5922E]" />
-                <span>Export Catalog Specs</span>
-              </a>
-            </div>
-
+        <div className="space-y-2.5 text-left">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F172A]">
+            <MapPin className="w-4 h-4 text-[#F97316] shrink-0" />
+            <span>Cashel, County Tipperary, Ireland</span>
           </div>
 
-          {/* RIGHT COLUMN: DISPLAY WITH GLOW EFFECT (6 COLS) */}
-          <div className="lg:col-span-6 flex items-center justify-center relative w-full">
-            
-            {/* Glowing Backdrop behind Image */}
-            <div className="absolute w-72 h-72 lg:w-96 lg:h-96 bg-[#C5922E]/15 rounded-full blur-[100px] pointer-events-none" />
+          <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
+            Your Premier Tech & Repair Hub in Cashel
+          </h1>
 
-            <div className="relative w-full max-w-lg lg:max-w-none h-[320px] sm:h-[400px] lg:h-[460px] flex items-center justify-center">
-              <Image
-                src="/hero.png"
-                alt="Pistachio Home Iranian Premium Pistachio Export"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain object-center lg:object-right drop-shadow-[0_20px_30px_rgba(197,146,46,0.25)] hover:scale-105 transition-transform duration-700 ease-out"
-              />
+          <p className="text-gray-800 text-xs sm:text-sm font-medium leading-relaxed">
+            Discover the latest technology, everyday accessories and reliable device repairs, backed by friendly local service in Cashel.
+          </p>
+
+          <div className="flex items-center gap-2.5 pt-1">
+            <Link
+              href="/shop"
+              className="flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-md transition"
+            >
+              <span>Explore Products</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <a
+              href="https://wa.me/353000000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-md transition"
+            >
+              <span>WhatsApp Us</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="w-full overflow-hidden my-1">
+          <img
+            src="/hero-mobile.png"
+            alt="ROX Tech Devices Showcase"
+            className="w-full h-auto object-cover rounded-lg"
+          />
+        </div>
+
+        {/* Mobile Badges Card */}
+        <div className="grid grid-cols-3 gap-1 p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-xs font-bold text-gray-800">
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-[#0F172A] shrink-0" />
+            <div>
+              <p className="text-[#0F172A] text-[10px] sm:text-xs leading-tight">Quality Products</p>
+              <p className="text-[8px] sm:text-[10px] text-gray-700 font-normal">Trusted Brands</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <Headphones className="w-4 h-4 text-[#0F172A] shrink-0" />
+            <div>
+              <p className="text-[#0F172A] text-[10px] sm:text-xs leading-tight">Expert Support</p>
+              <p className="text-[8px] sm:text-[10px] text-gray-700 font-normal">Local Team</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 text-[#0F172A] shrink-0" />
+            <div>
+              <p className="text-[#0F172A] text-[10px] sm:text-xs leading-tight">Local Service</p>
+              <p className="text-[8px] sm:text-[10px] text-gray-700 font-normal">In Cashel</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      {/* ================= BOTTOM FEATURE BAR (Desktop Only) ================= */}
+      <div className="hidden lg:block w-full bg-white border-t border-b border-gray-300/80 py-4 sm:py-5 px-4 sm:px-12 shadow-sm m-0">
+        <div className="w-full grid grid-cols-4 gap-6 items-center">
+          
+          <div className="flex items-center gap-3">
+            <Package className="w-8 h-8 text-[#0F172A] shrink-0" />
+            <div>
+              <h4 className="text-sm font-bold text-[#0F172A] leading-tight">Wide Range of Products</h4>
+              <p className="text-xs text-gray-500">Top Brands & Accessories</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 border-l border-gray-200 pl-6">
+            <Wrench className="w-8 h-8 text-[#0F172A] shrink-0" />
+            <div>
+              <h4 className="text-sm font-bold text-[#0F172A] leading-tight">Expert Device Repairs</h4>
+              <p className="text-xs text-gray-500">Fast & Reliable Service</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 border-l border-gray-200 pl-6">
+            <UserCheck className="w-8 h-8 text-[#0F172A] shrink-0" />
+            <div>
+              <h4 className="text-sm font-bold text-[#0F172A] leading-tight">Local Customer Support</h4>
+              <p className="text-xs text-gray-500">Friendly & Knowledgeable</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 border-l border-gray-200 pl-6">
+            <MessageSquare className="w-8 h-8 text-[#0F172A] shrink-0" />
+            <div>
+              <h4 className="text-sm font-bold text-[#0F172A] leading-tight">Convenient Contact</h4>
+              <p className="text-xs text-gray-500">WhatsApp, Call or Visit</p>
             </div>
           </div>
 
         </div>
       </div>
+
     </section>
   );
 }

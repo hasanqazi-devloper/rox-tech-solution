@@ -5,26 +5,37 @@ html {
   scroll-behavior: smooth !important;
 }
 
-/* 🏙️ ABSOLUTE RE-ENGINEERED BASE STYLES */
+/* 🏙️ ABSOLUTE RE-ENGINEERED BASE STYLES FOR ROX TECH */
 body {
-  background-color: #050505; /* Solid dark luxury canvas baseline */
-  color: #ffffff;
+  background-color: #C0C0C0; /* Light Silver/Grey luxury background base */
+  color: #0F172A; /* Dark Slate high-contrast typography for readability */
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* ✨ HIGH-END LUXURY FOCUS RESETS */
-*:focus {
+/* Globals.css mein yeh add kar do taake sara focus outline / ring khatam ho jaye */
+*:focus,
+*:focus-visible {
   outline: none !important;
   box-shadow: none !important;
 }
+/* ✨ HIGH-END LUXURY FOCUS RESETS */
+*:focus {
+  /* outline: 2px solid #F97316 !important;  */
+  box-shadow: none !important;
+}
 
-/* 🎛️ TAILWIND V4 FONTS CONFIGURATION BINDINGS */
+/* 🎛️ TAILWIND V4 FONTS & COLORS CONFIGURATION BINDINGS */
 @theme inline {
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-inter);
+  --font-serif: var(--font-montserrat, sans-serif);
+  --font-sans: var(--font-montserrat, sans-serif);
+  
+  /* ROX Brand Custom Theme Colors */
+  --color-rox-silver: #C0C0C0;
+  --color-rox-orange: #F97316;
+  --color-rox-green: #22C55E;
+  --color-rox-dark: #0F172A;
 }
 
 /* ⚡ SMOOTH FADE-IN UTILITY FOR DYNAMIC GRID EXPANDERS */
@@ -43,8 +54,17 @@ body {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 🎛️ TAILWIND V4 FONTS CONFIGURATION BINDINGS */
-@theme inline {
-  --font-serif: var(--font-montserrat);
-  --font-sans: var(--font-montserrat);
+/* Custom Scrollbar for Sleek European Retail Look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #E5E7EB;
+}
+::-webkit-scrollbar-thumb {
+  background: #C0C0C0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F97316;
 }

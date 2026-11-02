@@ -1,362 +1,592 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { 
-  ArrowDown, 
-  ShieldCheck, 
-  ThermometerSnowflake, 
-  FileCheck2, 
-  Ship, 
-  Globe2, 
-  PackageCheck, 
-  MessageSquare, 
-  ArrowUpRight,
-  Check,
-  Award,
-  Scale
-} from 'lucide-react';
+import { useState } from "react";
+import Link from "next/link";
+import {
+  MapPin,
+  MessageCircle,
+  MessageSquare,
+  Lightbulb,
+  Wrench,
+  Cog,
+  ShieldCheck,
+  Users,
+  UserCheck,
+  ArrowRight,
+  Smartphone,
+  Headphones,
+  CheckCircle2,
+  Navigation,
+  Send
+} from "lucide-react";
 
 export default function AboutPage() {
-  const steps = [
-    { num: '01', title: 'Orchard Harvest & Selection', desc: 'Hand-harvested premium pistachios directly sourced from prime orchards in Rafsanjan & Kerman.' },
-    { num: '02', title: 'Laser Sorting & Mechanical Sizing', desc: 'Precision optical color sorting and ounce calibration (20/22, 28/30) at our central facility.' },
-    { num: '03', title: 'Moisture Calibration & Roasting', desc: 'Strict moisture index control preserving natural crunchiness, rich oil content, and freshness.' },
-    { num: '04', title: 'Aflatoxin & Phytosanitary COA', desc: 'Comprehensive lab testing, zero-aflatoxin verification, and official phytosanitary inspection.' },
-    { num: '05', title: 'Direct Sea & Land Logistics', desc: 'Vacuum-sealed packaging and container dispatch directly via Southern Iranian export ports.' },
-  ];
+  const [formData, setFormData] = useState({
+    name: "",
+    emailOrPhone: "",
+    subject: "",
+    message: ""
+  });
+
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Thank you! Your message has been sent to ROX Tech Solutions.");
+  };
 
   return (
-    <div className="bg-[#0B2B22] text-[#F4F0E6] min-h-screen selection:bg-[#C5922E] selection:text-[#0B2B22]">
+    <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
 
-      {/* 1. HERO SECTION (Pistachio Garden Background) */}
-    {/* 1. HERO SECTION (100% Clear Background Image) */}
-<section className="relative bg-[#0B2B22] text-[#F4F0E6] overflow-hidden py-20 md:py-18 border-b border-[#1A4337]">
-  
-  {/* BACKGROUND IMAGE CONTAINER */}
-  <div className="absolute inset-0 z-0">
-    <Image
-      src="https://images.unsplash.com/photo-1756749442845-4973b7cede48?auto=format&fit=crop&w=1920&q=100"
-      alt="Iranian Pistachio Orchard"
-      fill
-      priority
-      unoptimized // Direct source file render karega bina Next.js compression ke
-      className="object-cover object-center opacity-40 -scale-x-100"
-    />
-    
-    {/* Soft subtle left gradient to keep text readable without darkening the image */}
-    <div className="absolute inset-0 bg-gradient-to-r from-[#0B2B22]/85 via-[#0B2B22]/50 to-transparent" />
-  </div>
+      {/* ================= 1. HERO SECTION ================= */}
+      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
 
-  {/* CONTENT CONTAINER */}
-  <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-    <div className="max-w-3xl space-y-7 text-left">
+        {/* ================= 1. DESKTOP HERO VIEW ================= */}
+        <div className="hidden lg:block">
+          <div className="absolute inset-0 w-full h-full flex justify-end">
+            <div className="relative w-full lg:w-[75%] h-full">
+              <img
+                src="/shop-2.jpeg"
+                alt="ROX Tech Store Showcase in Cashel"
+                className="w-full h-full object-cover object-right lg:grayscale-0"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
+            </div>
+          </div>
 
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-none uppercase">
-        <span className="text-[#F4F0E6]">ABOUT </span>
-        <span className="text-[#C5922E] drop-shadow-[0_0_25px_rgba(197,146,46,0.3)]">PISTACHIO HOME.</span>
-      </h1>
+          <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
+            <div className="max-w-xl space-y-6">
 
-      <p className="text-[#F4F0E6]/90 text-sm sm:text-base md:text-lg font-medium leading-relaxed max-w-2xl">
-        Connecting global wholesale buyers directly to Iran’s most celebrated pistachio orchards through rigorous laboratory grading, batch traceability, and zero-middleman container logistics.
-      </p>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+                <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+                <span>Cashel, Ireland</span>
+              </div>
 
-      <div className="pt-2">
-        <a
-          href="#story"
-          className="inline-flex items-center gap-3 bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] font-black text-xs uppercase tracking-wider px-8 py-4 rounded-xl transition-all duration-300 shadow-xl shadow-[#C5922E]/20 hover:shadow-[#C5922E]/40 transform active:scale-95 group"
-        >
-          <span>EXPLORE OUR HERITAGE</span>
-          <ArrowDown className="w-4 h-4 stroke-[3] transition-transform duration-300 group-hover:translate-y-1" />
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
+                Your Local Technology <br /> Store in <span className="text-[#F97316]">Cashel</span>
+              </h1>
 
-      {/* 2. OUR STORY & ORIGIN */}
-    <section id="story" className="py-16 md:py-18 bg-[#133A2E] border-b border-[#1A4337] relative">
-  <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-    
-    {/* LEFT: JUST CLEAR PNG IMAGE */}
-    <div className="lg:col-span-6 relative h-80 sm:h-[450px] w-full flex items-center justify-center">
-      <Image
-        src="/about.png"
-        alt="Rafsanjan Processing Facility"
-        fill
-        priority
-        className="object-contain object-center drop-shadow-none"
-      />
-    </div>
+              <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
+                ROX Tech Solutions is your go-to local destination for electronics, everyday accessories and device repair assistance. We bring you the latest technology with friendly, local service.
+              </p>
 
-    {/* RIGHT: CONTENT */}
-    <div className="lg:col-span-6 space-y-6">
-      <h2 className="text-3xl sm:text-4xl font-black text-[#F4F0E6] tracking-tight leading-tight">
-        Eliminating Supply Chain Risks for Overseas Importers
-      </h2>
-      
-      <p className="text-[#F4F0E6]/80 text-sm md:text-base leading-relaxed font-normal">
-        Pistachio Home was established to address quality inconsistency and price speculation in global nut exports. By operating dedicated sizing lines and humidity-controlled storage in Rafsanjan, we deliver 100% lab-verified Iranian pistachios directly to bulk buyers worldwide without broker inflated margins.
-      </p>
+              <div className="flex items-center gap-3 pt-2">
+                <Link
+                  href="/shop"
+                  className="bg-[#F97316] hover:bg-[#EA580C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                >
+                  <span>Explore Our Shop</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
 
-      <div className="p-4 bg-[#0B2B22] border-l-4 border-[#C5922E] rounded-r-xl space-y-1 border border-[#1A4337]">
-        <p className="text-xs font-bold text-[#C5922E] uppercase tracking-wider">Export Varieties</p>
-        <p className="text-xs text-[#F4F0E6]/80">
-          Akbari (Super Long), Ahmad Aghaei (Long), Kaleh Ghouchi (Jumbo), Fandoghi (Round), and Premium Green Kernel Fractions.
-        </p>
-      </div>
-    </div>
+                <a
+                  href="https://wa.me/353000000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <span>WhatsApp Us</span>
+                </a>
+              </div>
 
-  </div>
-</section>
-
-    {/* 3. TAILORED EXPORT SOLUTIONS */}
-<section className="py-16 md:py-18 bg-[#0B2B22] border-b border-[#1A4337]">
-  <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-    
-    {/* LEFT: CONTENT */}
-    <div className="lg:col-span-6 space-y-6">
- 
-      
-      <h2 className="text-3xl sm:text-4xl font-black text-[#F4F0E6] tracking-tight leading-tight">
-        Tailored Export Solutions for Global Procurement Teams
-      </h2>
-      
-      <p className="text-[#F4F0E6]/80 text-sm md:text-base leading-relaxed font-normal">
-        We streamline wholesale procurement for snack manufacturers, re-packers, and commercial importers. Pistachio Home offers end-to-end lot traceability, pre-shipment laboratory samples, and flexible private-label or bulk carton options.
-      </p>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-        <div className="p-3.5 bg-[#133A2E] border border-[#1A4337] rounded-xl flex items-center gap-3">
-          <Check className="w-4 h-4 text-[#C5922E] shrink-0" />
-          <span className="text-xs font-bold text-[#F4F0E6]">Vacuum Bags &amp; 10kg/25kg Cartons</span>
+            </div>
+          </div>
         </div>
-        <div className="p-3.5 bg-[#133A2E] border border-[#1A4337] rounded-xl flex items-center gap-3">
-          <Check className="w-4 h-4 text-[#C5922E] shrink-0" />
-          <span className="text-xs font-bold text-[#F4F0E6]">Flexible LC &amp; TT Payment Terms</span>
-        </div>
-      </div>
-    </div>
 
-    {/* RIGHT: JUST CLEAR PNG IMAGE */}
-    <div className="lg:col-span-6 relative h-80 sm:h-[450px] w-full flex items-center justify-center">
-      <Image
-        src="/hero.png"
-        alt="B2B Pistachio Wholesale Partner"
-        fill
-        priority
-        className="object-contain object-center drop-shadow-none"
-      />
-    </div>
 
-  </div>
-</section>
+        {/* ================= 2. MOBILE HERO VIEW ================= */}
+        <div className="block lg:hidden px-5 py-8 space-y-6">
 
-      {/* 4. CORE CAPABILITIES */}
-      <section className="py-16 md:py-20 bg-[#133A2E] border-b border-[#1A4337]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-          
-            <h2 className="text-3xl md:text-4xl font-black text-[#F4F0E6] tracking-tight">
-              Engineered for High-Volume International Supply
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div className="bg-[#0B2B22] border border-[#1A4337] hover:border-[#C5922E]/50 p-6 rounded-2xl space-y-4 transition-all duration-300 hover:-translate-y-1">
-              <div className="p-3 bg-[#133A2E] border border-[#1A4337] rounded-xl text-[#C5922E] w-fit">
-                <Award className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#F4F0E6]">Direct Facility Sourcing</h3>
-              <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">
-                Direct orchard contracts eliminate intermediate trade markups for maximum buyer profitability.
-              </p>
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+              <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+              <span>Cashel, Ireland</span>
             </div>
 
-            <div className="bg-[#0B2B22] border border-[#1A4337] hover:border-[#C5922E]/50 p-6 rounded-2xl space-y-4 transition-all duration-300 hover:-translate-y-1">
-              <div className="p-3 bg-[#133A2E] border border-[#1A4337] rounded-xl text-[#C5922E] w-fit">
-                <ThermometerSnowflake className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#F4F0E6]">Climate-Controlled Storage</h3>
-              <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">
-                Low-temperature warehousing prevents lipid oxidation, maintaining color, taste, and shell brightness.
-              </p>
-            </div>
+            <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
+              Your Local Technology <br /> Store in <span className="text-[#F97316]">Cashel</span>
+            </h1>
 
-            <div className="bg-[#0B2B22] border border-[#1A4337] hover:border-[#C5922E]/50 p-6 rounded-2xl space-y-4 transition-all duration-300 hover:-translate-y-1">
-              <div className="p-3 bg-[#133A2E] border border-[#1A4337] rounded-xl text-[#C5922E] w-fit">
-                <Scale className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#F4F0E6]">Precision Calibration</h3>
-              <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">
-                Optical defect elimination, mechanical size grading, and certified moisture index testing.
-              </p>
-            </div>
-
-            <div className="bg-[#0B2B22] border border-[#1A4337] hover:border-[#C5922E]/50 p-6 rounded-2xl space-y-4 transition-all duration-300 hover:-translate-y-1">
-              <div className="p-3 bg-[#133A2E] border border-[#1A4337] rounded-xl text-[#C5922E] w-fit">
-                <FileCheck2 className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#F4F0E6]">Zero-Aflatoxin Standards</h3>
-              <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">
-                Certified Phytosanitary documentation, Certificate of Origin, and accredited laboratory COA included.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 5. WORKFLOW TIMELINE */}
-      <section className="py-16 md:py-20 bg-[#0B2B22] border-b border-[#1A4337]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-        
-            <h2 className="text-3xl md:text-4xl font-black text-[#F4F0E6] tracking-tight">
-              Orchard-To-Port Supply Chain Workflow
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {steps.map((step, idx) => (
-              <div key={idx} className="bg-[#133A2E] border border-[#1A4337] hover:border-[#C5922E]/40 p-6 rounded-2xl space-y-3 transition-all">
-                <span className="text-3xl font-black text-[#C5922E] block">{step.num}</span>
-                <h3 className="text-sm font-bold text-[#F4F0E6]">{step.title}</h3>
-                <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* 6. QUALITY ASSURANCE & CERTIFICATIONS */}
-      <section className="py-16 md:py-20 bg-[#133A2E] border-b border-[#1A4337]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div className="lg:col-span-5 bg-[#0B2B22] border border-[#1A4337] p-8 rounded-3xl text-center space-y-6 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#C5922E]/10 rounded-full blur-3xl pointer-events-none" />
-            <ShieldCheck className="w-16 h-16 text-[#C5922E] mx-auto" />
-            <div>
-              <h3 className="text-xl font-black text-[#F4F0E6] uppercase tracking-tight">Export Quality Guarantee</h3>
-              <p className="text-xs text-[#F4F0E6]/70 mt-2 leading-relaxed">
-                Full documentation provided to ensure smooth customs clearance at European, Asian, and Middle Eastern ports.
-              </p>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 space-y-6">
-        
-            
-            <h2 className="text-3xl sm:text-4xl font-black text-[#F4F0E6] tracking-tight">
-              Strict European &amp; International Food Safety Compliance
-            </h2>
-
-            <p className="text-[#F4F0E6]/80 text-sm md:text-base leading-relaxed">
-              Every shipment leaving Pistachio Home is subject to laser sorting, moisture standardization, and laboratory aflatoxin verification prior to container loading and sealing.
+            <p className="text-xs text-gray-700 font-medium leading-relaxed">
+              ROX Tech Solutions is your go-to local destination for electronics, everyday accessories and device repair assistance. We bring you the latest technology with friendly, local service.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="flex items-center gap-3 bg-[#0B2B22] border border-[#1A4337] p-3.5 rounded-xl">
-                <Check className="w-4 h-4 text-[#C5922E] shrink-0" />
-                <span className="text-xs font-bold text-[#F4F0E6]">Calibrated Moisture (&lt;5%)</span>
-              </div>
-              <div className="flex items-center gap-3 bg-[#0B2B22] border border-[#1A4337] p-3.5 rounded-xl">
-                <Check className="w-4 h-4 text-[#C5922E] shrink-0" />
-                <span className="text-xs font-bold text-[#F4F0E6]">Grade A Ounce Uniformity</span>
-              </div>
-              <div className="flex items-center gap-3 bg-[#0B2B22] border border-[#1A4337] p-3.5 rounded-xl">
-                <Check className="w-4 h-4 text-[#C5922E] shrink-0" />
-                <span className="text-xs font-bold text-[#F4F0E6]">Zero Chemically Bleached Shells</span>
-              </div>
-              <div className="flex items-center gap-3 bg-[#0B2B22] border border-[#1A4337] p-3.5 rounded-xl">
-                <Check className="w-4 h-4 text-[#C5922E] shrink-0" />
-                <span className="text-xs font-bold text-[#F4F0E6]">Official COA &amp; Lab Certified</span>
-              </div>
+            <div className="flex items-center gap-2.5 pt-1">
+              <Link
+                href="/shop"
+                className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+              >
+                <span>Explore Our Shop</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+
+              <a
+                href="https://wa.me/353000000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                <span>WhatsApp Us</span>
+              </a>
             </div>
           </div>
 
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
+            <img
+              src="/shop-2.jpeg"
+              alt="ROX Tech Store Showcase in Cashel"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+
         </div>
+
       </section>
 
-      {/* 7. GLOBAL LOGISTICS */}
-      <section className="py-16 md:py-20 bg-[#0B2B22] border-b border-[#1A4337]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-        
-            <h2 className="text-3xl md:text-4xl font-black text-[#F4F0E6] tracking-tight">
-              Container Dispatch &amp; Incoterms
+
+      {/* ================= 2. OUR STORY & WHAT WE OFFER ================= */}
+      <section className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60 space-y-12">
+        <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+          {/* Mobile par text pehle aayega (order-1), aur image niche (order-2). Desktop pe grid items normal rahenge. */}
+          <div className="lg:col-span-6 order-1 lg:order-1 space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+              <span className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                Our Story
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
+              Technology, Accessories & <br />
+              <span className="text-[#F97316]">Friendly Local Service</span>
             </h2>
+
+            <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed max-w-2xl">
+              At ROX Tech Solutions, we&apos;re passionate about technology and dedicated to helping our customers find the right products and get the support they need. From the latest devices to everyday accessories and expert repair assistance, we&apos;re here to make technology easier and more accessible for everyone in Cashel.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#133A2E] border border-[#1A4337] p-6 rounded-2xl space-y-3">
-              <Ship className="w-8 h-8 text-[#C5922E]" />
-              <h3 className="text-base font-bold text-[#F4F0E6]">Flexible Incoterms</h3>
-              <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">
-                FOB Bandar Abbas, CIF, and CFR quotation terms tailored for corporate purchasing teams.
-              </p>
+          <div className="lg:col-span-6 order-2 lg:order-2">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/10 aspect-[16/10] w-full bg-white">
+              <img
+                src="/shop-3.jpeg"
+                alt="ROX Tech Solutions Storefront Cashel"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          </div>
+
+        </div>
+
+        {/* What We Offer Container */}
+        <div className="max-w-[1680px] mx-auto pt-4">
+          <div className="bg-gray-50/80 border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+           
+                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
+             What We Offer 
+            </h2>
             </div>
 
-            <div className="bg-[#133A2E] border border-[#1A4337] p-6 rounded-2xl space-y-3">
-              <PackageCheck className="w-8 h-8 text-[#C5922E]" />
-              <h3 className="text-base font-bold text-[#F4F0E6]">Sealed Export Packaging</h3>
-              <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">
-                Vacuum-sealed inner bags, modified atmosphere liners, and reinforced export cartons.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 flex items-start gap-4 shadow-sm hover:border-[#F97316] transition">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
+                  <Smartphone className="w-6 h-6 text-[#0F172A]" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-[#0F172A]">Electronics & Devices</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">Latest smartphones, laptops, tablets and more.</p>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 flex items-start gap-4 shadow-sm hover:border-[#F97316] transition">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
+                  <Headphones className="w-6 h-6 text-[#0F172A]" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-[#0F172A]">Everyday Accessories</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">Cases, chargers, cables, audio and more.</p>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 flex items-start gap-4 shadow-sm hover:border-[#F97316] transition">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
+                  <Wrench className="w-6 h-6 text-[#0F172A]" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-[#0F172A]">Device Repair Assistance</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">Professional repairs for phones, tablets, laptops & more.</p>
+                </div>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 flex items-start gap-4 shadow-sm hover:border-[#F97316] transition">
+                <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
+                  <UserCheck className="w-6 h-6 text-[#0F172A]" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-[#0F172A]">Local Customer Support</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">Friendly, helpful and always nearby.</p>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-[#133A2E] border border-[#1A4337] p-6 rounded-2xl space-y-3">
-              <Globe2 className="w-8 h-8 text-[#C5922E]" />
-              <h3 className="text-base font-bold text-[#F4F0E6]">Worldwide Freight Corridors</h3>
-              <p className="text-xs text-[#F4F0E6]/70 leading-relaxed">
-                Direct container vessel dispatch to Europe, Eurasia, the Middle East, and East Asia.
-              </p>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ================= 3. INSIDE OUR STORE & OUR VALUES ================= */}
+      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60 space-y-12">
+
+        {/* Inside Our Store */}
+        <div className="max-w-[1680px] mx-auto space-y-6">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-widest text-[#0F172A]">
+                Inside Our Store
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-gray-700 font-medium text-gray-700 pl-3">
+              Take a look at our real store photos and see what we have in store for you.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
+              <img
+                src="/shop-8.jpeg"
+                alt="ROX Tech Store Interior 1"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              />
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
+              <img
+                src="/shop-7.jpeg"
+                alt="ROX Tech Store Interior 2"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              />
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
+              <img
+                src="/shop-6.jpeg"
+                alt="ROX Tech Store Interior 3"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              />
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
+              <img
+                src="/shop-5.jpeg"
+                alt="ROX Tech Store Interior 4"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Our Values Cards */}
+        <div className="max-w-[1680px] mx-auto space-y-5 pt-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                Our Values
+              </h2>
+            </div>
+            <p className="text-xs text-gray-700 pl-3">
+              What drives us every day.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 w-full">
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] hover:shadow-md transition-all duration-200 group">
+              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#F97316] transition-colors duration-200">
+                <Lightbulb className="w-4 h-4 text-[#F97316] group-hover:text-white transition-colors" />
+              </div>
+              <div className="space-y-0.5">
+                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Helpful Advice</h3>
+                <p className="text-[10px] text-gray-600 leading-tight">
+                  Get the right product or repair guidance.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] hover:shadow-md transition-all duration-200 group">
+              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#F97316] transition-colors duration-200">
+                <ShieldCheck className="w-4 h-4 text-[#F97316] group-hover:text-white transition-colors" />
+              </div>
+              <div className="space-y-0.5">
+                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Quality-Focused</h3>
+                <p className="text-[10px] text-gray-600 leading-tight">
+                  We stock reliable & trusted brands.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] hover:shadow-md transition-all duration-200 group">
+              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#F97316] transition-colors duration-200">
+                <MessageSquare className="w-4 h-4 text-[#F97316] group-hover:text-white transition-colors" />
+              </div>
+              <div className="space-y-0.5">
+                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Clear Communication</h3>
+                <p className="text-[10px] text-gray-600 leading-tight">
+                  Honest advice & transparent details.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#22C55E] hover:shadow-md transition-all duration-200 group">
+              <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#22C55E] transition-colors duration-200">
+                <MapPin className="w-4 h-4 text-[#22C55E] group-hover:text-white transition-colors" />
+              </div>
+              <div className="space-y-0.5">
+                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Local Support</h3>
+                <p className="text-[10px] text-gray-600 leading-tight">
+                  A store you can count on in Cashel.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      {/* ================= 4. WHY CHOOSE ROX ================= */}
+      <section className="w-full bg-white py-12 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+        <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+
+          <div className="lg:col-span-4 space-y-1">
+            <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] tracking-tight">
+              Why Choose ROX
+            </h2>
+            <p className="text-xs text-gray-600 font-normal">
+              More than just a store — we&apos;re your local tech partner.
+            </p>
+          </div>
+
+          <div className="lg:col-span-8 bg-gray-50/80 border border-gray-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-0 items-center divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+
+              <div className="flex items-center gap-3.5 sm:px-4 first:pl-0">
+                <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-200 shadow-sm">
+                  <CheckCircle2 className="w-5 h-5 text-[#0F172A]" />
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">
+                    Wide Range
+                  </h3>
+                  <p className="text-[10px] text-gray-500 leading-tight">
+                    of Tech & Accessories
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3.5 sm:px-6 pt-3 sm:pt-0">
+                <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-200 shadow-sm">
+                  <Cog className="w-5 h-5 text-[#0F172A]" />
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">
+                    Expert Technicians
+                  </h3>
+                  <p className="text-[10px] text-gray-500 leading-tight">
+                    Skilled & Experienced
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3.5 sm:px-6 pt-3 sm:pt-0">
+                <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-200 shadow-sm">
+                  <Users className="w-5 h-5 text-[#0F172A]" />
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">
+                    Local & Friendly
+                  </h3>
+                  <p className="text-[10px] text-gray-500 leading-tight">
+                    Here to Help
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 8. CALL TO ACTION (RFQ) */}
-      <section id="rfq" className="py-16 md:py-20 bg-[#133A2E] relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C5922E]/10 rounded-full blur-[160px] pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
-       
+      {/* ================= 5. COME VISIT ROX TECH SOLUTIONS ================= */}
+      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+        <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#F4F0E6] tracking-tight leading-tight">
-            Ready to Source Lab-Certified Premium Pistachios?
-          </h2>
+          <div className="lg:col-span-5 space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+              <span className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                Visit Us
+              </span>
+            </div>
 
-          <p className="text-[#F4F0E6]/80 text-sm sm:text-base font-normal max-w-xl mx-auto leading-relaxed">
-            Request verified sample packages or get a customized FOB/CIF wholesale quotation within 24 hours.
-          </p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
+              Come Visit ROX Tech Solutions
+            </h2>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <a
-              href="https://wa.me/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] font-black text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-xl shadow-[#C5922E]/20 transition-all duration-300"
-            >
-              <MessageSquare className="w-4 h-4 fill-[#0B2B22]" />
-              <span>WhatsApp Quick Connect</span>
-            </a>
+            <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed max-w-md">
+              See our full range in person, get expert advice and friendly support.
+            </p>
 
-            <a
-              href="mailto:export@pistachiohome.com"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0B2B22] hover:bg-[#133A2E] border border-[#1A4337] text-[#F4F0E6] font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl transition"
-            >
-              <span>Email Request</span>
-              <ArrowUpRight className="w-4 h-4 text-[#C5922E]" />
-            </a>
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="https://maps.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#F97316] hover:bg-[#EA580C] text-white px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md hover:shadow-lg"
+              >
+                <Navigation className="w-4 h-4" />
+                <span>Get Directions</span>
+              </a>
+
+              <a
+                href="https://wa.me/353000000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md hover:shadow-lg"
+              >
+                <MessageCircle className="w-4 h-4 fill-white" />
+                <span>WhatsApp Us</span>
+              </a>
+            </div>
           </div>
+
+          <div className="lg:col-span-7">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/10 aspect-[16/7] w-full bg-white">
+              <img
+                src="/shop-4.jpeg"
+                alt="Come Visit ROX Tech Solutions Store Showcase"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ================= 6. GET IN TOUCH ================= */}
+      <section className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16">
+        <div className="max-w-[1680px] mx-auto">
+
+          <div className="bg-gray-50/80 border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+
+            <div className="">
+              <div className="flex items-center gap-2">
+                <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-widest text-[#0F172A]">
+                  Get in Touch
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-700 font-medium text-gray-700 ">
+                Have a question about a product or repair? We&apos;re here to help.
+              </p>
+            </div>
+
+            <form onSubmit={handleSendMessage} className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <select
+                    required
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  >
+                    <option value="" disabled>Select Subject</option>
+                    <option value="repair">Device Repair</option>
+                    <option value="product">Product Inquiry</option>
+                    <option value="other">General Question</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <input
+                    type="text"
+                    placeholder="Your Subject"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  />
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 px-6 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>Send Message</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <input
+                    type="text"
+                    required
+                    placeholder="Email or Phone"
+                    value={formData.emailOrPhone}
+                    onChange={(e) => setFormData({ ...formData, emailOrPhone: e.target.value })}
+                    className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22C55E] resize-none"
+                  />
+                </div>
+
+                <div>
+                  <a
+                    href="https://wa.me/353000000000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-3.5 px-6 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md block text-center"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white" />
+                    <span>WhatsApp Us</span>
+                  </a>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
         </div>
       </section>
 
