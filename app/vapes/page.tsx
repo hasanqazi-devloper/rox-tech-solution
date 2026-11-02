@@ -376,7 +376,7 @@ export default function VapeShopPage() {
 
           <div className="w-full rounded-2xl overflow-hidden shadow-md border border-slate-300 aspect-[16/9] bg-white flex items-center justify-center p-2">
             <img
-              src="/vape-hero-showcase.png"
+              src="/vape-hero-page.png"
               alt="Vape Showcase"
               className="w-full h-full object-cover object-center"
             />
