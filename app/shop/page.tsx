@@ -15,6 +15,7 @@ import {
   RotateCcw
 } from "lucide-react";
 
+
 // Complete Categorized Inventory Mapped to Public Folders (Prices removed for competitive protection)
 const INITIAL_PRODUCTS = [
   // --- Smartphones & Tablets ---
@@ -135,6 +136,7 @@ export default function DynamicShopPage() {
     });
   }, [searchQuery, selectedCategories, selectedBrands]);
 
+  
   return (
     <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
 

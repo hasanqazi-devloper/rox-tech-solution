@@ -12,10 +12,10 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "ROX Tech Solutions | Premier Tech, Vape & Repair Hub in Cashel, Ireland",
+  title: "ROX Tech Solutions | #1 Tech, Vape & Repair Hub in Cashel, Ireland",
   description:
-    "Your go-to local destination for electronics, everyday accessories, vape products and professional device repair assistance in Cashel, County Tipperary, Ireland.",
-
+    "Looking for the latest tech, mobile accessories, vapes, or expert device repairs in Cashel? Visit ROX Tech Solutions or order via WhatsApp today!",
+  // baqi openGraph aur twitter tags same rahenge...
   // 👑 Site Icons Configuration Engine
   icons: {
     icon: "/fav.png",
@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     images: ["/feature.jpg"],
   },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

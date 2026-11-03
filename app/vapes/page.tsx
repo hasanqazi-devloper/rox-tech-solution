@@ -284,104 +284,113 @@ export default function VapeShopPage() {
     <div className="w-full bg-[#F1F5F9] min-h-screen text-[#0F172A] font-sans relative z-0">
 
       {/* ================= 1. HERO BANNER SECTION ================= */}
-      <section className="relative w-full bg-[#CBD5E1] overflow-hidden border-b border-slate-300 z-10 shadow-sm">
+   
+
+     <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
+
+        {/* ================= 1. DESKTOP HERO VIEW ================= */}
         <div className="hidden lg:block">
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
               <img
                 src="/vape-hero-page.png"
-                alt="ROX Vape & Tech Hub Showcase"
-                className="w-full h-full object-cover object-right grayscale-[20%] lg:grayscale-0"
+                alt="ROX Tech Store Showcase in Cashel"
+                className="w-full h-full object-cover object-right lg:grayscale-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#CBD5E1] via-[#CBD5E1]/90 lg:via-[#CBD5E1]/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
             </div>
           </div>
 
           <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
             <div className="max-w-xl space-y-6">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-sm border border-slate-200">
+
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
                 <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
                 <span>Cashel, Ireland</span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
-                Premium Vapes, Juices & <br />
-                <span className="text-[#F97316]">Nicotine Pouches Hub</span>
+                Premium Vapes, Juices & <br /> Nicotine Pouches Hub<span className="text-[#F97316]">Cashel</span>
               </h1>
 
-              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed max-w-lg">
-                Explore authentic vaping kits, premium e-liquids, disposables &amp; top pouches in Cashel. High-grade products directly sourced for trusted quality.
+              <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
+              Explore authentic vaping kits, premium e-liquids, disposables &amp; top pouches in Cashel.
+
               </p>
 
               <div className="flex items-center gap-3 pt-2">
-                <a
-                  href="#shop"
-                  className="bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:opacity-95 text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md outline-none"
+                <Link
+                  href="/shop"
+                  className="bg-[#F97316] hover:bg-[#EA580C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
                 >
-                  <span>Explore Inventory</span>
+                  <span>Explore Our Shop</span>
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </Link>
 
                 <a
                   href="https://wa.me/353000000000"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md outline-none"
+                  className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
                   <span>WhatsApp Us</span>
                 </a>
               </div>
+
             </div>
           </div>
         </div>
 
-        {/* Mobile Hero View */}
+
+        {/* ================= 2. MOBILE HERO VIEW ================= */}
         <div className="block lg:hidden px-5 py-8 space-y-6">
+
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs border border-slate-200">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
               <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
               <span>Cashel, Ireland</span>
             </div>
 
             <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
-              Premium Vapes, Juices & <br />
-              <span className="text-[#F97316]">Nicotine Pouches Hub</span>
+               Premium Vapes, Juices &  <br /> Nicotine Pouches Hub <span className="text-[#F97316]">Cashel</span>
             </h1>
 
-            <p className="text-xs text-slate-700 font-medium leading-relaxed">
+            <p className="text-xs text-gray-700 font-medium leading-relaxed">
               Explore authentic vaping kits, premium e-liquids, disposables &amp; top pouches in Cashel.
             </p>
 
             <div className="flex items-center gap-2.5 pt-1">
-              <a
-                href="#shop"
-                className="flex-1 bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md outline-none"
+              <Link
+                href="/shop"
+                className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
               >
-                <span>Explore Catalog</span>
+                <span>Explore Our Shop</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              </Link>
 
               <a
                 href="https://wa.me/353000000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md outline-none"
+                className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
               >
                 <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                <span>WhatsApp</span>
+                <span>WhatsApp Us</span>
               </a>
             </div>
           </div>
 
-          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-slate-300 aspect-[16/9] bg-white flex items-center justify-center p-2">
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
             <img
               src="/vape-hero-page.png"
-              alt="Vape Showcase"
+              alt="ROX Tech Store Showcase in Cashel"
               className="w-full h-full object-cover object-center"
             />
           </div>
+
         </div>
+
       </section>
 
       {/* ================= 2. CATEGORY NAVIGATION CARDS BAR ================= */}
