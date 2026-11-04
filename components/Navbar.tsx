@@ -110,7 +110,7 @@ export default function Navbar() {
 
           {/* Desktop WhatsApp Button */}
           <a
-            href="https://wa.me/353000000000"
+            href="https://wa.me/353896091839"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 bg-[#22C55E] hover:bg-[#16A34A] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm transition outline-none focus:outline-none"
