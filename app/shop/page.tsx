@@ -101,6 +101,15 @@ export default function DynamicShopPage() {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>("popular");
 
+  // Quick Form State
+  const [quickForm, setQuickForm] = useState({
+    name: "",
+    emailOrPhone: "",
+    message: ""
+  });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
+
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
       prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
@@ -118,6 +127,39 @@ export default function DynamicShopPage() {
     setSelectedBrands([]);
     setSearchQuery("");
     setSortBy("popular");
+  };
+
+  const handleQuickInquirySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: quickForm.name,
+          email: quickForm.emailOrPhone,
+          phone: quickForm.emailOrPhone,
+          service: "Shop Quick Product Inquiry",
+          message: quickForm.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus({ type: "success", msg: "Inquiry submitted successfully!" });
+        setQuickForm({ name: "", emailOrPhone: "", message: "" });
+      } else {
+        setStatus({ type: "error", msg: result.error || "Something went wrong." });
+      }
+    } catch (err) {
+      setStatus({ type: "error", msg: "Failed to submit inquiry. Please try again later." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const filteredProducts = useMemo(() => {
@@ -376,7 +418,7 @@ export default function DynamicShopPage() {
                       </div>
                       <div className="space-y-2 pt-2">
                         <a
-                          href={`https://wa.me/353000000000?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
+                          href={`https://wa.me/353896091839?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-2.5 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1.5 transition shadow-sm"
@@ -412,7 +454,7 @@ export default function DynamicShopPage() {
                     <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="bg-[#F97316] hover:bg-[#EA580C] text-white py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1">
                       <Navigation className="w-3 h-3" /> Get Directions
                     </a>
-                    <a href="https://wa.me/353000000000" target="_blank" rel="noopener noreferrer" className="bg-[#00D66C] hover:bg-[#00B85C] text-white py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1">
+                    <a href="https://wa.me/353896091839" target="_blank" rel="noopener noreferrer" className="bg-[#00D66C] hover:bg-[#00B85C] text-white py-2 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1">
                       <MessageCircle className="w-3 h-3 fill-white" /> WhatsApp
                     </a>
                   </div>
@@ -420,12 +462,45 @@ export default function DynamicShopPage() {
 
                 <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">Quick Product Inquiry</h3>
-                  <form onSubmit={(e) => { e.preventDefault(); alert("Inquiry submitted!"); }} className="space-y-3">
-                    <input type="text" placeholder="Your Name *" required className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]" />
-                    <input type="text" placeholder="Email or Phone *" required className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]" />
-                    <textarea rows={2} placeholder="Tell us what you're looking for..." className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none resize-none focus:ring-2 focus:ring-[#F97316]"></textarea>
-                    <button type="submit" className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md">
-                      <Send className="w-3.5 h-3.5" /> Submit Inquiry
+                  
+                  {status && (
+                    <div className={`p-2.5 rounded-xl text-xs font-medium ${status.type === "success" ? "bg-green-500/10 text-green-700 border border-green-500/20" : "bg-red-500/10 text-red-700 border border-red-500/20"}`}>
+                      {status.msg}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleQuickInquirySubmit} className="space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Your Name *"
+                      required
+                      value={quickForm.name}
+                      onChange={(e) => setQuickForm({ ...quickForm, name: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Email or Phone *"
+                      required
+                      value={quickForm.emailOrPhone}
+                      onChange={(e) => setQuickForm({ ...quickForm, emailOrPhone: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]"
+                    />
+                    <textarea
+                      rows={2}
+                      placeholder="Tell us what you're looking for..."
+                      required
+                      value={quickForm.message}
+                      onChange={(e) => setQuickForm({ ...quickForm, message: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none resize-none focus:ring-2 focus:ring-[#F97316]"
+                    ></textarea>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md disabled:opacity-50"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>{loading ? "Submitting..." : "Submit Inquiry"}</span>
                     </button>
                   </form>
                 </div>

@@ -24,13 +24,45 @@ export default function AboutPage() {
   const [formData, setFormData] = useState({
     name: "",
     emailOrPhone: "",
+    reason: "",
     subject: "",
     message: ""
   });
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
+
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! Your message has been sent to ROX Tech Solutions.");
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.emailOrPhone,
+          phone: formData.emailOrPhone,
+          service: `${formData.reason} - ${formData.subject}`,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus({ type: "success", msg: "Thank you! Your message has been sent successfully." });
+        setFormData({ name: "", emailOrPhone: "", reason: "", subject: "", message: "" });
+      } else {
+        setStatus({ type: "error", msg: result.error || "Something went wrong." });
+      }
+    } catch (err) {
+      setStatus({ type: "error", msg: "Failed to send message. Please try again later." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -78,7 +110,7 @@ export default function AboutPage() {
                 </Link>
 
                 <a
-                  href="https://wa.me/353000000000"
+                  href="https://wa.me/353896091839"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
@@ -120,7 +152,7 @@ export default function AboutPage() {
               </Link>
 
               <a
-                href="https://wa.me/353000000000"
+                href="https://wa.me/353896091839"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
@@ -148,7 +180,6 @@ export default function AboutPage() {
       <section className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60 space-y-12">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-          {/* Mobile par text pehle aayega (order-1), aur image niche (order-2). Desktop pe grid items normal rahenge. */}
           <div className="lg:col-span-6 order-1 lg:order-1 space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
@@ -185,10 +216,9 @@ export default function AboutPage() {
 
             <div className="flex items-center gap-2">
               <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
-           
-                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
-             What We Offer 
-            </h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
+                What We Offer
+              </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -250,7 +280,7 @@ export default function AboutPage() {
                 Inside Our Store
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-gray-700 font-medium text-gray-700 pl-3">
+            <p className="text-xs sm:text-sm text-gray-700 font-medium pl-3">
               Take a look at our real store photos and see what we have in store for you.
             </p>
           </div>
@@ -455,7 +485,7 @@ export default function AboutPage() {
               </a>
 
               <a
-                href="https://wa.me/353000000000"
+                href="https://wa.me/353896091839"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md hover:shadow-lg"
@@ -493,10 +523,16 @@ export default function AboutPage() {
                   Get in Touch
                 </h2>
               </div>
-              <p className="text-xs sm:text-sm text-gray-700 font-medium text-gray-700 ">
+              <p className="text-xs sm:text-sm text-gray-700 font-medium">
                 Have a question about a product or repair? We&apos;re here to help.
               </p>
             </div>
+
+            {status && (
+              <div className={`p-3 rounded-xl text-xs font-medium ${status.type === "success" ? "bg-green-500/10 text-green-700 border border-green-500/20" : "bg-red-500/10 text-red-700 border border-red-500/20"}`}>
+                {status.msg}
+              </div>
+            )}
 
             <form onSubmit={handleSendMessage} className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
@@ -515,35 +551,26 @@ export default function AboutPage() {
                 <div className="space-y-1">
                   <select
                     required
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    value={formData.reason}
+                    onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                     className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#F97316]"
                   >
-                    <option value="" disabled>Select Subject</option>
-                    <option value="repair">Device Repair</option>
-                    <option value="product">Product Inquiry</option>
-                    <option value="other">General Question</option>
+                    <option value="" disabled>Select Reason / Department</option>
+                    <option value="Device Repair">Device Repair</option>
+                    <option value="Product Inquiry">Product Inquiry</option>
+                    <option value="General Question">General Question</option>
                   </select>
                 </div>
 
                 <div className="space-y-1">
                   <input
                     type="text"
-                    placeholder="Your Subject"
+                    required
+                    placeholder="Subject (e.g. iPhone Screen Quote)"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]"
                   />
-                </div>
-
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 px-6 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md"
-                  >
-                    <Send className="w-4 h-4" />
-                    <span>Send Message</span>
-                  </button>
                 </div>
               </div>
 
@@ -552,7 +579,7 @@ export default function AboutPage() {
                   <input
                     type="text"
                     required
-                    placeholder="Email or Phone"
+                    placeholder="Email or Phone Number"
                     value={formData.emailOrPhone}
                     onChange={(e) => setFormData({ ...formData, emailOrPhone: e.target.value })}
                     className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22C55E]"
@@ -563,19 +590,28 @@ export default function AboutPage() {
                   <textarea
                     rows={4}
                     required
-                    placeholder="Your Message"
+                    placeholder="Your Message..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22C55E] resize-none"
                   />
                 </div>
 
-                <div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex-1 bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 px-6 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md disabled:opacity-50"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>{loading ? "Sending..." : "Send Message"}</span>
+                  </button>
+
                   <a
-                    href="https://wa.me/353000000000"
+                    href="https://wa.me/353896091839"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-3.5 px-6 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md block text-center"
+                    className="flex-1 bg-[#00D66C] hover:bg-[#00B85C] text-white py-3.5 px-6 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md text-center"
                   >
                     <MessageCircle className="w-4 h-4 fill-white" />
                     <span>WhatsApp Us</span>

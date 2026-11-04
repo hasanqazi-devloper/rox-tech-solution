@@ -137,7 +137,7 @@ export default function FeaturedProducts() {
 
                 {/* WhatsApp Inquiry Button */}
                 <a
-                  href={`https://wa.me/353000000000?text=Hi, I am interested in ${product.title}`}
+                  href={`https://wa.me/353896091839?text=Hi, I am interested in ${product.title}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 w-full bg-[#22C55E] hover:bg-[#16A34A] text-white py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-xs"
@@ -182,7 +182,7 @@ export default function FeaturedProducts() {
                     </p>
 
                     <a
-                      href={`https://wa.me/353000000000?text=Hi, I am interested in ${product.title}`}
+                      href={`https://wa.me/353896091839?text=Hi, I am interested in ${product.title}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-3 inline-flex items-center gap-1.5 bg-[#22C55E] text-white px-3 py-1.5 rounded-full text-[10px] font-bold shadow-xs"

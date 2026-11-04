@@ -39,137 +39,173 @@ export default function RepairsPage() {
     contactMethod: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! Your repair request has been submitted successfully.");
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: `Repair Request - ${formData.deviceType} (${formData.deviceBrand}) - Issue: ${formData.repairIssue}`,
+          message: `Device Type: ${formData.deviceType}\nBrand: ${formData.deviceBrand}\nIssue: ${formData.repairIssue}\nPreferred Contact: ${formData.contactMethod}\n\nDescription:\n${formData.description}`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus({ type: "success", msg: "Thank you! Your repair request has been submitted successfully." });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          deviceType: "",
+          deviceBrand: "",
+          repairIssue: "",
+          description: "",
+          contactMethod: ""
+        });
+      } else {
+        setStatus({ type: "error", msg: result.error || "Something went wrong." });
+      }
+    } catch (err) {
+      setStatus({ type: "error", msg: "Failed to submit request. Please try again later." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
 
       {/* ================= 1. HERO SECTION ================= */}
-   <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
+      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
 
-  {/* ================= 1. DESKTOP HERO VIEW (EXACT UNTOUCHED CODE) ================= */}
-  <div className="hidden lg:block">
-    {/* Background Image Wrapper (Right Aligned & Smoothly Blended to Left) */}
-    <div className="absolute inset-0 w-full h-full flex justify-end">
-      <div className="relative w-full lg:w-[75%] sm:w-[10%] h-full">
-        <img
-          src="/rox-repair.png"
-          alt="Expert Device Repairs Workbench"
-          className="w-full h-full object-cover object-right grayscale-[40%] lg:grayscale-0"
-        />
+        {/* ================= 1. DESKTOP HERO VIEW (EXACT UNTOUCHED CODE) ================= */}
+        <div className="hidden lg:block">
+          {/* Background Image Wrapper (Right Aligned & Smoothly Blended to Left) */}
+          <div className="absolute inset-0 w-full h-full flex justify-end">
+            <div className="relative w-full lg:w-[75%] sm:w-[10%] h-full">
+              <img
+                src="/rox-repair.png"
+                alt="Expert Device Repairs Workbench"
+                className="w-full h-full object-cover object-right grayscale-[40%] lg:grayscale-0"
+              />
 
-        {/* Soft Horizontal Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
-      </div>
-    </div>
+              {/* Soft Horizontal Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
+            </div>
+          </div>
 
-    {/* Content Overlay Layer (Text & CTA Buttons on Left) */}
-    <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
-      <div className="max-w-xl space-y-6">
+          {/* Content Overlay Layer (Text & CTA Buttons on Left) */}
+          <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
+            <div className="max-w-xl space-y-6">
 
-        {/* Cashel, Ireland Location Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
-          <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
-          <span>Cashel, Ireland</span>
+              {/* Cashel, Ireland Location Badge */}
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+                <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+                <span>Cashel, Ireland</span>
+              </div>
+
+              {/* Main Heading */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
+                Expert Device Repairs <br />
+                in <span className="text-[#F97316]">Cashel</span>
+              </h1>
+
+              {/* Description */}
+              <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
+                Professional, reliable and affordable repair assistance for smartphones, tablets, laptops and other supported devices. Get your devices back in top shape with our expert technicians.
+              </p>
+
+              {/* CTA Action Buttons */}
+              <div className="flex items-center gap-3 pt-2">
+                <a
+                  href="#quote-form"
+                  className="bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:opacity-95 text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                >
+                  <span>Request a Repair</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="https://wa.me/353896091839"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <span>WhatsApp Us</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
         </div>
 
-        {/* Main Heading */}
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
-          Expert Device Repairs <br />
-          in <span className="text-[#F97316]">Cashel</span>
-        </h1>
 
-        {/* Description */}
-        <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
-          Professional, reliable and affordable repair assistance for smartphones, tablets, laptops and other supported devices. Get your devices back in top shape with our expert technicians.
-        </p>
+        {/* ================= 2. MOBILE HERO VIEW (MATCHING EXACT REFERENCE UI) ================= */}
+        <div className="block lg:hidden px-5 py-8 space-y-6">
+          
+          {/* Top Content: Badge, Heading, Subtext */}
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+              <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+              <span>Cashel, Ireland</span>
+            </div>
 
-        {/* CTA Action Buttons */}
-        <div className="flex items-center gap-3 pt-2">
-          <a
-            href="#quote-form"
-            className="bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:opacity-95 text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
-          >
-            <span>Request a Repair</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
+            <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
+              Expert Device Repairs <br />
+              in <span className="text-[#F97316]">Cashel</span>
+            </h1>
 
-          <a
-            href="https://wa.me/353000000000"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
-          >
-            <MessageCircle className="w-4 h-4 fill-white" />
-            <span>WhatsApp Us</span>
-          </a>
+            <p className="text-xs text-gray-700 font-medium leading-relaxed">
+              Professional, reliable and affordable repair assistance for smartphones, tablets, laptops and other supported devices. Get your devices back in top shape with our expert technicians.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex items-center gap-2.5 pt-1">
+              <a
+                href="#quote-form"
+                className="flex-1 bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+              >
+                <span>Request a Repair</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+
+              <a
+                href="https://wa.me/353896091839"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                <span>WhatsApp Us</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Bottom Workbench Image Box */}
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
+            <img
+              src="/rox-repair.png"
+              alt="Expert Device Repairs Workbench"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+
         </div>
 
-      </div>
-    </div>
-  </div>
-
-
-  {/* ================= 2. MOBILE HERO VIEW (MATCHING EXACT REFERENCE UI) ================= */}
-  <div className="block lg:hidden px-5 py-8 space-y-6">
-    
-    {/* Top Content: Badge, Heading, Subtext */}
-    <div className="space-y-4">
-      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
-        <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
-        <span>Cashel, Ireland</span>
-      </div>
-
-      <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
-        Expert Device Repairs <br />
-        in <span className="text-[#F97316]">Cashel</span>
-      </h1>
-
-      <p className="text-xs text-gray-700 font-medium leading-relaxed">
-        Professional, reliable and affordable repair assistance for smartphones, tablets, laptops and other supported devices. Get your devices back in top shape with our expert technicians.
-      </p>
-
-      {/* Buttons */}
-      <div className="flex items-center gap-2.5 pt-1">
-        <a
-          href="#quote-form"
-          className="flex-1 bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
-        >
-          <span>Request a Repair</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </a>
-
-        <a
-          href="https://wa.me/353000000000"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
-        >
-          <MessageCircle className="w-3.5 h-3.5 fill-white" />
-          <span>WhatsApp Us</span>
-        </a>
-      </div>
-    </div>
-
-    {/* Features Row (4 Icons) */}
-  
-
-    {/* Bottom Workbench Image Box */}
-    <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-      <img
-        src="/rox-repair.png"
-        alt="Expert Device Repairs Workbench"
-        className="w-full h-full object-cover object-center"
-      />
-    </div>
-
-  </div>
-
-</section>
-
+      </section>
 
 
       {/* ================= 2. CORE FEATURES BAR ================= */}
@@ -471,7 +507,7 @@ export default function RepairsPage() {
                 <span>Get Directions</span>
               </a>
               <a
-                href="https://wa.me/353000000000"
+                href="https://wa.me/353896091839"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-5 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
@@ -503,6 +539,12 @@ export default function RepairsPage() {
                 Fill out the form below and we&apos;ll get back to you as soon as possible.
               </p>
             </div>
+
+            {status && (
+              <div className={`p-3 rounded-xl text-xs font-medium ${status.type === "success" ? "bg-green-500/10 text-green-700 border border-green-500/20" : "bg-red-500/10 text-red-700 border border-red-500/20"}`}>
+                {status.msg}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
@@ -602,10 +644,11 @@ export default function RepairsPage() {
               <div className="sm:col-span-2 pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md"
+                  disabled={loading}
+                  className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Submit Repair Request</span>
+                  <span>{loading ? "Submitting..." : "Submit Repair Request"}</span>
                 </button>
               </div>
 
@@ -640,7 +683,7 @@ export default function RepairsPage() {
                 <span>Get Directions</span>
               </a>
               <a
-                href="https://wa.me/353000000000"
+                href="https://wa.me/353896091839"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md block text-center"

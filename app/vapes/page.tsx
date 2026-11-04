@@ -328,7 +328,7 @@ export default function VapeShopPage() {
                 </Link>
 
                 <a
-                  href="https://wa.me/353000000000"
+                  href="https://wa.me/353896091839"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
@@ -370,7 +370,7 @@ export default function VapeShopPage() {
               </Link>
 
               <a
-                href="https://wa.me/353000000000"
+                href="https://wa.me/353896091839"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
@@ -605,7 +605,7 @@ export default function VapeShopPage() {
 
                   {/* Direct WhatsApp Call-To-Action Button */}
                   <a
-                    href={`https://wa.me/353000000000?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
+                    href={`https://wa.me/353896091839?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-[#22C55E] hover:bg-[#1ea950] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm outline-none"

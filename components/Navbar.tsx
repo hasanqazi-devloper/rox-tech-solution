@@ -168,7 +168,7 @@ export default function Navbar() {
 
           <div className="pt-2 flex flex-col gap-2">
             <a
-              href="https://wa.me/353000000000"
+              href="https://wa.me/353896091839"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 bg-[#22C55E] text-white py-2.5 rounded-full font-bold text-xs outline-none focus:outline-none"

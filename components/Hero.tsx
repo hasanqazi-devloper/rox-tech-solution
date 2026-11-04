@@ -49,7 +49,7 @@ export default function HeroSection() {
                 </Link>
 
                 <a
-                  href="https://wa.me/353000000000"
+                  href="https://wa.me/353896091839"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 2xl:gap-3 bg-[#22C55E] hover:bg-[#16A34A] text-white px-6 py-3 2xl:px-9 2xl:py-4 rounded-full font-bold text-sm 2xl:text-lg shadow-md transition transform hover:-translate-y-0.5"

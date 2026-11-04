@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { 
-  MapPin, 
-  MessageCircle, 
-  Clock, 
-  PhoneCall, 
-  Navigation, 
-  Send, 
-  ShoppingBag, 
-  Wrench, 
+import {
+  MapPin,
+  MessageCircle,
+  Clock,
+  PhoneCall,
+  Navigation,
+  Send,
+  ShoppingBag,
+  Wrench,
   Info,
   ChevronRight
 } from "lucide-react";
@@ -25,130 +25,141 @@ export default function ContactPage() {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! Your message has been sent to ROX Tech Solutions.");
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          service: `${formData.reason} - ${formData.subject}`,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus({ type: "success", msg: "Thank you! Your message has been sent successfully." });
+        setFormData({ fullName: "", email: "", phone: "", reason: "", subject: "", message: "" });
+      } else {
+        setStatus({ type: "error", msg: result.error || "Something went wrong." });
+      }
+    } catch (err) {
+      setStatus({ type: "error", msg: "Failed to submit. Please try again later." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
 
       {/* ================= 1. HERO SECTION ================= */}
-    <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
+      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
+        <div className="hidden lg:block">
+          <div className="absolute inset-0 w-full h-full flex justify-end">
+            <div className="relative w-full lg:w-[75%] h-full">
+              <img
+                src="/rox-contact.png"
+                alt="ROX Tech Solutions Interior Showcase"
+                className="w-full h-full object-cover object-right lg:grayscale-0"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
+            </div>
+          </div>
 
-  {/* ================= 1. DESKTOP HERO VIEW ================= */}
-  <div className="hidden lg:block">
-    <div className="absolute inset-0 w-full h-full flex justify-end">
-      <div className="relative w-full lg:w-[75%] h-full">
-        <img
-          src="/rox-contact.png"
-          alt="ROX Tech Solutions Interior Showcase"
-          className="w-full h-full object-cover object-right lg:grayscale-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
-      </div>
-    </div>
-
-    <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
-      <div className="max-w-xl space-y-6">
-
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
-          <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
-          <span>Cashel, Ireland</span>
+          <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
+            <div className="max-w-xl space-y-6">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+                <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+                <span>Cashel, Ireland</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
+                Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
+              </h1>
+              <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
+                Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
+              </p>
+              <div className="flex items-center gap-3 pt-2">
+                <a
+                  href="https://wa.me/353896091839"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <span>WhatsApp Us</span>
+                </a>
+                <a
+                  href="https://maps.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#F97316] hover:bg-[#EA580C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                >
+                  <Navigation className="w-4 h-4" />
+                  <span>Visit Our Store</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
-          Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
-        </h1>
-
-        <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
-          Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
-        </p>
-
-        <div className="flex items-center gap-3 pt-2">
-          <a
-            href="https://wa.me/353000000000"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
-          >
-            <MessageCircle className="w-4 h-4 fill-white" />
-            <span>WhatsApp Us</span>
-          </a>
-
-          <a
-            href="https://maps.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#F97316] hover:bg-[#EA580C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
-          >
-            <Navigation className="w-4 h-4" />
-            <span>Visit Our Store</span>
-          </a>
+        <div className="block lg:hidden px-5 py-8 space-y-6">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+              <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+              <span>Cashel, Ireland</span>
+            </div>
+            <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
+              Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
+            </h1>
+            <p className="text-xs text-gray-700 font-medium leading-relaxed">
+              Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
+            </p>
+            <div className="flex items-center gap-2.5 pt-1">
+              <a
+                href="https://wa.me/353896091839"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                <span>WhatsApp Us</span>
+              </a>
+              <a
+                href="https://maps.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Visit Our Store</span>
+              </a>
+            </div>
+          </div>
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
+            <img
+              src="/rox-contact.png"
+              alt="ROX Tech Solutions Interior Showcase"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-
-
-  {/* ================= 2. MOBILE HERO VIEW ================= */}
-  <div className="block lg:hidden px-5 py-8 space-y-6">
-    
-    <div className="space-y-4">
-      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
-        <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
-        <span>Cashel, Ireland</span>
-      </div>
-
-      <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
-        Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
-      </h1>
-
-      <p className="text-xs text-gray-700 font-medium leading-relaxed">
-        Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
-      </p>
-
-      <div className="flex items-center gap-2.5 pt-1">
-        <a
-          href="https://wa.me/353000000000"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 bg-[#00D66C] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
-        >
-          <MessageCircle className="w-3.5 h-3.5 fill-white" />
-          <span>WhatsApp Us</span>
-        </a>
-
-        <a
-          href="https://maps.google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
-        >
-          <Navigation className="w-3.5 h-3.5" />
-          <span>Visit Our Store</span>
-        </a>
-      </div>
-    </div>
-
-    <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-      <img
-        src="/rox-contact.png"
-        alt="ROX Tech Solutions Interior Showcase"
-        className="w-full h-full object-cover object-center"
-      />
-    </div>
-
-  </div>
-
-</section>
-
+      </section>
 
       {/* ================= 2. QUICK INFO CARDS BAR ================= */}
       <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-          
           <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group cursor-pointer">
             <div className="flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
@@ -187,15 +198,13 @@ export default function ContactPage() {
             </div>
             <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
           </div>
-
         </div>
       </section>
-
 
       {/* ================= 3. MAIN CONTENT: FORM & SIDECARDS ================= */}
       <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Side: Send Us a Message Form */}
           <div className="lg:col-span-8 bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
             <div className="flex justify-between items-center">
@@ -213,8 +222,13 @@ export default function ContactPage() {
               <span className="text-[10px] font-bold text-red-500">* Required fields</span>
             </div>
 
+            {status && (
+              <div className={`p-3 rounded-xl text-xs font-medium ${status.type === "success" ? "bg-green-500/10 text-green-700 border border-green-500/20" : "bg-red-500/10 text-red-700 border border-red-500/20"}`}>
+                {status.msg}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              
               <div className="space-y-1">
                 <label className="text-[11px] font-bold text-[#0F172A]">Full Name *</label>
                 <input
@@ -259,9 +273,9 @@ export default function ContactPage() {
                   className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
                 >
                   <option value="" disabled>Select reason</option>
-                  <option value="repair">Device Repair</option>
-                  <option value="product">Product Inquiry</option>
-                  <option value="other">General Question</option>
+                  <option value="Device Repair">Device Repair</option>
+                  <option value="Product Inquiry">Product Inquiry</option>
+                  <option value="General Question">General Question</option>
                 </select>
               </div>
 
@@ -292,23 +306,21 @@ export default function ContactPage() {
               <div className="sm:col-span-2 pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 px-8 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md"
+                  disabled={loading}
+                  className="w-full sm:w-auto bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 px-8 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Submit Message</span>
+                  <span>{loading ? "Sending..." : "Submit Message"}</span>
                 </button>
                 <p className="text-[11px] text-gray-500 text-center sm:text-right">
                   🔒 Your information is safe with us. We&apos;ll only use it to respond to your enquiry.
                 </p>
               </div>
-
             </form>
           </div>
 
-          {/* Right Side: Sidecards (Quick WhatsApp & Visit Store) */}
+          {/* Right Side: Sidecards */}
           <div className="lg:col-span-4 space-y-6">
-            
-            {/* Quick WhatsApp Assistance Card */}
             <div className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 shadow-sm space-y-4">
               <div className="space-y-1">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
@@ -319,7 +331,7 @@ export default function ContactPage() {
                 </p>
               </div>
               <a
-                href="https://wa.me/353000000000"
+                href="https://wa.me/353896091839"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md block text-center"
@@ -329,7 +341,6 @@ export default function ContactPage() {
               </a>
             </div>
 
-            {/* Visit Our Store Card */}
             <div className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 shadow-sm space-y-4">
               <div className="space-y-1">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
@@ -357,7 +368,7 @@ export default function ContactPage() {
                   <span>Get Directions</span>
                 </a>
                 <a
-                  href="https://wa.me/353000000000"
+                  href="https://wa.me/353896091839"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#00D66C] hover:bg-[#00B85C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"
@@ -367,17 +378,14 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-
           </div>
 
         </div>
       </section>
 
-
       {/* ================= 4. HELPFUL LINKS SECTION ================= */}
       <section className="w-full bg-white py-10 px-6 sm:px-10 lg:px-16">
         <div className="max-w-[1680px] mx-auto space-y-6">
-          
           <div className="flex items-center gap-2">
             <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
             <div>
@@ -389,7 +397,6 @@ export default function ContactPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            
             <Link
               href="/shop"
               className="bg-gray-50 border border-gray-200 rounded-2xl p-5 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group"
@@ -437,9 +444,7 @@ export default function ContactPage() {
               </div>
               <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
             </Link>
-
           </div>
-
         </div>
       </section>
 
