@@ -39,7 +39,7 @@ export default function Footer() {
 
             {/* Description */}
             <p className="text-sm text-gray-300 font-normal leading-relaxed max-w-md">
-              Your local tech store in Cashel, offering electronics, accessories and professional device repair services. Quality products, expert advice and friendly local support.
+              Your local tech stores in Cashel, offering electronics, accessories, vapes and professional device repair services across two convenient locations.
             </p>
 
             {/* 4 Feature Badges Grid */}
@@ -80,71 +80,55 @@ export default function Footer() {
                 </div>
                 <div>
                   <h5 className="text-xs sm:text-sm font-bold text-white leading-tight">Local Support</h5>
-                  <p className="text-xs text-gray-400 mt-0.5">In Cashel</p>
+                  <p className="text-xs text-gray-400 mt-0.5">2 Store Locations</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* COLUMN 2: Contact Us & Opening Hours */}
-          <div className="lg:col-span-3 space-y-8">
-            {/* Contact Us */}
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <h4 className="text-sm font-bold text-white tracking-wide">Contact Us</h4>
-                <div className="w-8 h-0.5 bg-[#F97316] rounded-full" />
-              </div>
-
-              <ul className="space-y-3.5 text-sm">
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#F97316] shrink-0 mt-1" />
-                  <div>
-                    <p className="text-white font-medium">Cashel,</p>
-                    <p className="text-xs text-gray-300">County Tipperary, Ireland</p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-3">
-                  <MessageCircle className="w-4 h-4 text-[#22C55E] shrink-0 mt-1" />
-                  <div>
-                    <p className="text-white font-medium">WhatsApp & Phone</p>
-                    <p className="text-xs text-gray-300">Get in touch via WhatsApp or call us</p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-[#F97316] shrink-0 mt-1" />
-                  <div>
-                    <p className="text-white font-medium">Email</p>
-                    <p className="text-xs text-gray-300">Send us a message</p>
-                  </div>
-                </li>
-              </ul>
+          {/* COLUMN 2: Contact Us & Dual Store Locations */}
+          <div className="lg:col-span-3 space-y-6">
+            <div className="space-y-1">
+              <h4 className="text-sm font-bold text-white tracking-wide">Our Store Locations</h4>
+              <div className="w-8 h-0.5 bg-[#F97316] rounded-full" />
             </div>
 
-            {/* Opening Hours */}
-            <div className="space-y-4 pt-2">
-              <div className="space-y-1">
-                <h4 className="text-sm font-bold text-white tracking-wide">Opening Hours</h4>
-                <div className="w-8 h-0.5 bg-[#F97316] rounded-full" />
-              </div>
-
-              <div className="flex items-start gap-3 text-sm">
-                <Clock className="w-4 h-4 text-[#F97316] shrink-0 mt-1" />
-                <div className="space-y-2.5 text-xs sm:text-sm w-full max-w-[240px]">
-                  <div className="flex justify-between text-gray-200">
-                    <span>Monday - Thursday</span>
-                    <span className="text-gray-300 font-mono text-xs">9:00 AM – 7:00 PM</span>
-                  </div>
-                  <div className="flex justify-between text-gray-200">
-                    <span>Friday - Saturday</span>
-                    <span className="text-gray-300 font-mono text-xs">9:00 AM – 10:00 PM</span>
-                  </div>
-                  <div className="flex justify-between text-gray-200">
-                    <span>Sunday</span>
-                    <span className="text-gray-300 font-mono text-xs">9:00 AM – 8:00 PM</span>
+            <ul className="space-y-4 text-sm">
+              {/* Location 1 */}
+              <li className="flex items-start gap-3 bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                <MapPin className="w-4 h-4 text-[#F97316] shrink-0 mt-1" />
+                <div className="space-y-1">
+                  <p className="text-white font-bold text-xs">Location 1: Shopping Centre</p>
+                  <p className="text-[11px] text-gray-300 leading-snug">Unit 3, Cashel Town Shopping Centre, Ashwell&apos;s-Lot, Cashel, Co. Tipperary</p>
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="text-[10px] font-mono text-orange-400">E25 EF82</span>
+                    <a href="https://share.google/XIeHDurgfiVKCpBxz" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F97316] hover:underline">
+                      View Map →
+                    </a>
                   </div>
                 </div>
+              </li>
+
+              {/* Location 2 */}
+              <li className="flex items-start gap-3 bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                <MapPin className="w-4 h-4 text-[#22C55E] shrink-0 mt-1" />
+                <div className="space-y-1">
+                  <p className="text-white font-bold text-xs">Location 2: Bank Place</p>
+                  <p className="text-[11px] text-gray-300 leading-snug">Bank Pl, Cashel, Co. Tipperary</p>
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="text-[10px] font-mono text-emerald-400">E25 VE04</span>
+                    <a href="https://share.google/j6alfoimaC2IgJJoO" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#22C55E] hover:underline">
+                      View Map →
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <div className="space-y-2 pt-1">
+              <div className="flex items-center gap-2.5 text-xs text-gray-300">
+                <MessageCircle className="w-3.5 h-3.5 text-[#22C55E] shrink-0" />
+                <span>WhatsApp / Phone Support Available</span>
               </div>
             </div>
           </div>
@@ -166,6 +150,28 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+
+            {/* Opening Hours inside Quick Links column */}
+            <div className="space-y-3 pt-4">
+              <div className="space-y-1">
+                <h4 className="text-xs font-bold text-white tracking-wide">Opening Hours</h4>
+                <div className="w-6 h-0.5 bg-[#F97316] rounded-full" />
+              </div>
+              <div className="space-y-1.5 text-[11px] text-gray-300">
+                <div className="flex justify-between">
+                  <span>Mon - Thu:</span>
+                  <span className="font-mono">9AM – 7PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Fri - Sat:</span>
+                  <span className="font-mono">9AM – 10PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Sunday:</span>
+                  <span className="font-mono">9AM – 8PM</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* COLUMN 4: Shop Categories */}
@@ -241,38 +247,17 @@ export default function Footer() {
                   </svg>
                 </a>
               </div>
-
-              {/* Newsletter Form */}
-              <div className="pt-3 space-y-2">
-                <h5 className="text-xs sm:text-sm font-bold text-white">Be the first to know</h5>
-                <p className="text-xs text-gray-300">Get updates on new products, special offers and more.</p>
-                
-                <div className="flex items-center gap-1.5 pt-1">
-                  <input 
-                    type="email" 
-                    placeholder="Your email address" 
-                    className="w-full bg-[#0F172A] border border-gray-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none focus:border-[#F97316]"
-                  />
-                  <button className="bg-[#F97316] hover:bg-[#EA580C] text-white p-2.5 rounded-xl transition shrink-0">
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
 
         </div>
 
-
         {/* ================= BOTTOM COPYRIGHT & PAYMENT SECTION ================= */}
         <div className="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-300">
-          
-          {/* Copyright */}
           <p className="text-xs sm:text-sm">
             © {new Date().getFullYear()} ROX Tech Solutions. All rights reserved.
           </p>
 
-          {/* Payment Method Badges */}
           <div className="flex items-center gap-2">
             <span className="bg-[#0A1124] border border-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold text-blue-400 flex items-center gap-1">
               VISA
@@ -288,7 +273,6 @@ export default function Footer() {
               G Pay
             </span>
           </div>
-
         </div>
 
         {/* ================= SIGNATURE BOTTOM ACCENT LINE ================= */}

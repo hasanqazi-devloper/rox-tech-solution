@@ -17,7 +17,8 @@ import {
   Headphones,
   CheckCircle2,
   Navigation,
-  Send
+  Send,
+  ExternalLink
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -71,7 +72,7 @@ export default function AboutPage() {
       {/* ================= 1. HERO SECTION ================= */}
       <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
 
-        {/* ================= 1. DESKTOP HERO VIEW ================= */}
+        {/* ================= DESKTOP HERO VIEW ================= */}
         <div className="hidden lg:block">
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
@@ -92,12 +93,12 @@ export default function AboutPage() {
                 <span>Cashel, Ireland</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] leading-[1.15] tracking-tight">
                 Your Local Technology <br /> Store in <span className="text-[#F97316]">Cashel</span>
               </h1>
 
-              <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
-                ROX Tech Solutions is your go-to local destination for electronics, everyday accessories and device repair assistance. We bring you the latest technology with friendly, local service.
+              <p className="text-xs sm:text-sm text-gray-700 font-normal leading-relaxed max-w-lg">
+                ROX Tech Solutions is your go-to local destination across two convenient locations for electronics, everyday accessories, vapes and professional device repair assistance.
               </p>
 
               <div className="flex items-center gap-3 pt-2">
@@ -124,22 +125,20 @@ export default function AboutPage() {
           </div>
         </div>
 
-
-        {/* ================= 2. MOBILE HERO VIEW ================= */}
+        {/* ================= MOBILE HERO VIEW ================= */}
         <div className="block lg:hidden px-5 py-8 space-y-6">
-
           <div className="space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
               <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
               <span>Cashel, Ireland</span>
             </div>
 
-            <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
+            <h1 className="text-3xl font-bold text-[#0F172A] leading-tight tracking-tight">
               Your Local Technology <br /> Store in <span className="text-[#F97316]">Cashel</span>
             </h1>
 
-            <p className="text-xs text-gray-700 font-medium leading-relaxed">
-              ROX Tech Solutions is your go-to local destination for electronics, everyday accessories and device repair assistance. We bring you the latest technology with friendly, local service.
+            <p className="text-xs text-gray-700 font-normal leading-relaxed">
+              ROX Tech Solutions is your go-to local destination for electronics, everyday accessories, vapes and professional device repair assistance.
             </p>
 
             <div className="flex items-center gap-2.5 pt-1">
@@ -147,7 +146,7 @@ export default function AboutPage() {
                 href="/shop"
                 className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
               >
-                <span>Explore Our Shop</span>
+                <span>Explore Shop</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
@@ -170,35 +169,33 @@ export default function AboutPage() {
               className="w-full h-full object-cover object-center"
             />
           </div>
-
         </div>
 
       </section>
-
 
       {/* ================= 2. OUR STORY & WHAT WE OFFER ================= */}
       <section className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60 space-y-12">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-          <div className="lg:col-span-6 order-1 lg:order-1 space-y-4">
-            <div className="flex items-center gap-2">
+          <div className="lg:col-span-6 space-y-4">
+            <div className="inline-flex items-center gap-2">
               <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
               <span className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
                 Our Story
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
-              Technology, Accessories & <br />
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] leading-tight tracking-tight">
+              Technology, Accessories, Vapes & <br />
               <span className="text-[#F97316]">Friendly Local Service</span>
             </h2>
 
-            <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed max-w-2xl">
-              At ROX Tech Solutions, we&apos;re passionate about technology and dedicated to helping our customers find the right products and get the support they need. From the latest devices to everyday accessories and expert repair assistance, we&apos;re here to make technology easier and more accessible for everyone in Cashel.
+            <p className="text-xs sm:text-sm text-gray-700 font-normal leading-relaxed max-w-2xl">
+              At ROX Tech Solutions, operating across two convenient locations in Cashel, we are passionate about technology and dedicated to helping our customers. From the latest devices and premium vapes to everyday accessories and expert repair assistance, we make technology accessible for everyone.
             </p>
           </div>
 
-          <div className="lg:col-span-6 order-2 lg:order-2">
+          <div className="lg:col-span-6">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/10 aspect-[16/10] w-full bg-white">
               <img
                 src="/shop-3.jpeg"
@@ -216,7 +213,7 @@ export default function AboutPage() {
 
             <div className="flex items-center gap-2">
               <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">
                 What We Offer
               </h2>
             </div>
@@ -227,7 +224,7 @@ export default function AboutPage() {
                   <Smartphone className="w-6 h-6 text-[#0F172A]" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-sm font-bold text-[#0F172A]">Electronics & Devices</h3>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#0F172A]">Electronics & Devices</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">Latest smartphones, laptops, tablets and more.</p>
                 </div>
               </div>
@@ -237,8 +234,8 @@ export default function AboutPage() {
                   <Headphones className="w-6 h-6 text-[#0F172A]" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-sm font-bold text-[#0F172A]">Everyday Accessories</h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">Cases, chargers, cables, audio and more.</p>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#0F172A]">Everyday Accessories</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">Cases, chargers, cables, audio gear & vapes.</p>
                 </div>
               </div>
 
@@ -247,8 +244,8 @@ export default function AboutPage() {
                   <Wrench className="w-6 h-6 text-[#0F172A]" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-sm font-bold text-[#0F172A]">Device Repair Assistance</h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">Professional repairs for phones, tablets, laptops & more.</p>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#0F172A]">Device Repair Assistance</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">Professional repairs for phones, tablets & laptops.</p>
                 </div>
               </div>
 
@@ -257,8 +254,8 @@ export default function AboutPage() {
                   <UserCheck className="w-6 h-6 text-[#0F172A]" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-sm font-bold text-[#0F172A]">Local Customer Support</h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">Friendly, helpful and always nearby.</p>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#0F172A]">Local Support</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">Friendly, helpful support across 2 locations.</p>
                 </div>
               </div>
             </div>
@@ -266,7 +263,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
 
       {/* ================= 3. INSIDE OUR STORE & OUR VALUES ================= */}
       <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60 space-y-12">
@@ -276,12 +272,12 @@ export default function AboutPage() {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-widest text-[#0F172A]">
-                Inside Our Store
+              <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-widest text-[#0F172A]">
+                Inside Our Stores
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-gray-700 font-medium pl-3">
-              Take a look at our real store photos and see what we have in store for you.
+            <p className="text-xs sm:text-sm text-gray-700 font-normal pl-3">
+              Take a look at our real store environments in Cashel.
             </p>
           </div>
 
@@ -329,57 +325,49 @@ export default function AboutPage() {
                 Our Values
               </h2>
             </div>
-            <p className="text-xs text-gray-700 pl-3">
-              What drives us every day.
+            <p className="text-xs text-gray-700 pl-3 font-normal">
+              What drives us every day to deliver exceptional service.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 w-full">
-            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] hover:shadow-md transition-all duration-200 group">
-              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#F97316] transition-colors duration-200">
-                <Lightbulb className="w-4 h-4 text-[#F97316] group-hover:text-white transition-colors" />
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] transition">
+              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                <Lightbulb className="w-4 h-4 text-[#F97316]" />
               </div>
               <div className="space-y-0.5">
-                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Helpful Advice</h3>
-                <p className="text-[10px] text-gray-600 leading-tight">
-                  Get the right product or repair guidance.
-                </p>
+                <h3 className="text-xs font-bold text-[#0F172A]">Helpful Advice</h3>
+                <p className="text-[10px] text-gray-600">Right product & repair guidance.</p>
               </div>
             </div>
 
-            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] hover:shadow-md transition-all duration-200 group">
-              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#F97316] transition-colors duration-200">
-                <ShieldCheck className="w-4 h-4 text-[#F97316] group-hover:text-white transition-colors" />
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] transition">
+              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-4 h-4 text-[#F97316]" />
               </div>
               <div className="space-y-0.5">
-                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Quality-Focused</h3>
-                <p className="text-[10px] text-gray-600 leading-tight">
-                  We stock reliable & trusted brands.
-                </p>
+                <h3 className="text-xs font-bold text-[#0F172A]">Quality-Focused</h3>
+                <p className="text-[10px] text-gray-600">Reliable & trusted brands.</p>
               </div>
             </div>
 
-            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] hover:shadow-md transition-all duration-200 group">
-              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#F97316] transition-colors duration-200">
-                <MessageSquare className="w-4 h-4 text-[#F97316] group-hover:text-white transition-colors" />
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#F97316] transition">
+              <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                <MessageSquare className="w-4 h-4 text-[#F97316]" />
               </div>
               <div className="space-y-0.5">
-                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Clear Communication</h3>
-                <p className="text-[10px] text-gray-600 leading-tight">
-                  Honest advice & transparent details.
-                </p>
+                <h3 className="text-xs font-bold text-[#0F172A]">Clear Communication</h3>
+                <p className="text-[10px] text-gray-600">Honest advice & transparent pricing.</p>
               </div>
             </div>
 
-            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#22C55E] hover:shadow-md transition-all duration-200 group">
-              <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:bg-[#22C55E] transition-colors duration-200">
-                <MapPin className="w-4 h-4 text-[#22C55E] group-hover:text-white transition-colors" />
+            <div className="bg-white/95 border border-gray-300/80 rounded-xl p-3.5 flex items-center gap-3 shadow-sm hover:border-[#22C55E] transition">
+              <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                <MapPin className="w-4 h-4 text-[#22C55E]" />
               </div>
               <div className="space-y-0.5">
-                <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Local Support</h3>
-                <p className="text-[10px] text-gray-600 leading-tight">
-                  A store you can count on in Cashel.
-                </p>
+                <h3 className="text-xs font-bold text-[#0F172A]">Local Support</h3>
+                <p className="text-[10px] text-gray-600">Stores across Cashel.</p>
               </div>
             </div>
           </div>
@@ -387,17 +375,16 @@ export default function AboutPage() {
 
       </section>
 
-
       {/* ================= 4. WHY CHOOSE ROX ================= */}
       <section className="w-full bg-white py-12 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
 
           <div className="lg:col-span-4 space-y-1">
-            <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">
               Why Choose ROX
             </h2>
             <p className="text-xs text-gray-600 font-normal">
-              More than just a store — we&apos;re your local tech partner.
+              More than just a store — your trusted local tech partner.
             </p>
           </div>
 
@@ -409,12 +396,8 @@ export default function AboutPage() {
                   <CheckCircle2 className="w-5 h-5 text-[#0F172A]" />
                 </div>
                 <div className="space-y-0.5">
-                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">
-                    Wide Range
-                  </h3>
-                  <p className="text-[10px] text-gray-500 leading-tight">
-                    of Tech & Accessories
-                  </p>
+                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Wide Range</h3>
+                  <p className="text-[10px] text-gray-500 leading-tight">Tech, Vapes & Accessories</p>
                 </div>
               </div>
 
@@ -423,12 +406,8 @@ export default function AboutPage() {
                   <Cog className="w-5 h-5 text-[#0F172A]" />
                 </div>
                 <div className="space-y-0.5">
-                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">
-                    Expert Technicians
-                  </h3>
-                  <p className="text-[10px] text-gray-500 leading-tight">
-                    Skilled & Experienced
-                  </p>
+                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Expert Assistance</h3>
+                  <p className="text-[10px] text-gray-500 leading-tight">Skilled & Professional</p>
                 </div>
               </div>
 
@@ -437,12 +416,8 @@ export default function AboutPage() {
                   <Users className="w-5 h-5 text-[#0F172A]" />
                 </div>
                 <div className="space-y-0.5">
-                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">
-                    Local & Friendly
-                  </h3>
-                  <p className="text-[10px] text-gray-500 leading-tight">
-                    Here to Help
-                  </p>
+                  <h3 className="text-xs font-bold text-[#0F172A] leading-tight">Dual Locations</h3>
+                  <p className="text-[10px] text-gray-500 leading-tight">Conveniently in Cashel</p>
                 </div>
               </div>
 
@@ -452,79 +427,129 @@ export default function AboutPage() {
         </div>
       </section>
 
-
-      {/* ================= 5. COME VISIT ROX TECH SOLUTIONS ================= */}
+      {/* ================= 5. VISIT OUR STORES (WITH DUAL GMB LOCATIONS) ================= */}
       <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
-        <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="max-w-[1680px] mx-auto space-y-8">
 
-          <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-2">
-              <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
-              <span className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
-                Visit Us
-              </span>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2">
+                <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+                <span className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                  Visit Us
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] leading-tight tracking-tight">
+                Our Two Store Locations in Cashel
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-700 font-normal max-w-xl">
+                Visit either of our physical stores in Cashel to explore our full range in person, get expert advice, or drop off devices for repair.
+              </p>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] leading-tight tracking-tight">
-              Come Visit ROX Tech Solutions
-            </h2>
-
-            <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed max-w-md">
-              See our full range in person, get expert advice and friendly support.
-            </p>
-
-            <div className="flex items-center gap-3 pt-2">
-              <a
-                href="https://maps.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#F97316] hover:bg-[#EA580C] text-white px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md hover:shadow-lg"
-              >
-                <Navigation className="w-4 h-4" />
-                <span>Get Directions</span>
-              </a>
-
-              <a
-                href="https://wa.me/353896091839"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md hover:shadow-lg"
-              >
-                <MessageCircle className="w-4 h-4 fill-white" />
-                <span>WhatsApp Us</span>
-              </a>
-            </div>
+            <a
+              href="https://wa.me/353896091839"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#00D66C] hover:bg-[#00B85C] text-white px-6 py-3 rounded-full text-xs font-bold flex items-center gap-2 transition shadow-md w-fit"
+            >
+              <MessageCircle className="w-4 h-4 fill-white" />
+              <span>Chat via WhatsApp</span>
+            </a>
           </div>
 
-          <div className="lg:col-span-7">
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/10 aspect-[16/7] w-full bg-white">
-              <img
-                src="/shop-4.jpeg"
-                alt="Come Visit ROX Tech Solutions Store Showcase"
-                className="w-full h-full object-cover object-center"
-              />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            
+            {/* Location 1 Card */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6 hover:border-[#F97316] transition">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold px-3 py-1 rounded-md bg-orange-100 text-[#F97316] uppercase">
+                    Location 01
+                  </span>
+                  <span className="text-xs font-mono text-gray-500 font-bold bg-gray-100 px-2.5 py-1 rounded-md">
+                    E25 EF82
+                  </span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-[#F97316] shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-sm font-bold text-[#0F172A]">Shopping Centre Store</h3>
+                    <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                      Unit 3, Cashel Town Shopping Centre, Ashwell&apos;s-Lot, Cashel, Co. Tipperary
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span className="text-[11px] text-gray-500 font-medium">Full Tech, Vape & Repair Hub</span>
+                <a
+                  href="https://share.google/XIeHDurgfiVKCpBxz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#F97316] hover:bg-[#EA580C] text-white px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Google Maps</span>
+                </a>
+              </div>
             </div>
+
+            {/* Location 2 Card */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6 hover:border-[#22C55E] transition">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold px-3 py-1 rounded-md bg-emerald-100 text-emerald-700 uppercase">
+                    Location 02
+                  </span>
+                  <span className="text-xs font-mono text-gray-500 font-bold bg-gray-100 px-2.5 py-1 rounded-md">
+                    E25 VE04
+                  </span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-[#22C55E] shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-sm font-bold text-[#0F172A]">Bank Place Store</h3>
+                    <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                      Bank Pl, Cashel, Co. Tipperary
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span className="text-[11px] text-gray-500 font-medium">In-Store Assistance & Accessories</span>
+                <a
+                  href="https://share.google/j6alfoimaC2IgJJoO"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#22C55E] hover:bg-[#1da852] text-white px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Google Maps</span>
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>
       </section>
 
-
       {/* ================= 6. GET IN TOUCH ================= */}
       <section className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16">
         <div className="max-w-[1680px] mx-auto">
 
-          <div className="bg-gray-50/80 border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+          <div className="bg-gray-80/80 border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
 
-            <div className="">
+            <div className="space-y-1 bg-grey/80">
               <div className="flex items-center gap-2">
                 <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-widest text-[#0F172A]">
+                <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-widest text-[#0F172A]">
                   Get in Touch
                 </h2>
               </div>
-              <p className="text-xs sm:text-sm text-gray-700 font-medium">
-                Have a question about a product or repair? We&apos;re here to help.
+              <p className="text-xs sm:text-sm text-gray-700 font-normal pl-3">
+                Have a question about a product, vape or repair? We&apos;re here to help.
               </p>
             </div>
 

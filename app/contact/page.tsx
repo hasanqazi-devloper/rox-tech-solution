@@ -88,7 +88,7 @@ export default function ContactPage() {
                 Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
               </h1>
               <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
-                Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
+                Have a question about our products, accessories, repairs or want to visit our stores in Cashel? We&apos;re here to help!
               </p>
               <div className="flex items-center gap-3 pt-2">
                 <a
@@ -101,13 +101,13 @@ export default function ContactPage() {
                   <span>WhatsApp Us</span>
                 </a>
                 <a
-                  href="https://maps.google.com"
+                  href="https://share.google/XIeHDurgfiVKCpBxz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#F97316] hover:bg-[#EA580C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
                 >
                   <Navigation className="w-4 h-4" />
-                  <span>Visit Our Store</span>
+                  <span>Visit Our Stores</span>
                 </a>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function ContactPage() {
               Get in Touch with <br /> <span className="text-[#F97316]">ROX Tech Solutions</span>
             </h1>
             <p className="text-xs text-gray-700 font-medium leading-relaxed">
-              Have a question about our products, accessories, repairs or want to visit our store? We&apos;re here to help!
+              Have a question about our products, accessories, repairs or want to visit our stores? We&apos;re here to help!
             </p>
             <div className="flex items-center gap-2.5 pt-1">
               <a
@@ -137,13 +137,13 @@ export default function ContactPage() {
                 <span>WhatsApp Us</span>
               </a>
               <a
-                href="https://maps.google.com"
+                href="https://share.google/XIeHDurgfiVKCpBxz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
               >
                 <Navigation className="w-3.5 h-3.5" />
-                <span>Visit Our Store</span>
+                <span>Visit Stores</span>
               </a>
             </div>
           </div>
@@ -157,46 +157,76 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ================= 2. QUICK INFO CARDS BAR ================= */}
-      <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
-        <div className="max-w-[1680px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group cursor-pointer">
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
-                <MapPin className="w-5 h-5 text-[#F97316]" />
-              </div>
-              <div className="space-y-0.5">
-                <h3 className="text-xs font-bold text-[#0F172A]">Location</h3>
-                <p className="text-[11px] text-gray-600">Cashel, County Tipperary, Ireland</p>
-              </div>
-            </div>
-            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
+      {/* ================= 2. DUAL GMB LOCATIONS CARDS BAR ================= */}
+      <section className="w-full bg-white py-8 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+        <div className="max-w-[1680px] mx-auto space-y-4">
+          <div className="flex items-center gap-2">
+            <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+            <h2 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+              Our Official Store Locations in Cashel
+            </h2>
           </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-[#00D66C] transition group cursor-pointer">
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0 border border-emerald-500/20">
-                <MessageCircle className="w-5 h-5 text-[#00D66C]" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Location 1 */}
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 hover:border-[#F97316] transition">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-md bg-orange-100 text-[#F97316] uppercase">
+                    Location 01
+                  </span>
+                  <span className="text-xs font-mono text-gray-500 font-bold">E25 EF82</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-[#F97316] shrink-0 mt-0.5" />
+                  <p className="text-xs sm:text-sm font-bold text-[#0F172A] leading-relaxed">
+                    Unit 3, Cashel Town Shopping Centre, Ashwell&apos;s-Lot, Cashel, Co. Tipperary
+                  </p>
+                </div>
               </div>
-              <div className="space-y-0.5">
-                <h3 className="text-xs font-bold text-[#0F172A]">WhatsApp & Phone</h3>
-                <p className="text-[11px] text-gray-600">Get in touch via WhatsApp or phone for quick assistance.</p>
+              <div className="pt-2 border-t border-gray-200 flex items-center justify-between">
+                <span className="text-[11px] text-gray-500 font-medium">Open for Tech, Vapes & Repairs</span>
+                <a
+                  href="https://share.google/XIeHDurgfiVKCpBxz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#F97316] hover:bg-[#EA580C] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Google Maps</span>
+                </a>
               </div>
             </div>
-            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
-          </div>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:border-[#F97316] transition group cursor-pointer">
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0 border border-orange-500/20">
-                <Clock className="w-5 h-5 text-[#F97316]" />
+            {/* Location 2 */}
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 hover:border-[#F97316] transition">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-700 uppercase">
+                    Location 02
+                  </span>
+                  <span className="text-xs font-mono text-gray-500 font-bold">E25 VE04</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-[#22C55E] shrink-0 mt-0.5" />
+                  <p className="text-xs sm:text-sm font-bold text-[#0F172A] leading-relaxed">
+                    Bank Pl, Cashel, Co. Tipperary
+                  </p>
+                </div>
               </div>
-              <div className="space-y-0.5">
-                <h3 className="text-xs font-bold text-[#0F172A]">Opening Hours</h3>
-                <p className="text-[11px] text-gray-600">Visit us during our regular opening hours for in-store support.</p>
+              <div className="pt-2 border-t border-gray-200 flex items-center justify-between">
+                <span className="text-[11px] text-gray-500 font-medium">In-store Support & Quick Assistance</span>
+                <a
+                  href="https://share.google/j6alfoimaC2IgJJoO"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#22C55E] hover:bg-[#1da852] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Google Maps</span>
+                </a>
               </div>
             </div>
-            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition" />
           </div>
         </div>
       </section>
@@ -344,10 +374,10 @@ export default function ContactPage() {
             <div className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 shadow-sm space-y-4">
               <div className="space-y-1">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
-                  Visit Our Store
+                  Visit Our Stores
                 </h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  See our full range in person. Get expert advice and friendly support.
+                  See our full range in person. Get expert advice and friendly support at either location.
                 </p>
               </div>
               <div className="rounded-2xl overflow-hidden border border-gray-300 aspect-[16/10] bg-gray-50">
@@ -359,22 +389,22 @@ export default function ContactPage() {
               </div>
               <div className="grid grid-cols-2 gap-2 pt-1">
                 <a
-                  href="https://maps.google.com"
+                  href="https://share.google/XIeHDurgfiVKCpBxz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#F97316] hover:bg-[#EA580C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"
                 >
                   <Navigation className="w-3.5 h-3.5" />
-                  <span>Get Directions</span>
+                  <span>Shopping Centre</span>
                 </a>
                 <a
-                  href="https://wa.me/353896091839"
+                  href="https://share.google/j6alfoimaC2IgJJoO"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#00D66C] hover:bg-[#00B85C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"
+                  className="bg-[#22C55E] hover:bg-[#1da852] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"
                 >
-                  <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                  <span>WhatsApp Us</span>
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Bank Place</span>
                 </a>
               </div>
             </div>
