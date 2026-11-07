@@ -28,8 +28,8 @@ body {
 
 /* 🎛️ TAILWIND V4 FONTS & COLORS CONFIGURATION BINDINGS */
 @theme inline {
-  --font-serif: var(--font-montserrat, sans-serif);
-  --font-sans: var(--font-montserrat, sans-serif);
+ --font-serif: var(--font-jakarta), sans-serif; /* 👈 Yahan update karein */
+  --font-sans: var(--font-jakarta), sans-serif;  /* 👈 Yahan update karein */
   
   /* ROX Brand Custom Theme Colors */
   --color-rox-silver: #C0C0C0;

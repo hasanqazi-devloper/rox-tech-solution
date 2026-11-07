@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const montserrat = Montserrat({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-montserrat",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-jakarta",
 });
 
 export const metadata: Metadata = {
@@ -57,10 +57,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} scroll-smooth`}
+      className={`${plusJakarta.variable} scroll-smooth`}
     >
       <body
-        className={`${montserrat.className} bg-[#C0C0C0] text-[#0F172A] antialiased min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-[#F97316] selection:text-white`}
+        className={`${plusJakarta.className} bg-[#C0C0C0] text-[#0F172A] antialiased min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-[#F97316] selection:text-white`}
         suppressHydrationWarning={true}
       >
         <Navbar />

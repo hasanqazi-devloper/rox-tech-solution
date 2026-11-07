@@ -1,105 +1,1016 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { 
-  MapPin, 
-  MessageCircle, 
-  Search, 
-  SlidersHorizontal, 
-  ShieldCheck, 
-  Users, 
+import {
+  MapPin,
+  MessageCircle,
+  Search,
+  SlidersHorizontal,
+  ShieldCheck,
+  Users,
   Send,
   Navigation,
   ArrowRight,
-  RotateCcw
+  RotateCcw,
+  X,
+  Sparkles,
+  CheckCircle2
 } from "lucide-react";
 
-
-// Complete Categorized Inventory Mapped to Public Folders (Prices removed for competitive protection)
+// Complete Updated Inventory with Rich Content & SEO Details for Popups
 const INITIAL_PRODUCTS = [
-  // --- Smartphones & Tablets ---
-  { id: 1, name: "iPhone 15 Pro Max", category: "smartphones", brand: "apple", specs: "256GB | Unlocked", image: "/products/iphone.png" },
-  { id: 2, name: "iPhone 18 Pro Max Concept", category: "smartphones", brand: "apple", specs: "Next-Gen Edition", image: "/products/iphone-18.png" },
-  { id: 3, name: "Samsung Galaxy S24 Ultra", category: "smartphones", brand: "samsung", specs: "512GB | Unlocked", image: "/products/samsung.png" },
-  { id: 4, name: "Apple iPad Pro", category: "smartphones", brand: "apple", specs: "12.9-inch | Cellular", image: "/products/ipad.png" },
-  { id: 5, name: "Samsung Galaxy Tab S9", category: "smartphones", brand: "samsung", specs: "AMOLED Display", image: "/products/sumsung-tab.png" },
-  { id: 6, name: "Hoco Android Tablet", category: "smartphones", brand: "hoco", specs: "Performance Edition", image: "/products/hoco-tab.png" },
+  // --- 1. Smartphones ---
+  { 
+    id: 101, 
+    name: "iPhone 11", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "64GB / 128GB | Unlocked", 
+    image: "/products/iphone-11.png",
+    description: "Equipped with a dual-camera system, Liquid Retina LCD display, and reliable A13 Bionic performance. Unlocked for all networks in Ireland.",
+    features: ["6.1-inch Liquid Retina Display", "Dual 12MP Ultra Wide Camera", "A13 Bionic Chip", "All-Day Battery Life"]
+  },
+  { 
+    id: 1011, 
+    name: "iPhone 11 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Super Retina XDR | Triple Camera", 
+    image: "/products/iphone-11-pro.png",
+    description: "Pro camera system with triple 12MP lenses, textured matte glass design, and vibrant Super Retina XDR OLED display.",
+    features: ["5.8-inch Super Retina XDR", "Triple 12MP Cameras", "A13 Bionic with Neural Engine", "Water Resistant IP68"]
+  },
+  { 
+    id: 102, 
+    name: "iPhone 11 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Triple Camera | Unlocked", 
+    image: "/products/iphone-11-pro-max.png",
+    description: "Expansive 6.5-inch screen with extraordinary battery longevity and professional-grade photographic tools.",
+    features: ["6.5-inch OLED Display", "Extended Battery Performance", "Pro Triple Camera Setup", "Face ID Security"]
+  },
 
-  // --- Laptops & Computing ---
-  { id: 7, name: "Apple MacBook Pro M3", category: "laptops", brand: "apple", specs: "Space Black | 16GB RAM", image: "/products/macbppk-pro-m3.png" },
-  { id: 8, name: "ROG Gaming Laptop", category: "laptops", brand: "asus", specs: "High Performance GPU", image: "/products/ROG_Gaming_Laptop.png" },
-  { id: 9, name: "Foldable Touchscreen Laptop", category: "laptops", brand: "lenovo", specs: "Dual Screen Foldable", image: "/products/foldable-touchscreen-laptop.png" },
-  { id: 10, name: "Custom Gaming PC Rig", category: "laptops", brand: "custom", specs: "RGB Liquid Cooled", image: "/products/custom-gamming-pc.png" },
-  { id: 11, name: "4K Curved Desktop Monitor", category: "laptops", brand: "samsung", specs: "32-inch UltraWide", image: "/products/4k-curved-desktop.png" },
-  { id: 12, name: "External Portable SSD Storage", category: "laptops", brand: "sandisk", specs: "1TB High Speed", image: "/products/External_Portable_SSD_Hard_Drive_product_shot.png" },
+  { 
+    id: 103, 
+    name: "iPhone 12", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "5G Enabled | 128GB", 
+    image: "/products/iphone-12.png",
+    description: "Superfast 5G speeds, Ceramic Shield front cover, and A14 Bionic chip packaged in a sleek flat-edge design.",
+    features: ["5G Cellular Connectivity", "Ceramic Shield Drop Protection", "A14 Bionic Chip", "MagSafe Wireless Charging"]
+  },
+  { 
+    id: 104, 
+    name: "iPhone 12 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Stainless Steel Frame | LiDAR", 
+    image: "/products/iphone-12-pro.png",
+    description: "Featuring a LiDAR Scanner for immersive AR experiences, night mode portraits, and surgical-grade stainless steel finish.",
+    features: ["LiDAR Scanner for AR", "Pro 12MP Camera System", "Apple ProRAW Support", "Stainless Steel Build"]
+  },
+  { 
+    id: 1041, 
+    name: "iPhone 12 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "6.7-inch Display | Sensor-shift OIS", 
+    image: "/products/iphone-12-pro-max.png",
+    description: "The ultimate 12-series flagship with a massive 6.7-inch display and advanced sensor-shift optical image stabilization.",
+    features: ["6.7-inch Super Retina XDR", "Sensor-shift OIS", "Cinematic Video Recording", "A14 Bionic Power"]
+  },
 
-  // --- Gaming Zone ---
-  { id: 13, name: "Sony PlayStation 5 Console", category: "gadgets", brand: "sony", specs: "Disc Edition", image: "/products/Sony_PlayStation_5_Console_studio_shot.png" },
-  { id: 14, name: "Xbox Series X Console", category: "gadgets", brand: "microsoft", specs: "1TB SSD Gaming", image: "/products/Xbox_Series_X_Console.png" },
-  { id: 15, name: "Nintendo Switch OLED", category: "gadgets", brand: "nintendo", specs: "White Console Edition", image: "/products/Nintendo_Switch_OLED.png" },
-  { id: 16, name: "PS5 DualSense Controller", category: "gadgets", brand: "sony", specs: "Wireless Controller", image: "/products/PS5_DualSense_Controller.png" },
-  { id: 17, name: "Logitech G923 Racing Wheel", category: "gadgets", brand: "logitech", specs: "TrueForce Feedback", image: "/products/Logitech_G923_Gaming_Steering_Wheel.png" },
-  { id: 18, name: "Meta Quest 3 VR Headset", category: "gadgets", brand: "meta", specs: "Mixed Reality", image: "/products/Meta_Quest_3_VR_Headset.png" },
-  { id: 19, name: "Portable Gaming Projector", category: "gadgets", brand: "generic", specs: "1080p HD Display", image: "/products/Portable_Gaming_Projector.png" },
-  { id: 20, name: "Android TV Gaming Stick", category: "gadgets", brand: "generic", specs: "4K Streaming", image: "/products/Android_TV_Gaming_Stick.png" },
-  { id: 21, name: "RGB Wireless Gaming Mouse", category: "gadgets", brand: "generic", specs: "High DPI Optical", image: "/products/RGB_Wireless_Gaming_Mouse.png" },
-  { id: 22, name: "Mechanical RGB Gaming Keyboard", category: "gadgets", brand: "generic", specs: "Mechanical Switches", image: "/products/Mechanical_RGB_Gaming_Keyboard.png" },
-  { id: 23, name: "Laptop Gaming Cooling Pad", category: "gadgets", brand: "generic", specs: "Dual Fan Cooling", image: "/products/Laptop_Gaming_Cooling_Pad_RGB.png" },
-  { id: 24, name: "Over-Ear Gaming Headset", category: "gadgets", brand: "generic", specs: "Surround Sound & Mic", image: "/products/Over_Ear_Gaming_Headset_with_Mic.png" },
+  { 
+    id: 105, 
+    name: "iPhone 13", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Cinematic Mode | A15 Bionic", 
+    image: "/products/iphone-13.png",
+    description: "Advanced dual-camera system with Cinematic mode that automatically adds shallow depth of field to your videos.",
+    features: ["Cinematic Mode in 1080p", "Bright Super Retina XDR", "A15 Bionic Chip", "Larger Battery Capacity"]
+  },
+  { 
+    id: 1052, 
+    name: "iPhone 13 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "120Hz ProMotion | Telephoto", 
+    image: "/products/iphone-13-pro.png",
+    description: "ProMotion technology with adaptive refresh rates up to 120Hz for incredibly smooth scrolling and responsiveness.",
+    features: ["120Hz ProMotion Display", "Macro Photography Support", "A15 Pro GPU Performance", "Pro Camera System"]
+  },
+  { 
+    id: 106, 
+    name: "iPhone 13 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "ProMotion Display | Long Battery", 
+    image: "/products/iphone-13-pro-max.png",
+    description: "Unmatched battery life paired with a stunning 6.7-inch ProMotion display and lightning-fast A15 Bionic architecture.",
+    features: ["Max Battery Longevity", "6.7-inch ProMotion OLED", "Telephoto & Wide Lenses", "Premium Ceramic Shield"]
+  },
 
-  // --- Audio & Wearables ---
-  { id: 25, name: "Apple AirPods Pro 2", category: "audio", brand: "apple", specs: "USB-C | ANC", image: "/products/Apple_AirPods_Pro_2.png" },
-  { id: 26, name: "JBL Bluetooth Speaker", category: "audio", brand: "jbl", specs: "Waterproof Portable", image: "/products/JBL_Bluetooth_Speaker.png" },
-  { id: 27, name: "JBL Wireless Earbuds", category: "audio", brand: "jbl", specs: "Deep Bass Sound", image: "/products/JBL_Wireless_Earbuds.png" },
-  { id: 28, name: "Wireless Earbuds Case", category: "audio", brand: "generic", specs: "Universal Charging", image: "/products/Wireless_Earbuds_Charging_Case.png" },
-  { id: 29, name: "Wireless Vlogging Microphone", category: "audio", brand: "generic", specs: "Type-C Clip-on Mic", image: "/products/Wireless_Vlogging_Microphone_Type-C.png" },
-  { id: 30, name: "Studio Wired Headphones", category: "audio", brand: "generic", specs: "Over-Ear Monitoring", image: "/products/Studio_Wired_Over_Ear_Headphones.png" },
-  { id: 31, name: "Apple Watch Ultra 2", category: "audio", brand: "apple", specs: "Titanium Case", image: "/products/Apple_Watch_Ultra_2.png" },
-  { id: 32, name: "Samsung Galaxy Watch 6", category: "audio", brand: "samsung", specs: "Health Tracking", image: "/products/Samsung_Galaxy_Watch_6.png" },
-  { id: 33, name: "Hoco Smartwatch", category: "audio", brand: "hoco", specs: "Bluetooth Calling", image: "/products/Hoco_Smartwatch.png" },
-  { id: 34, name: "Casio G-Shock Watch", category: "audio", brand: "casio", specs: "Shock Resistant", image: "/products/Casio_G-Shock_Watch.png" },
-  { id: 35, name: "Smart Health Ring", category: "audio", brand: "generic", specs: "Sleep & Fitness Tracker", image: "/products/Smart_Health_Ring.png" },
+  { 
+    id: 107, 
+    name: "iPhone 14", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Emergency SOS via Satellite", 
+    image: "/products/iphone-14.png",
+    description: "Critical safety features like Crash Detection and satellite connectivity alongside impressive low-light camera enhancements.",
+    features: ["Crash Detection Safety", "Action Mode Video", "A15 Bionic with 5-core GPU", "All-Day Battery"]
+  },
+  { 
+    id: 1072, 
+    name: "iPhone 14 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Dynamic Island | 48MP Camera", 
+    image: "/products/iphone-14-pro.png",
+    description: "Introducing the revolutionary Dynamic Island and an advanced 48MP Main camera for breathtaking ultra-high-resolution detail.",
+    features: ["Dynamic Island Interface", "48MP Main Sensor", "Always-On Retina Display", "A16 Bionic Chip"]
+  },
+  { 
+    id: 108, 
+    name: "iPhone 14 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Dynamic Island | Always-On Display", 
+    image: "/products/iphone-14-pro-max.png",
+    description: "The pinnacle of smartphone engineering with an immersive 6.7-inch display, Dynamic Island, and pro camera capabilities.",
+    features: ["6.7-inch Always-On Screen", "Dynamic Island Tech", "Pro 48MP Camera System", "Surgical-grade Steel"]
+  },
 
-  // --- Accessories & Chargers ---
-  { id: 36, name: "iPhone Camera Lens Protector", category: "accessories", brand: "generic", specs: "Tempered Glass", image: "/products/iPhone_Camera_Lens_Protector.png" },
-  { id: 37, name: "Transparent Shockproof Case", category: "accessories", brand: "generic", specs: "Anti-Yellowing", image: "/products/Transparent_Shockproof_Phone_Case.png" },
-  { id: 38, name: "Tempered Glass Screen Protector", category: "accessories", brand: "generic", specs: "9H Hardness Box", image: "/products/Tempered_Glass_Screen_Protector_box.png" },
-  { id: 39, name: "Apple Watch Silicone Strap", category: "accessories", brand: "apple", specs: "Comfortable Fit", image: "/products/Apple_Watch_Silicone_strap.png" },
-  { id: 40, name: "SanDisk Micro SD Card", category: "accessories", brand: "sandisk", specs: "Extreme Pro 128GB", image: "/products/SanDisk_Micro_SD_Card_Extreme_product_shot.png" },
-  { id: 41, name: "Multi-Socket Extension Lead", category: "accessories", brand: "generic", specs: "With USB Ports", image: "/products/Multi_Socket_Extension_Lead_with_USB.png" },
-  { id: 42, name: "Type-C Laptop Charger Adapter", category: "accessories", brand: "generic", specs: "Fast Power Delivery", image: "/products/Type-C_Laptop_Charger_Adapter.png" },
-  { id: 43, name: "Magnetic Smart Watch Cable", category: "accessories", brand: "generic", specs: "USB Charging Dock", image: "/products/Magnetic_Smart_Watch_Charging_Cable.png" },
-  { id: 44, name: "65W GaN Dual USB Fast Charger", category: "accessories", brand: "generic", specs: "Compact Wall Plug", image: "/products/65W_GaN_Dual_USB_Fast_Charger.png" },
-  { id: 45, name: "MagSafe Car Wireless Charger", category: "accessories", brand: "generic", specs: "Vent Mount Holder", image: "/products/MagSafe_Car_Wireless_Charger_Mount.png" },
-  { id: 46, name: "20000mAh Power Bank", category: "accessories", brand: "generic", specs: "Fast Portable Battery", image: "/products/20000mAh_Fast_Charging_Power_Bank_product_shot.png" },
-  { id: 47, name: "Universal Travel Adapter", category: "accessories", brand: "generic", specs: "All-in-One Plugs", image: "/products/Universal_All_in_One_Travel_Adapter.png" },
-  { id: 48, name: "3.5mm Audio Cable", category: "accessories", brand: "generic", specs: "Auxiliary Stereo Wire", image: "/products/3.5mm_Audio_Cable.png" },
-  { id: 49, name: "High Speed Braided HDMI Cable", category: "accessories", brand: "generic", specs: "4K Support", image: "/products/High_Speed_Braided_HDMI_Cable.png" },
-  { id: 50, name: "Apple AirTag", category: "accessories", brand: "apple", specs: "Item Tracker", image: "/products/Apple_AirTag.png" },
-  { id: 51, name: "Apple Pencil 2nd Gen", category: "accessories", brand: "apple", specs: "Stylus for iPad", image: "/products/pple_Pencil_2nd_Gen.png" },
+  { 
+    id: 1090, 
+    name: "iPhone 15", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Dynamic Island | USB-C", 
+    image: "/products/iphone-15.png",
+    description: "Featuring Dynamic Island, a 48MP Main camera with 2x telephoto, and universal USB-C connectivity.",
+    features: ["Universal USB-C Port", "Dynamic Island Experience", "48MP Main Camera", "Color-infused Glass Back"]
+  },
+  { 
+    id: 1092, 
+    name: "iPhone 15 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Titanium Build | Action Button", 
+    image: "/products/iphone-15-pro.png",
+    description: "Forged in aerospace-grade titanium with a customizable Action button and powered by the ground-breaking A17 Pro chip.",
+    features: ["Aerospace Titanium Frame", "Customizable Action Button", "A17 Pro Gaming Chip", "Pro Camera Flexibility"]
+  },
+  { 
+    id: 1, 
+    name: "iPhone 15 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "256GB | Titanium Design | 5x Telephoto", 
+    image: "/products/iphone-15-pro-max.png",
+    description: "The ultimate iPhone experience featuring a 5x Telephoto optical zoom lens, lightweight titanium design, and A17 Pro power.",
+    features: ["5x Optical Zoom Telephoto", "Titanium Build & Contour", "A17 Pro Architecture", "USB 3 Speeds"]
+  },
 
-  // --- Smart Gadgets, Security & Toys ---
-  { id: 52, name: "Mini Foldable Camera Drone", category: "gadgets", brand: "generic", specs: "HD Aerial Camera", image: "/products/Mini_Foldable_Camera_Drone.png" },
-  { id: 53, name: "Remote Control Racing Car", category: "gadgets", brand: "generic", specs: "High Speed Toy", image: "/products/Remote_Control_Racing_Car.png" },
-  { id: 54, name: "Outdoor Smart Security Camera", category: "gadgets", brand: "generic", specs: "WiFi IP Camera", image: "/products/Outdoor_Smart_Security_Camera_Wireless.png" },
-  { id: 55, name: "Smart Video Doorbell Camera", category: "gadgets", brand: "generic", specs: "Two-Way Audio", image: "/products/Smart_Video_Doorbell_Camera.png" },
-  { id: 56, name: "TP-Link WiFi Range Extender", category: "gadgets", brand: "tplink", specs: "Signal Booster", image: "/products/TP-Link_WiFi_Range_Extender.png" },
-  { id: 57, name: "Amazon Fire TV Stick 4K", category: "gadgets", brand: "amazon", specs: "Streaming Device", image: "/products/Amazon_Fire_TV_Stick_4K.png" },
-  { id: 58, name: "Desktop Selfie Ring Light", category: "gadgets", brand: "generic", specs: "With Phone Holder", image: "/products/Desktop_Selfie_Ring_Light_with_Phone_Holder.png" },
-  { id: 59, name: "1080p HD Webcam", category: "gadgets", brand: "generic", specs: "With Privacy Cover", image: "/products/1080p_HD_Webcam_with_Privacy_Cover.png" },
-  { id: 60, name: "RGB LED Strip Light Roll", category: "gadgets", brand: "generic", specs: "Remote Control", image: "/products/RGB_LED_Strip_Light_Roll.png" },
-  { id: 61, name: "Digital Voice Recorder", category: "gadgets", brand: "generic", specs: "Portable Audio Recorder", image: "/products/Digital_Voice_Recorder_Portable.png" },
-  { id: 62, name: "Auto Face Tracking Phone Holder", category: "gadgets", brand: "generic", specs: "Smart Gimbal Mount", image: "/products/Auto_Face_Tracking_Phone_Holder.png" },
-  { id: 63, name: "Flexible Phone Tripod Stand", category: "gadgets", brand: "generic", specs: "Compact & Bendable", image: "/products/Flexible_Phone_Tripod_Stand.png" },
-  { id: 64, name: "3-Axis Smartphone Gimbal", category: "gadgets", brand: "generic", specs: "Stabilizer", image: "/products/3_Axis_Smartphone_Gimbal_Stabilizer.png" }
+  { 
+    id: 1093, 
+    name: "iPhone 16", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Camera Control | Apple Intelligence", 
+    image: "/products/iphone-16.png",
+    description: "Built for Apple Intelligence with dedicated Camera Control button and advanced dual-lens optical system.",
+    features: ["Apple Intelligence Ready", "Dedicated Camera Control", "A18 Chip Efficiency", "Advanced Thermal Design"]
+  },
+  { 
+    id: 1095, 
+    name: "iPhone 16 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "A18 Pro | 4K 120 fps Dolby Vision", 
+    image: "/products/iphone-16-pro.png",
+    description: "Cinematic pro recording in 4K 120 fps Dolby Vision paired with the powerhouse A18 Pro chip and thinner borders.",
+    features: ["4K 120 fps Dolby Vision", "A18 Pro Processor", "Studio-quality Mics", "Larger Display Real Estate"]
+  },
+  { 
+    id: 1096, 
+    name: "iPhone 16 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "6.9-inch Display | Titanium Frame", 
+    image: "/products/iphone-16-pro-max.png",
+    description: "The largest iPhone display ever at 6.9 inches, extreme battery life, and state-of-the-art pro optics.",
+    features: ["6.9-inch Super Retina XDR", "Longest Battery Ever", "5x Telephoto Zoom", "Titanium Enclosure"]
+  },
+
+  { 
+    id: 1097, 
+    name: "iPhone 17 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Next-Gen Performance | Pro Camera System", 
+    image: "/products/iphone-17-pro.png",
+    description: "Cutting-edge next-gen performance specs with upgraded optics and lightning-fast processing speeds.",
+    features: ["Next-Gen Processor", "Upgraded Optical Zoom", "Advanced Thermal Cooling", "Sleek Finish"]
+  },
+  { 
+    id: 1098, 
+    name: "iPhone 17 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Ultimate Flagship Edition", 
+    image: "/products/iphone-17-pro-max.png",
+    description: "The absolute pinnacle of mobile tech innovation, offering uncompromised speed, display, and camera capability.",
+    features: ["Ultimate Flagship Tier", "Maximum Storage Options", "Revolutionary Optics", "Unrivaled Battery"]
+  },
+
+  { 
+    id: 2001, 
+    name: "iPhone 18", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Next-Gen Base Model | Advanced Chip", 
+    image: "/products/iphone-18.png",
+    description: "Futuristic base model equipped with cutting-edge artificial intelligence integration and refined everyday efficiency.",
+    features: ["Advanced Chipset", "Refined Dual Cameras", "All-Day Power", "Eco-friendly Build"]
+  },
+  { 
+    id: 2002, 
+    name: "iPhone 18 Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "ProMotion Display | Advanced Camera", 
+    image: "/products/iphone-18-pro.png",
+    description: "Professional grade mobile device featuring enhanced ProMotion rendering and studio-grade capture tools.",
+    features: ["Enhanced ProMotion", "Professional Optics", "Lightning Fast Storage", "Sleek Ergonomics"]
+  },
+  { 
+    id: 2003, 
+    name: "iPhone 18 Pro Max", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "Next-Gen Ultimate Flagship Edition", 
+    image: "/products/iphone-18-pro-max.png",
+    description: "The ultimate futuristic flagship combining maximum screen size, raw performance, and immaculate camera technology.",
+    features: ["Ultimate Flagship Specs", "Massive Battery Reserve", "Elite Camera Array", "Premium Materials"]
+  },
+
+  // --- Samsung Flagships ---
+  {
+    id: 320,
+    name: "Samsung Galaxy S26 Ultra",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Ultimate Flagship Edition | S-Pen",
+    image: "/products/Samsung_Galaxy_S26_Ultra.png",
+    description: "The ultimate Samsung Galaxy flagship featuring built-in S-Pen, cutting-edge AI processing, and an astonishing 200MP camera system.",
+    features: ["Built-in S-Pen Stylus", "200MP Quad Camera", "Galaxy AI Integration", "Armor Aluminum Frame"]
+  },
+  {
+    id: 319,
+    name: "Samsung Galaxy S26+",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Advanced Display | Dynamic Performance",
+    image: "/products/Samsung_Galaxy_S26+.png",
+    description: "Sleek and powerful with a vibrant Dynamic AMOLED 2X display and blazing-fast multi-tasking capabilities.",
+    features: ["Dynamic AMOLED 2X", "High-Performance CPU", "Long-lasting Battery", "Sleek Bezels"]
+  },
+  {
+    id: 318,
+    name: "Samsung Galaxy S26",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Compact Flagship | 120Hz Display",
+    image: "/products/Samsung_Galaxy_S26.png",
+    description: "Compact form factor packed with flagship performance, pro cameras, and buttery-smooth 120Hz refresh rates.",
+    features: ["120Hz Refresh Rate", "Compact Ergonomics", "Pro Triple Camera", "Fast Charging Support"]
+  },
+  {
+    id: 317,
+    name: "Samsung Galaxy S25 Ultra",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Snapdragon 8 Gen 4 | 200MP Camera",
+    image: "/products/Samsung_Galaxy_S25_Ultra.png",
+    description: "Snapdragon processing power meets professional-grade mobile photography with integrated AI assistance.",
+    features: ["Snapdragon Processor", "200MP Main Sensor", "Built-in S-Pen", "Titanium Body"]
+  },
+  {
+    id: 314,
+    name: "Samsung Galaxy S24 Ultra",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Built-in S-Pen | Titanium Frame",
+    image: "/products/Samsung_Galaxy_S24_Ultra.png",
+    description: "Titanium exterior paired with intelligent productivity tools and professional grade zoom capability.",
+    features: ["Titanium Frame", "S-Pen Included", "Galaxy AI Suite", "Quad Telephoto System"]
+  },
+  {
+    id: 306,
+    name: "Samsung Galaxy Z Fold 6",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Dual Display | S-Pen Support",
+    image: "/products/Samsung_Galaxy_Z_Fold_6.png",
+    description: "Transform your mobile experience with a foldable tablet-sized inner screen and durable outer cover display.",
+    features: ["Foldable Dual Display", "Multitasking Powerhouse", "S-Pen Compatible", "Slim Hinge Design"]
+  },
+  {
+    id: 303,
+    name: "Samsung Galaxy Z Flip 6",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "50MP FlexCam | Galaxy AI",
+    image: "/products/Samsung_Galaxy_Z_Flip_6.png",
+    description: "Pocket-friendly foldable smartphone with versatile FlexCam angles and large interactive cover window.",
+    features: ["Compact Flip Design", "50MP FlexCam", "Interactive Cover Screen", "Galaxy AI Features"]
+  },
+
+  // --- Tablets & iPads ---
+  { 
+    id: 4, 
+    name: "Apple iPad Pro", 
+    category: "smartphones", 
+    brand: "apple", 
+    specs: "12.9-inch | Cellular", 
+    image: "/products/ipad.png",
+    description: "Stunning Liquid Retina XDR display, M-series processing power, and cellular connectivity for workflow anywhere.",
+    features: ["Liquid Retina XDR", "M-Series Performance", "Cellular & Wi-Fi", "Apple Pencil Support"]
+  },
+  { 
+    id: 5, 
+    name: "Samsung Galaxy Tab S9", 
+    category: "smartphones", 
+    brand: "samsung", 
+    specs: "AMOLED Display", 
+    image: "/products/sumsung-tab.png",
+    description: "Immersive Dynamic AMOLED 2X screen with included S Pen for seamless note-taking and entertainment.",
+    features: ["AMOLED Display", "S Pen Included", "Water Resistant IP68", "Immersive Audio"]
+  },
+  { 
+    id: 6, 
+    name: "Hoco Android Tablet", 
+    category: "smartphones", 
+    brand: "hoco", 
+    specs: "Performance Edition", 
+    image: "/products/hoco-tab.png",
+    description: "Reliable Android tablet engineered for smooth media streaming, reading, and everyday apps.",
+    features: ["Smooth Android OS", "Reliable Battery", "Bright Display", "Affordable Performance"]
+  },
+
+  // --- 2. Laptops ---
+  { 
+    id: 7, 
+    name: "Apple MacBook Pro M3 (2024)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "Space Black | 16GB RAM", 
+    image: "/products/Apple_MacBook_Pro_M3__2024.png",
+    description: "Blazing-fast M3 chip architecture with stunning Space Black finish, advanced thermal cooling, and incredible battery life.",
+    features: ["Apple M3 Chip", "Liquid Retina XDR Display", "Up to 22 Hours Battery", "Space Black Finish"]
+  },
+  { 
+    id: 204, 
+    name: "Apple MacBook Pro 2023", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "High Performance Workflow", 
+    image: "/products/Apple_MacBook_Pro_2023.png",
+    description: "Engineered for demanding workflows, video editing, and software development with pro ports and retina display.",
+    features: ["Pro Performance Architecture", "Advanced Connectivity Ports", "Stunning Retina Screen", "Quiet Cooling Fans"]
+  },
+  { 
+    id: 202, 
+    name: "Apple MacBook Pro 2020 (M1)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "Active Cooling | Touch Bar", 
+    image: "/products/Apple_MacBook_Pro_2020__M1.png",
+    description: "Revolutionary M1 chip with active cooling fan for sustained peak performance and convenient Touch Bar control.",
+    features: ["Apple M1 Chip with Active Cooling", "Interactive Touch Bar", "Crystal Clear Retina Display", "FaceTime HD Camera"]
+  },
+  { 
+    id: 201, 
+    name: "Apple MacBook Air 2020 (M1)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "M1 Chip | 8GB RAM | 256GB SSD", 
+    image: "/products/Apple_MacBook_Air_2020__M1.png",
+    description: "Incredibly thin and light notebook powered by the M1 chip with silent fanless design and all-day battery.",
+    features: ["Fanless Silent Design", "Apple M1 Chip", "Retina Display", "Up to 18 Hours Battery"]
+  },
+  { 
+    id: 8, 
+    name: "ROG Gaming Laptop", 
+    category: "gaming", 
+    brand: "asus", 
+    specs: "High Performance GPU", 
+    image: "/products/ROG_Gaming_Laptop.png",
+    description: "Heavy-duty gaming laptop equipped with dedicated high-end GPU and high refresh rate gaming display.",
+    features: ["Dedicated Gaming GPU", "High Refresh Display", "RGB Backlit Keyboard", "Advanced Cooling"]
+  },
+  { 
+    id: 9, 
+    name: "Foldable Touchscreen Laptop", 
+    category: "gaming", 
+    brand: "lenovo", 
+    specs: "Dual Screen Foldable", 
+    image: "/products/foldable-touchscreen-laptop.png",
+    description: "Next-gen foldable OLED screen laptop offering unmatched versatility for creators and professionals.",
+    features: ["Foldable OLED Screen", "Touchscreen Versatility", "Portable Form Factor", "Modern Multi-tasking"]
+  },
+  { 
+    id: 10, 
+    name: "Custom Gaming PC Rig", 
+    category: "gaming", 
+    brand: "custom", 
+    specs: "RGB Liquid Cooled", 
+    image: "/products/custom-gamming-pc.png",
+    description: "Custom built gaming rig featuring liquid cooling, vibrant RGB lighting, and ultimate desktop performance.",
+    features: ["Liquid Cooling System", "Custom RGB Lighting", "High Tier Desktop Specs", "Easy Upgrade Path"]
+  },
+  { 
+    id: 11, 
+    name: "4K Curved Desktop Monitor", 
+    category: "gaming", 
+    brand: "samsung", 
+    specs: "32-inch UltraWide", 
+    image: "/products/4k-curved-desktop.png",
+    description: "Immersive 32-inch 4K curved display designed for professional designers, gamers, and multitasking efficiency.",
+    features: ["32-inch 4K Resolution", "Immersive Curve", "High Color Accuracy", "Multiple HDMI/DP Ports"]
+  },
+  { 
+    id: 12, 
+    name: "External Portable SSD Storage", 
+    category: "laptops", 
+    brand: "sandisk", 
+    specs: "1TB High Speed", 
+    image: "/products/External_Portable_SSD_Hard_Drive_product_shot.png",
+    description: "Lightning-fast portable solid-state drive with rugged drop protection for secure file transfers on the go.",
+    features: ["1TB High-Speed Storage", "Rugged Drop Protection", "Compact Pocket Size", "USB-C Fast Transfer"]
+  },
+
+  // --- 3. Accessories ---
+  { 
+    id: 36, 
+    name: "iPhone Camera Lens Protector", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "Tempered Glass", 
+    image: "/products/iPhone_Camera_Lens_Protector.png",
+    description: "Individual tempered glass rings to protect your iPhone camera lenses from scratches without affecting photo quality.",
+    features: ["9H Hardness Glass", "Crystal Clear Optics", "Easy Installation", "Scratch Proof"]
+  },
+  { 
+    id: 37, 
+    name: "Transparent Shockproof Case", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "Anti-Yellowing", 
+    image: "/products/Transparent_Shockproof_Phone_Case.png",
+    description: "Crystal clear shockproof bumper case with anti-yellowing technology to showcase your phone's original design.",
+    features: ["Anti-Yellowing Material", "Corner Air Cushion", "Slim Profile", "Wireless Charging Compatible"]
+  },
+  { 
+    id: 38, 
+    name: "Tempered Glass Screen Protector", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "9H Hardness Box", 
+    image: "/products/Tempered_Glass_Screen_Protector_box.png",
+    description: "Premium tempered glass screen protector offering edge-to-edge tough defense against drops and keys.",
+    features: ["9H Surface Hardness", "Oleophobic Coating", "Bubble-free Adhesive", "High Touch Sensitivity"]
+  },
+  { 
+    id: 39, 
+    name: "Apple Watch Silicone Strap", 
+    category: "accessories", 
+    brand: "apple", 
+    specs: "Comfortable Fit", 
+    image: "/products/Apple_Watch_Silicone_strap.png",
+    description: "Soft, breathable, and durable fluoroelastomer band designed for everyday wear and workouts.",
+    features: ["Skin-friendly Silicone", "Secure Pin-and-Tuck", "Sweat Resistant", "Easy Swap Design"]
+  },
+  { 
+    id: 40, 
+    name: "SanDisk Micro SD Card", 
+    category: "accessories", 
+    brand: "sandisk", 
+    specs: "Extreme Pro 128GB", 
+    image: "/products/SanDisk_Micro_SD_Card_Extreme_product_shot.png",
+    description: "High-speed micro SD card optimized for 4K video recording, drones, and smartphone storage expansion.",
+    features: ["128GB Capacity", "4K Video Ready", "Fast Read/Write Speeds", "Durable Build"]
+  },
+  { 
+    id: 41, 
+    name: "Multi-Socket Extension Lead", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "With USB Ports", 
+    image: "/products/Multi_Socket_Extension_Lead_with_USB.png",
+    description: "Convenient extension lead featuring multiple AC sockets and built-in USB charging ports for desk organization.",
+    features: ["Multiple AC Outlets", "Built-in USB Charging", "Surge Protection", "Safe Power Switch"]
+  },
+  { 
+    id: 42, 
+    name: "Type-C Laptop Charger Adapter", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "Fast Power Delivery", 
+    image: "/products/Type-C_Laptop_Charger_Adapter.png",
+    description: "High wattage USB-C power delivery adapter compatible with MacBooks, iPads, and modern laptops.",
+    features: ["Fast Power Delivery", "Compact Wall Plug", "Overheat Protection", "Detachable Cable"]
+  },
+  { 
+    id: 43, 
+    name: "Magnetic Smart Watch Cable", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "USB Charging Dock", 
+    image: "/products/Magnetic_Smart_Watch_Charging_Cable.png",
+    description: "Convenient magnetic alignment charging cable for quick and effortless smartwatch power replenishing.",
+    features: ["Strong Magnetic Snap", "USB Powered", "Tangle-free Cord", "Portable Design"]
+  },
+  { 
+    id: 44, 
+    name: "65W GaN Dual USB Fast Charger", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "Compact Wall Plug", 
+    image: "/products/65W_GaN_Dual_USB_Fast_Charger.png",
+    description: "Gallium Nitride (GaN) charger capable of powering two devices simultaneously at high speeds in a pocket-sized brick.",
+    features: ["65W GaN Technology", "Dual USB Ports", "Cooler Operation", "Travel Friendly"]
+  },
+  { 
+    id: 45, 
+    name: "MagSafe Car Wireless Charger", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "Vent Mount Holder", 
+    image: "/products/MagSafe_Car_Wireless_Charger_Mount.png",
+    description: "Magnetic wireless charging car mount that securely holds your iPhone while charging on bumpy roads.",
+    features: ["MagSafe Alignment", "Secure Vent Mount", "Fast Wireless Charging", "360-Degree Rotation"]
+  },
+  { 
+    id: 46, 
+    name: "20000mAh Power Bank", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "Fast Portable Battery", 
+    image: "/products/20000mAh_Fast_Charging_Power_Bank_product_shot.png",
+    description: "Massive 20000mAh capacity portable charger to keep your phones and tablets powered throughout travel.",
+    features: ["20000mAh Capacity", "Multi-Device Charging", "LED Battery Indicator", "Flight Approved"]
+  },
+  { 
+    id: 47, 
+    name: "Universal Travel Adapter", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "All-in-One Plugs", 
+    image: "/products/Universal_All_in_One_Travel_Adapter.png",
+    description: "All-in-one international plug adapter compatible with outlets across Europe, UK, USA, and Australia.",
+    features: ["Global Plug Interchange", "Built-in Fuse Safety", "Compact Travel Case", "Multi-Country Use"]
+  },
+  { 
+    id: 48, 
+    name: "3.5mm Audio Cable", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "Auxiliary Stereo Wire", 
+    image: "/products/3.5mm_Audio_Cable.png",
+    description: "High fidelity auxiliary stereo cable for connecting phones or media players to car stereos and speakers.",
+    features: ["Gold-Plated Connectors", "Tangle-Resistant Wire", "Clear Stereo Sound", "Standard 3.5mm Jack"]
+  },
+  { 
+    id: 49, 
+    name: "High Speed Braided HDMI Cable", 
+    category: "accessories", 
+    brand: "generic", 
+    specs: "4K Support", 
+    image: "/products/High_Speed_Braided_HDMI_Cable.png",
+    description: "Durable braided HDMI cable supporting 4K ultra HD video streaming and gaming display connectivity.",
+    features: ["4K Ultra HD Support", "Nylon Braided Jacket", "Gold Connectors", "High Speed Data Transfer"]
+  },
+  { 
+    id: 50, 
+    name: "Apple AirTag", 
+    category: "accessories", 
+    brand: "apple", 
+    specs: "Item Tracker", 
+    image: "/products/Apple_AirTag.png",
+    description: "Keep track of your keys, wallet, luggage, and more right inside the Find My app on your iPhone.",
+    features: ["Precision Finding", "Replaceable Battery", "IP67 Water Resistant", "Find My Network Integration"]
+  },
+  { 
+    id: 51, 
+    name: "Apple Pencil 2nd Gen", 
+    category: "accessories", 
+    brand: "apple", 
+    specs: "Stylus for iPad", 
+    image: "/products/pple_Pencil_2nd_Gen.png",
+    description: "Pixel-perfect precision and industry-low latency for drawing, sketching, and note-taking on compatible iPads.",
+    features: ["Magnetic Attachment & Charging", "Double-Tap Tool Switch", "Pressure Sensitive", "Pixel-Perfect Accuracy"]
+  },
+
+  // --- 4. Audio ---
+  { 
+    id: 25, 
+    name: "Apple AirPods Pro 2", 
+    category: "audio", 
+    brand: "apple", 
+    specs: "USB-C | ANC", 
+    image: "/products/Apple_AirPods_Pro_2.png",
+    description: "Active Noise Cancellation, Adaptive Audio, and immersive Spatial Audio powered by the H2 chip in a USB-C charging case.",
+    features: ["Active Noise Cancellation", "Adaptive Transparency", "Personalized Spatial Audio", "USB-C MagSafe Case"]
+  },
+  { 
+    id: 26, 
+    name: "JBL Bluetooth Speaker", 
+    category: "audio", 
+    brand: "jbl", 
+    specs: "Waterproof Portable", 
+    image: "/products/JBL_Bluetooth_Speaker.png",
+    description: "Bold sound, punchy bass, and waterproof portability make this Bluetooth speaker ready for any outdoor adventure.",
+    features: ["IP67 Waterproof & Dustproof", "Long Battery Life", "Signature JBL Pro Sound", "Rugged Fabric Design"]
+  },
+  { 
+    id: 27, 
+    name: "JBL Wireless Earbuds", 
+    category: "audio", 
+    brand: "jbl", 
+    specs: "Deep Bass Sound", 
+    image: "/products/JBL_Wireless_Earbuds.png0",
+    description: "True wireless earbuds delivering crisp acoustics and deep punchy bass for all-day listening comfort.",
+    features: ["Deep Bass Sound", "Ergonomic Fit", "Touch Controls", "Charging Case Included"]
+  },
+  { 
+    id: 28, 
+    name: "Wireless Earbuds Case", 
+    category: "audio", 
+    brand: "generic", 
+    specs: "Universal Charging", 
+    image: "/products/Wireless_Earbuds_Charging_Case.png",
+    description: "Replacement or universal protective charging case designed for seamless wireless earbud refueling.",
+    features: ["Universal Compatibility", "LED Charge Status", "Compact Protection", "Pocket Friendly"]
+  },
+  { 
+    id: 29, 
+    name: "Wireless Vlogging Microphone", 
+    category: "audio", 
+    brand: "generic", 
+    specs: "Type-C Clip-on Mic", 
+    image: "/products/Wireless_Vlogging_Microphone_Type-C.png",
+    description: "Plug-and-play wireless clip-on microphone delivering crystal clear audio for mobile content creators and vloggers.",
+    features: ["Plug & Play Setup", "Crystal Clear Audio", "Low Latency Transmission", "Type-C Receiver"]
+  },
+  { 
+    id: 30, 
+    name: "Studio Wired Headphones", 
+    category: "audio", 
+    brand: "generic", 
+    specs: "Over-Ear Monitoring", 
+    image: "/products/Studio_Wired_Over_Ear_Headphones.png",
+    description: "Over-ear studio monitoring headphones designed for accurate sound reproduction, mixing, and casual listening.",
+    features: ["Over-Ear Comfort", "Accurate Sound Profile", "Durable Headband", "Detachable Audio Cable"]
+  },
+  { 
+    id: 34, 
+    name: "Casio G-Shock Watch", 
+    category: "audio", 
+    brand: "casio", 
+    specs: "Shock Resistant", 
+    image: "/products/Casio_G-Shock_Watch.png",
+    description: "Legendary shock-resistant toughness paired with rugged digital utility for outdoor and sports enthusiasts.",
+    features: ["Shock Resistant Build", "200M Water Resistance", "World Time & Stopwatch", "Durable Resin Band"]
+  },
+  { 
+    id: 35, 
+    name: "Smart Health Ring", 
+    category: "audio", 
+    brand: "generic", 
+    specs: "Sleep & Fitness Tracker", 
+    image: "/products/Smart_Health_Ring.png",
+    description: "Discreet titanium smart ring that tracks your sleep quality, daily steps, and vital health metrics seamlessly.",
+    features: ["Sleep & Recovery Tracking", "Heart Rate Monitor", "Lightweight Titanium", "Long Battery Life"]
+  },
+
+  // --- 5. Smart Watches ---
+  { 
+    id: 31, 
+    name: "Apple Watch Ultra 2", 
+    category: "smartwatches", 
+    brand: "apple", 
+    specs: "Titanium Case | Fitness", 
+    image: "/products/Apple_Watch_Ultra_2.png",
+    description: "The ultimate sports and adventure watch featuring a rugged titanium case, precision dual-frequency GPS, and ultra-bright display.",
+    features: ["Rugged Titanium Case", "Precision Dual-Frequency GPS", "Up to 36 Hours Battery", "Extreme Temperature Tolerant"]
+  },
+  { 
+    id: 32, 
+    name: "Samsung Galaxy Watch 6", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Health Tracking", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Advanced wellness coaching, sleep score monitoring, and a sleek rotating bezel design on your wrist.",
+    features: ["Advanced Sleep Coaching", "Body Composition Analysis", "Vibrant Sapphire Crystal", "Seamless Galaxy Sync"]
+  },
+  { 
+    id: 33, 
+    name: "Hoco Smartwatch", 
+    category: "smartwatches", 
+    brand: "hoco", 
+    specs: "Bluetooth Calling", 
+    image: "/products/Hoco_Smartwatch.png",
+    description: "Affordable smartwatch featuring Bluetooth calling capability, daily activity tracking, and customizable watch faces.",
+    features: ["Bluetooth Calling", "Activity Tracker", "Customizable Faces", "Touchscreen Display"]
+  },
+
+  // --- 6. Gaming Zone ---
+  { 
+    id: 13, 
+    name: "Sony PlayStation 5 Console", 
+    category: "gaming", 
+    brand: "sony", 
+    specs: "Disc Edition", 
+    image: "/products/Sony_PlayStation_5_Console_studio_shot.png",
+    description: "Experience lightning-fast loading with an ultra-high speed SSD, deeper immersion with haptic feedback, and incredible 4K games.",
+    features: ["Ultra-High Speed SSD", "Ray Tracing Support", "Tempest 3D AudioTech", "DualSense Wireless Controller"]
+  },
+  { 
+    id: 14, 
+    name: "Xbox Series X Console", 
+    category: "gaming", 
+    brand: "microsoft", 
+    specs: "1TB SSD Gaming", 
+    image: "/products/Xbox_Series_X_Console.png",
+    description: "The fastest, most powerful Xbox ever. Explore rich new worlds with 12 teraflops of raw graphic processing power.",
+    features: ["12 Teraflops Processing", "1TB Custom SSD", "True 4K Gaming", "Quick Resume Feature"]
+  },
+  { 
+    id: 15, 
+    name: "Nintendo Switch OLED", 
+    category: "gaming", 
+    brand: "nintendo", 
+    specs: "White Console Edition", 
+    image: "/products/Nintendo_Switch_OLED.png",
+    description: "Featuring a vibrant 7-inch OLED screen, wide adjustable stand, and enhanced audio for gaming at home or on the go.",
+    features: ["7-inch OLED Screen", "Wide Adjustable Stand", "Enhanced Audio Speakers", "64GB Internal Storage"]
+  },
+  { 
+    id: 16, 
+    name: "PS5 DualSense Controller", 
+    category: "gaming", 
+    brand: "sony", 
+    specs: "Wireless Controller", 
+    image: "/products/PS5_DualSense_Controller.png",
+    description: "Discover a deeper, highly immersive gaming experience with haptic feedback and dynamic trigger effects.",
+    features: ["Haptic Feedback", "Adaptive Triggers", "Built-in Microphone", "Create Button"]
+  },
+  { 
+    id: 17, 
+    name: "Logitech G923 Racing Wheel", 
+    category: "gaming", 
+    brand: "logitech", 
+    specs: "TrueForce Feedback", image: "/products/Logitech_G923_Gaming_Steering_Wheel.png",
+    description: "High-performance racing wheel featuring TRUEFORCE high-definition force feedback connected directly to game engines.",
+    features: ["TRUEFORCE Feedback", "Dual-Clutch Launch", "Brushed Metal Steering", "Responsive Floor Pedals"]
+  },
+  { 
+    id: 18, 
+    name: "Meta Quest 3 VR Headset", 
+    category: "gaming", 
+    brand: "meta", 
+    specs: "Mixed Reality", 
+    image: "/products/Meta_Quest_3_VR_Headset.png",
+    description: "Dive into extraordinary virtual and mixed reality experiences with breakthrough performance and full color passthrough.",
+    features: ["Mixed Reality Capabilities", "High-Resolution Display", "Touch Plus Controllers", "Wireless Freedom"]
+  },
+  { 
+    id: 19, 
+    name: "Portable Gaming Projector", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "1080p HD Display", 
+    image: "/products/Portable_Gaming_Projector.png",
+    description: "Compact HD projector for big-screen gaming, movie nights, and presentations anywhere you set up camp.",
+    features: ["1080p HD Output", "Compact Portable Design", "Built-in Speaker", "Multiple Input Ports"]
+  },
+  { 
+    id: 20, 
+    name: "Android TV Gaming Stick", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "4K Streaming", 
+    image: "/products/Android_TV_Gaming_Stick.png",
+    description: "Transform any TV into a smart streaming and retro gaming entertainment hub with 4K output support.",
+    features: ["4K Streaming Support", "Android TV OS", "Compact Stick Form", "Bluetooth Controller Pairing"]
+  },
+  { 
+    id: 21, 
+    name: "RGB Wireless Gaming Mouse", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "High DPI Optical", 
+    image: "/products/RGB_Wireless_Gaming_Mouse.png",
+    description: "Ergonomic wireless gaming mouse with adjustable high DPI sensor and customizable RGB lighting zones.",
+    features: ["High Precision Optical Sensor", "Customizable RGB Lighting", "Wireless Zero-Lag", "Ergonomic Grip"]
+  },
+  { 
+    id: 22, 
+    name: "Mechanical RGB Gaming Keyboard", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Mechanical Switches", 
+    image: "/products/Mechanical_RGB_Gaming_Keyboard.png",
+    description: "Tactile mechanical switches and per-key RGB backlighting engineered for competitive gaming and fast typing.",
+    features: ["Tactile Mechanical Switches", "Per-Key RGB Lighting", "Anti-Ghosting Keys", "Durable Metal Plate"]
+  },
+  { 
+    id: 23, 
+    name: "Laptop Gaming Cooling Pad", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Dual Fan Cooling", 
+    image: "/products/Laptop_Gaming_Cooling_Pad_RGB.png",
+    description: "Keep your gaming laptop running at peak performance during intense sessions with quiet dual cooling fans.",
+    features: ["Dual High-Speed Fans", "RGB Accent Lighting", "Adjustable Elevation Angles", "USB Powered"]
+  },
+  { 
+    id: 24, 
+    name: "Over-Ear Gaming Headset", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Surround Sound & Mic", 
+    image: "/products/Over_Ear_Gaming_Headset_with_Mic.png",
+    description: "Immersive surround sound headset featuring plush memory foam ear cushions and a noise-canceling boom mic.",
+    features: ["Immersive Surround Sound", "Noise-Canceling Mic", "Plush Memory Foam", "Multi-Platform Compatibility"]
+  },
+  { 
+    id: 52, 
+    name: "Mini Foldable Camera Drone", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "HD Aerial Camera", 
+    image: "/products/Mini_Foldable_Camera_Drone.png",
+    description: "Lightweight foldable drone equipped with an HD camera for capturing breathtaking aerial photography and videos.",
+    features: ["Foldable Arm Design", "HD Aerial Camera", "Altitude Hold", "Easy Smartphone Control"]
+  },
+  { 
+    id: 53, 
+    name: "Remote Control Racing Car", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "High Speed Toy", 
+    image: "/products/Remote_Control_Racing_Car.png",
+    description: "High-speed RC car built for thrilling outdoor racing performance and responsive maneuverability.",
+    features: ["High Speed Motor", "Shock Absorbing Suspension", "Rechargeable Battery", "Responsive Controller"]
+  },
+  { 
+    id: 54, 
+    name: "Outdoor Smart Security Camera", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "WiFi IP Camera", 
+    image: "/products/Outdoor_Smart_Security_Camera_Wireless.png",
+    description: "Weatherproof wireless IP security camera with night vision and motion alerts sent straight to your phone.",
+    features: ["Weatherproof IP65", "Night Vision", "Motion Detection Alerts", "WiFi Connectivity"]
+  },
+  { 
+    id: 55, 
+    name: "Smart Video Doorbell Camera", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Two-Way Audio", 
+    image: "/products/Smart_Video_Doorbell_Camera.png",
+    description: "See, hear, and speak to visitors at your door from anywhere with crystal clear HD video and two-way audio.",
+    features: ["HD Video Feed", "Two-Way Talk Audio", "Smart Motion Detection", "Easy App Setup"]
+  },
+  { 
+    id: 56, 
+    name: "TP-Link WiFi Range Extender", 
+    category: "gaming", 
+    brand: "tplink", 
+    specs: "Signal Booster", 
+    image: "/products/TP-Link_WiFi_Range_Extender.png",
+    description: "Eliminate WiFi dead zones and boost your home network coverage with this wall-plug signal repeater.",
+    features: ["WiFi Dead Zone Booster", "Ethernet Port Included", "Easy One-Button Setup", "Universal Compatibility"]
+  },
+  { 
+    id: 57, 
+    name: "Amazon Fire TV Stick 4K", 
+    category: "gaming", 
+    brand: "amazon", 
+    specs: "Streaming Device", 
+    image: "/products/Amazon_Fire_TV_Stick_4K.png",
+    description: "Cinematic 4K Ultra HD streaming with Wi-Fi 6 support and Alexa Voice Remote capabilities.",
+    features: ["4K Ultra HD Streaming", "Alexa Voice Remote", "Wi-Fi 6 Support", "Cinematic Dolby Vision"]
+  },
+  { 
+    id: 58, 
+    name: "Desktop Selfie Ring Light", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "With Phone Holder", 
+    image: "/products/Desktop_Selfie_Ring_Light_with_Phone_Holder.png",
+    description: "Adjustable LED ring light with phone mount for flawless lighting during video calls, streaming, and selfies.",
+    features: ["Adjustable Color Tones", "Phone Holder Mount", "USB Powered", "Stable Desk Stand"]
+  },
+  { 
+    id: 59, 
+    name: "1080p HD Webcam", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "With Privacy Cover", 
+    image: "/products/1080p_HD_Webcam_with_Privacy_Cover.png",
+    description: "Crisp 1080p video calling webcam complete with a physical privacy shutter and built-in microphone.",
+    features: ["1080p HD Video", "Physical Privacy Cover", "Plug & Play USB", "Built-in Mic"]
+  },
+  { 
+    id: 60, 
+    name: "RGB LED Strip Light Roll", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Remote Control", 
+    image: "/products/RGB_LED_Strip_Light_Roll.png",
+    description: "Flexible color-changing LED strip lights with remote control to elevate your room or desk ambiance.",
+    features: ["Multi-Color RGB Modes", "Remote Control Included", "Cut-to-Fit Length", "Strong Adhesive Backing"]
+  },
+  { 
+    id: 61, 
+    name: "Digital Voice Recorder", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Portable Audio Recorder", 
+    image: "/products/Digital_Voice_Recorder_Portable.png",
+    description: "High-clarity portable digital voice recorder for lectures, interviews, and personal notes.",
+    features: ["High Fidelity Recording", "Long Battery Backup", "Easy File Transfer", "Compact Recorder"]
+  },
+  { 
+    id: 62, 
+    name: "Auto Face Tracking Phone Holder", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Smart Gimbal Mount", 
+    image: "/products/Auto_Face_Tracking_Phone_Holder.png",
+    description: "Smart motorized gimbal mount that automatically tracks your face for hands-free video recording and live streaming.",
+    features: ["360-Degree Face Tracking", "App-Free Operation", "Rechargeable Battery", "Standard Tripod Mount"]
+  },
+  { 
+    id: 63, 
+    name: "Flexible Phone Tripod Stand", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Compact & Bendable", 
+    image: "/products/Flexible_Phone_Tripod_Stand.png",
+    description: "Bendable octopus tripod legs allow you to wrap and secure your phone on virtually any surface for unique angles.",
+    features: ["Flexible Bendable Legs", "Secure Phone Clamp", "Compact Travel Size", "360 Ball Head"]
+  },
+  { 
+    id: 64, 
+    name: "3-Axis Smartphone Gimbal", 
+    category: "gaming", 
+    brand: "generic", 
+    specs: "Stabilizer", 
+    image: "/products/3_Axis_Smartphone_Gimbal_Stabilizer.png",
+    description: "Professional 3-axis motorized stabilization for cinematic smooth smartphone video recording.",
+    features: ["3-Axis Motorized Stability", "Gesture Control", "Foldable Design", "Companion App Features"]
+  }
 ];
 
-export default function DynamicShopPage() {
+const SHOP_CATEGORIES = [
+  { title: "Smartphones", key: "smartphones", desc: "iPhone 11 to 18 & Samsung", img: "/mobile.png" },
+  { title: "Laptops", key: "laptops", desc: "MacBooks (M1-M3) & PCs", img: "/laptop.png" },
+  { title: "Accessories", key: "accessories", desc: "Cases, Chargers & More", img: "/asseceries.png" },
+  { title: "Audio", key: "audio", desc: "Headphones & Speakers", img: "/audio.png" },
+  { title: "Smart Watches", key: "smartwatches", desc: "Apple Watch & Galaxy Watch", img: "/products/Samsung_Galaxy_Watch_6.png" },
+  { title: "Gaming Zone", key: "gaming", desc: "PS5, Xbox & Gear", img: "/repair.png" }
+];
+
+function ShopContent() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>("popular");
+
+  // Selected product for Modal Popup
+  const [selectedProduct, setSelectedProduct] = useState<typeof INITIAL_PRODUCTS[0] | null>(null);
+
+  // Sync category selection with URL parameter
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategories([categoryParam]);
+    }
+  }, [categoryParam]);
 
   // Quick Form State
   const [quickForm, setQuickForm] = useState({
@@ -178,12 +1089,11 @@ export default function DynamicShopPage() {
     });
   }, [searchQuery, selectedCategories, selectedBrands]);
 
-  
   return (
-    <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
+    <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans relative z-0">
 
       {/* ================= 1. HERO BANNER SECTION ================= */}
-      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
+      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/65">
         <div className="hidden lg:block">
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
@@ -269,48 +1179,48 @@ export default function DynamicShopPage() {
         </div>
       </section>
 
-      {/* ================= 2. CATEGORY NAVIGATION CARDS BAR ================= */}
+      {/* ================= 2. SHOP CATEGORY CARDS BAR (130% SCALED PNGs) ================= */}
       <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
-        <div className="max-w-[1680px] mx-auto"> 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"> 
-            {[
-              { title: "Smartphones & Tabs", key: "smartphones", desc: "iPhone • Samsung • iPad", img: "/cat-mobile.png" },
-              { title: "Laptops & Computing", key: "laptops", desc: "MacBooks • PCs • Storage", img: "/cat-lap.png" },
-              { title: "Gaming Zone", key: "gadgets", desc: "PS5 • Xbox • Controllers", img: "/cat-game.png" },
-              { title: "Audio & Watches", key: "audio", desc: "AirPods • Speakers • Smartwatch", img: "/cat-watch.png" },
-              { title: "Accessories & Chargers", key: "accessories", desc: "Cables • Adapters • Cases", img: "/cat-case.png" }
-            ].map((cat) => (
-              <div
-                key={cat.key}
-                onClick={() => toggleCategory(cat.key)}
-                className={`bg-white border rounded-2xl p-4 shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between h-44 ${
-                  selectedCategories.includes(cat.key)
+        <div className="max-w-[1680px] mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {SHOP_CATEGORIES.map((cat) => {
+              const isSelected = selectedCategories.includes(cat.key);
+              return (
+                <div
+                  key={cat.key}
+                  onClick={() => toggleCategory(cat.key)}
+                  className={`bg-white border rounded-2xl p-4 shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between h-44 ${isSelected
                     ? "border-[#F97316] ring-1 ring-[#F97316]"
                     : "border-gray-200 hover:border-[#F97316] hover:shadow-md"
-                }`}
-              >
-                <div className="w-full h-24 flex items-center justify-center p-1">
-                  <img src={cat.img} alt={cat.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-200" />
-                </div>
-                <div className="flex items-end justify-between pt-2 border-t border-gray-100">
-                  <div className="space-y-0.5">
-                    <h3 className="text-xs font-bold text-[#0F172A] leading-tight">{cat.title}</h3>
-                    <p className="text-[10px] text-gray-500 font-medium leading-tight">{cat.desc}</p>
+                    }`}
+                >
+                  <div className="w-full h-24 flex items-center justify-center p-1 overflow-hidden">
+                    <img 
+                      src={cat.img} 
+                      alt={cat.title} 
+                      className="max-h-full max-w-full object-contain group-hover:scale-138 transition-transform duration-300 scale-130" 
+                    />
                   </div>
-                  <div className="w-6 h-6 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 group-hover:bg-[#F97316] group-hover:text-white group-hover:border-[#F97316] transition shrink-0">
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition" />
+                  <div className="flex items-end justify-between pt-2 border-t border-gray-100">
+                    <div className="space-y-0.5">
+                      <h3 className="text-xs font-bold text-[#0F172A] leading-tight">{cat.title}</h3>
+                      <p className="text-[10px] text-gray-500 font-medium leading-tight">{cat.desc}</p>
+                    </div>
+                    <div className="w-6 h-6 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 group-hover:bg-[#F97316] group-hover:text-white group-hover:border-[#F97316] transition shrink-0">
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ================= 3. MAIN CONTENT: WORKING FILTERS & PRODUCT GRID ================= */}
+      {/* ================= 3. MAIN CONTENT: FILTERS & PRODUCT GRID ================= */}
       <section className="w-full bg-[#C0C0C0] py-12 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Sidebar: Interactive Filters */}
           <div className="lg:col-span-3 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
             <div className="flex items-center justify-between border-b border-gray-200 pb-4">
@@ -331,11 +1241,12 @@ export default function DynamicShopPage() {
               <h4 className="text-xs font-bold text-[#0F172A]">Category</h4>
               <div className="space-y-2 text-xs text-gray-700">
                 {[
-                  { name: "Smartphones & Tabs", key: "smartphones" },
-                  { name: "Laptops & Computing", key: "laptops" },
-                  { name: "Gaming Zone", key: "gadgets" },
-                  { name: "Audio & Watches", key: "audio" },
-                  { name: "Accessories", key: "accessories" }
+                  { name: "Smartphones", key: "smartphones" },
+                  { name: "Laptops", key: "laptops" },
+                  { name: "Accessories", key: "accessories" },
+                  { name: "Audio", key: "audio" },
+                  { name: "Smart Watches", key: "smartwatches" },
+                  { name: "Gaming Zone", key: "gaming" }
                 ].map((item) => (
                   <label key={item.key} className="flex items-center justify-between cursor-pointer">
                     <div className="flex items-center gap-2">
@@ -356,7 +1267,7 @@ export default function DynamicShopPage() {
             <div className="space-y-3 pt-2 border-t border-gray-100">
               <h4 className="text-xs font-bold text-[#0F172A]">Brand</h4>
               <div className="space-y-2 text-xs text-gray-700 max-h-48 overflow-y-auto">
-                {["apple", "samsung", "hoco", "asus", "sony", "microsoft", "nintendo", "meta", "jbl", "sandisk"].map((brand) => (
+                {["apple", "samsung", "asus", "sony", "microsoft", "nintendo", "meta", "jbl", "hoco"].map((brand) => (
                   <label key={brand} className="flex items-center justify-between cursor-pointer capitalize">
                     <div className="flex items-center gap-2">
                       <input
@@ -375,12 +1286,12 @@ export default function DynamicShopPage() {
 
           {/* Product Listing Area */}
           <div className="lg:col-span-9 space-y-6">
-            
+
             {/* Sorting Header */}
             <div className="bg-white border border-gray-200 rounded-2xl px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
               <div>
                 <h2 className="text-sm font-bold text-[#0F172A]">Shop Catalog ({filteredProducts.length} Items)</h2>
-                <p className="text-[11px] text-gray-500">Inquire instantly via WhatsApp to get competitive pricing</p>
+                <p className="text-[11px] text-gray-500">Click any product for details or inquire instantly via WhatsApp</p>
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-xs text-gray-600 font-medium">Sort by:</span>
@@ -397,22 +1308,26 @@ export default function DynamicShopPage() {
 
             {/* Grid Layout: Products + Right Sidebars */}
             <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
-              
-              {/* Filtered Products Grid (Prices Hidden) */}
+
+              {/* Filtered Products Grid with 130% Scaled PNGs & Click Modal */}
               <div className="xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {filteredProducts.length > 0 ? (
                   filteredProducts.map((product) => (
-                    <div key={product.id} className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:border-[#F97316] transition flex flex-col justify-between space-y-4">
+                    <div 
+                      key={product.id} 
+                      onClick={() => setSelectedProduct(product)}
+                      className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:border-[#F97316] transition cursor-pointer flex flex-col justify-between space-y-4 group"
+                    >
                       <div className="space-y-3">
-                        <div className="relative w-full h-44 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2">
+                        <div className="relative w-full h-52 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-4">
                           <img
                             src={product.image}
                             alt={product.name}
-                            className="w-full h-full object-contain"
+                            className="max-h-full max-w-full object-contain  transition-transform duration-300 scale-[1.2]"
                           />
                         </div>
                         <div className="space-y-1">
-                          <h3 className="text-xs font-bold text-[#0F172A]">{product.name}</h3>
+                          <h3 className="text-xs font-bold text-[#0F172A] group-hover:text-[#F97316] transition-colors">{product.name}</h3>
                           <p className="text-[11px] text-gray-500">{product.specs}</p>
                         </div>
                       </div>
@@ -421,6 +1336,7 @@ export default function DynamicShopPage() {
                           href={`https://wa.me/353896091839?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-2.5 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1.5 transition shadow-sm"
                         >
                           <MessageCircle className="w-3.5 h-3.5 fill-white" />
@@ -462,7 +1378,7 @@ export default function DynamicShopPage() {
 
                 <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">Quick Product Inquiry</h3>
-                  
+
                   {status && (
                     <div className={`p-2.5 rounded-xl text-xs font-medium ${status.type === "success" ? "bg-green-500/10 text-green-700 border border-green-500/20" : "bg-red-500/10 text-red-700 border border-red-500/20"}`}>
                       {status.msg}
@@ -549,6 +1465,104 @@ export default function DynamicShopPage() {
         </div>
       </section>
 
+      {/* ================= 5. BULLETPROOF CENTERED POPUP MODAL (Z-[99999] & PT-36) ================= */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-[99999] flex items-start justify-center p-4 sm:p-6 pt-36 sm:pt-44 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto">
+          <div className="bg-white border border-slate-300 rounded-3xl max-w-4xl w-[95%] sm:w-[85%] lg:w-[75%] p-6 sm:p-10 shadow-2xl relative space-y-6 max-h-[85vh] overflow-y-auto my-auto mb-12">
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full p-2.5 transition outline-none z-10 shadow-md"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Large Centered Modal Image */}
+              <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="max-h-full max-w-full object-contain drop-shadow-2xl scale-[1.3]"
+                />
+              </div>
+
+              {/* Modal Information & SEO Rich Content */}
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2">
+                  <span className="text-xs font-bold px-3 py-1 rounded-md bg-orange-100 text-[#F97316] uppercase tracking-wider">
+                    {selectedProduct.brand}
+                  </span>
+                  <span className="text-xs font-bold px-3 py-1 rounded-md bg-emerald-100 text-emerald-700 uppercase">
+                    {selectedProduct.category}
+                  </span>
+                </div>
+
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#0F172A] leading-tight">
+                  {selectedProduct.name}
+                </h2>
+
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                  {selectedProduct.description || "Experience top-tier quality and seamless performance with this verified device, available directly at ROX Tech Solutions in Cashel."}
+                </p>
+
+                {/* Extended SEO Value Section */}
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
+                  <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-[#F97316]" />
+                    <span>Why Choose This Product at ROX Tech Cashel</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Verified authentic stock available directly at our physical store in Cashel, County Tipperary. Enjoy expert local advice, quick WhatsApp inquiries, and guaranteed top-tier performance for all tech items.
+                  </p>
+                </div>
+
+                {/* Key Features List */}
+                {selectedProduct.features && (
+                  <div className="space-y-2 pt-1">
+                    <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">Key Specifications:</h4>
+                    <div className="grid grid-cols-2 gap-2.5">
+                      {selectedProduct.features.map((feat, i) => (
+                        <div key={i} className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                          <CheckCircle2 className="w-4 h-4 text-[#22C55E] shrink-0" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Modal Footer WhatsApp CTA */}
+            <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-xs text-slate-500 font-medium">
+                📍 Available now at ROX Tech Store, Cashel, Co. Tipperary.
+              </div>
+              <a
+                href={`https://wa.me/353896091839?text=Hi,%20I%20want%20to%20order%20or%20inquire%20about%20${encodeURIComponent(selectedProduct.name)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto bg-[#22C55E] hover:bg-[#1ea950] text-white px-8 py-3.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-lg outline-none"
+              >
+                <MessageCircle className="w-4 h-4 fill-white" />
+                <span>Instant WhatsApp Quote</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </div>
+  );
+}
+
+export default function DynamicShopPage() {
+  return (
+    <Suspense fallback={<div className="p-10 text-center text-xs font-bold">Loading Shop...</div>}>
+      <ShopContent />
+    </Suspense>
   );
 }

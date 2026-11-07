@@ -7,7 +7,7 @@ import FeaturedProducts from "@/components/FeaturedProducts";
 import RepairQuoteWidget from "@/components/RepairQuoteWidget";
 // import StoreGallery from "@/components/StoreGallery";
 // import WhyChooseUsSection from "@/components/WhyChooseUsSection";
-// import WhatsAppButton from "@/components/WhatsAppButton";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import BottomFeatureBar from "@/components/BottomFeatureBar";
 
 
@@ -16,7 +16,7 @@ export default function RoxTechHomePage() {
     <LazyMotion features={domMax}>
       {/* ✅ Clean block rendering matching the #C0C0C0 Light Silver European Retail Theme */}
       <main className="w-full min-h-screen bg-[#C0C0C0] text-[#0F172A] font-sans overflow-x-hidden m-0 p-0 block">
-        
+        <WhatsAppButton/>
         {/* Section 2: Hero Section */}
         <Hero />
         {/* <BottomFeatureBar /> */}

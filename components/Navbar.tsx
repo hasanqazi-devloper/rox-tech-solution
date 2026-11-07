@@ -10,7 +10,8 @@ import {
   Search, 
   Menu, 
   X, 
-  ShoppingBag 
+  ShoppingBag,
+  Sparkles
 } from "lucide-react";
 
 export default function Navbar() {
@@ -27,12 +28,49 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ];
 
+  const tickerItems = [
+    { text: "iPhone 18, Pro & Pro Max - All Colors Available Now!", icon: "https://img.icons8.com/3d-fluent/100/iphone18-pro.png" },
+    { text: "Call / WhatsApp Us: 00353896091839", icon: "https://img.icons8.com/3d-fluent/100/iphone18-pro.png" },
+    { text: "Experience Next-Gen iPhone Flagships in Store - Cashel, Ireland", icon: "https://img.icons8.com/3d-fluent/100/iphone18-pro.png" }
+  ];
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-300 shadow-sm transition-all duration-300">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-xs transition-all duration-300">
+      
+      {/* ================= PROFESSIONAL ANNOUNCEMENT TICKER BAR ================= */}
+    <div className="bg-[#0B0F19] text-slate-300 text-xs py-2 overflow-hidden relative border-b border-slate-800/80 flex items-center shadow-xs">
+  
+  {/* Left Fade Gradient for Smooth Marquee Entry */}
+  <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#0B0F19] to-transparent z-20 pointer-events-none hidden md:block" />
+
+  {/* Fixed Badge on Left - Sleek & Professional */}
+  <div className="hidden md:flex items-center gap-1.5 px-3.5 bg-gradient-to-r from-orange-600 to-[#F97316] text-white font-bold text-[10px] tracking-widest uppercase z-10 shrink-0 h-full py-2 shadow-sm border-r border-orange-500/30">
+    <Sparkles className="w-3 h-3 animate-pulse text-orange-200" />
+    <span>Latest Stock</span>
+  </div>
+
+  {/* Marquee Slider */}
+  <div className="flex w-max animate-marquee items-center space-x-12 whitespace-nowrap pl-6">
+    {[...tickerItems, ...tickerItems].map((item, index) => (
+      <div key={index} className="flex items-center gap-2.5 font-normal tracking-wide text-slate-300 hover:text-white transition-colors">
+        <img 
+          src={item.icon} 
+          alt="Stock Icon" 
+          className="w-4 h-4 object-contain shrink-0 opacity-90" 
+        />
+        <span className="text-[11px] sm:text-xs font-medium text-slate-200">{item.text}</span>
+      </div>
+    ))}
+  </div>
+
+  {/* Right Fade Gradient for Smooth Marquee Exit */}
+  <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#0B0F19] to-transparent z-20 pointer-events-none" />
+
+</div>
+
       <div className="max-w-[2200px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         
-        {/* ================= DESKTOP VIEW ================= */}
-        {/* 1. Brand Logo (Left Side - Desktop) */}
+        {/* 1. Brand Logo (Desktop) */}
         <Link href="/" className="hidden lg:flex items-center shrink-0 outline-none focus:outline-none">
           <div className="relative h-10 sm:h-16 w-36 flex items-center">
             <Image 
@@ -45,17 +83,16 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* ================= MOBILE VIEW ================= */}
-        {/* 1. Mobile Menu Toggle (Left) */}
+        {/* 1. Mobile Menu Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none focus:outline-none focus:ring-0"
+          className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none focus:outline-none"
           aria-label="Toggle Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
 
-        {/* 2. Brand Logo (Center - Mobile) */}
+        {/* 2. Brand Logo (Mobile Center) */}
         <Link href="/" className="lg:hidden flex items-center justify-center shrink-0 absolute left-1/2 -translate-x-1/2 outline-none focus:outline-none">
           <div className="relative h-10 w-28 flex items-center">
             <Image 
@@ -68,7 +105,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* 2. Navigation Links (Center - Desktop) with Active Underline Effect */}
+        {/* Navigation Links (Desktop) */}
         <nav className="hidden lg:flex items-center space-x-7 text-sm font-semibold text-[#0F172A]">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
@@ -76,7 +113,7 @@ export default function Navbar() {
               <Link 
                 key={link.name} 
                 href={link.href} 
-                className={`relative py-2 transition hover:text-[#F97316] outline-none focus:outline-none focus:ring-0 ${
+                className={`relative py-2 transition hover:text-[#F97316] outline-none ${
                   isActive ? "text-[#F97316] font-bold" : "text-[#0F172A]"
                 }`}
               >
@@ -89,7 +126,7 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* 3. Search Bar (Desktop) */}
+        {/* Search Bar (Desktop) */}
         <div className="hidden md:flex items-center relative w-64 lg:w-72">
           <input
             type="text"
@@ -101,34 +138,30 @@ export default function Navbar() {
           <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
         </div>
 
-        {/* ================= RIGHT ACTIONS ================= */}
+        {/* Right Actions */}
         <div className="flex items-center space-x-2 sm:space-x-3">
-          {/* Mobile Search Icon Quick Toggle */}
-          <button className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none focus:outline-none">
+          <button className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none">
             <Search className="w-5 h-5" />
           </button>
 
-          {/* Desktop WhatsApp Button */}
           <a
             href="https://wa.me/353896091839"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 bg-[#22C55E] hover:bg-[#16A34A] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm transition outline-none focus:outline-none"
+            className="hidden sm:flex items-center gap-1.5 bg-[#22C55E] hover:bg-[#16A34A] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm transition outline-none"
           >
             <MessageCircle className="w-4 h-4" />
             <span>WhatsApp Us</span>
           </a>
 
-          {/* Desktop Visit Store Button */}
           <Link
             href="/contact"
-            className="hidden sm:flex items-center gap-1.5 bg-[#F97316] hover:bg-[#EA580C] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm transition outline-none focus:outline-none"
+            className="hidden sm:flex items-center gap-1.5 bg-[#F97316] hover:bg-[#EA580C] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm transition outline-none"
           >
             <MapPin className="w-4 h-4" />
             <span>Visit Store</span>
           </Link>
 
-          {/* Cart Icon with Badge */}
           <div className="relative p-2 text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-full cursor-pointer transition">
             <ShoppingBag className="w-5 h-5" />
             <span className="absolute -top-1 -right-1 bg-[#F97316] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white pointer-events-none">
@@ -158,7 +191,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href} 
                   onClick={() => setMobileMenuOpen(false)} 
-                  className={`transition outline-none focus:outline-none ${isActive ? "text-[#F97316] pl-2 border-l-4 border-[#F97316]" : "hover:text-[#F97316]"}`}
+                  className={`transition ${isActive ? "text-[#F97316] pl-2 border-l-4 border-[#F97316]" : "hover:text-[#F97316]"}`}
                 >
                   {link.name}
                 </Link>
@@ -171,7 +204,7 @@ export default function Navbar() {
               href="https://wa.me/353896091839"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-[#22C55E] text-white py-2.5 rounded-full font-bold text-xs outline-none focus:outline-none"
+              className="flex items-center justify-center gap-2 bg-[#22C55E] text-white py-2.5 rounded-full font-bold text-xs"
             >
               <MessageCircle className="w-4 h-4" />
               <span>WhatsApp Us</span>
@@ -179,7 +212,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 bg-[#F97316] text-white py-2.5 rounded-full font-bold text-xs outline-none focus:outline-none"
+              className="flex items-center justify-center gap-2 bg-[#F97316] text-white py-2.5 rounded-full font-bold text-xs"
             >
               <MapPin className="w-4 h-4" />
               <span>Visit Store</span>

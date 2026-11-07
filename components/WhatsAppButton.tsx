@@ -1,48 +1,82 @@
 "use client";
 
-import { motion as m } from "framer-motion";
+import { useState } from "react";
+import { MessageCircle, X, Sparkles, ArrowRight } from "lucide-react";
 
-export default function WhatsAppButton() {
-  const phoneNumber = "989000000000"; // Aapna WhatsApp number yahan likhein (e.g. 989123456789)
-  const directMessage = encodeURIComponent(
-    "Hello Pistachio Home Team, I would like to inquire about bulk pistachio container quotations and quality spec sheets."
-  );
+export default function WhatsAppCommunitySticky() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Aap yahan apna actual WhatsApp Community Invite Link paste kar sakte ho
+  const communityLink = "https://chat.whatsapp.com/YOUR_COMMUNITY_INVITE_LINK";
 
   return (
-    <m.a
-      href={`https://wa.me/${phoneNumber}?text=${directMessage}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center h-14 w-14 rounded-full bg-[#0B2B22] border border-[#C5922E]/50 hover:border-[#C5922E] shadow-2xl group transition-all duration-300 transform-gpu active:scale-95 select-none cursor-pointer"
-      aria-label="Contact Pistachio Home on WhatsApp"
-    >
-      {/* Top Badge */}
-      <div className="absolute -top-7 right-0 bg-[#C5922E] text-[#0B2B22] text-[8px] font-black tracking-[0.2em] uppercase px-2 py-0.5 rounded border border-[#C5922E]/40 font-sans shadow-md pointer-events-none select-none opacity-90 group-hover:opacity-100 transition-all duration-300">
-        B2B·DESK
-      </div>
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+      
+      {/* ================= EXPANDABLE COMMUNITY CARD ================= */}
+      {isOpen && (
+        <div className="mb-3 w-72 bg-[#0F291E] border border-[#22C55E]/40 text-white rounded-3xl p-4 shadow-2xl animate-fadeIn relative">
+          
+          {/* Close Button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-3 right-3 text-gray-400 hover:text-white bg-gray-800/80 rounded-full p-1 transition"
+            aria-label="Close"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
 
-      {/* Button Circle Container */}
-      <div className="relative h-11 w-11 flex items-center justify-center shrink-0 rounded-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#133A2E] to-[#0B2B22] rounded-full shadow-inner transition-transform duration-500 group-hover:scale-105" />
+          <div className="flex items-center gap-1.5 mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#F97316]" />
+            <span className="text-[10px] font-extrabold text-[#22C55E] uppercase tracking-wider">
+              Exclusive Access
+            </span>
+          </div>
+
+          <h4 className="text-xs font-black text-white leading-tight mb-1">
+            Join Our WhatsApp Community 🔥
+          </h4>
+          <p className="text-[11px] text-gray-300 mb-3 leading-relaxed">
+            Stay updated with latest stock, iPhone arrivals & special store deals in Cashel!
+          </p>
+
+          <a
+            href={communityLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:opacity-95 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-md"
+          >
+            <span>Join Community</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      )}
+
+      {/* ================= PREMIUM WHATSAPP FLOATING BUTTON ================= */}
+      <div 
+        className="flex items-center gap-2.5 group cursor-pointer select-none" 
+        onClick={() => setIsOpen(!isOpen)}
+      >
         
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(197,146,46,0.3)_0%,transparent_70%)] rounded-full pointer-events-none" />
+        {/* Attractive Text Bubble Tag */}
+        <div className="bg-[#0F291E] text-white px-3.5 py-2 rounded-2xl shadow-xl border border-[#22C55E]/40 text-xs font-bold flex items-center gap-1.5 transition-all duration-300 group-hover:scale-105">
+          <span className="text-sm">🔥</span>
+          <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">Join Community</span>
+        </div>
 
-        {/* WhatsApp Icon with Gold/Accent Tone */}
-        <svg 
-          viewBox="0 0 24 24" 
-          className="w-5 h-5 text-[#C5922E] group-hover:text-amber-300 relative z-10 fill-current drop-shadow-[0_2px_5px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110"
-        >
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.454 5.709 1.455h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
+        {/* Enhanced Realistic WhatsApp Icon Button */}
+        <div className="relative">
+          <div className="w-14 h-14 bg-gradient-to-tr from-[#128C7E] via-[#25D366] to-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-white/20">
+            {/* Custom SVG for exact clean WhatsApp logo */}
+            <svg className="w-7 h-7 fill-current drop-shadow-sm" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+          </div>
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#F97316] rounded-full animate-ping" />
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#F97316] rounded-full text-[9px] font-bold text-white flex items-center justify-center">1</span>
+        </div>
+
       </div>
 
-      {/* Unread Notification Badge */}
-      <span className="absolute top-1 right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#C5922E] text-[8px] font-black font-sans text-[#0B2B22] shadow-md border border-[#0B2B22]">
-        1
-      </span>
-    </m.a>
+    </div>
   );
 }
