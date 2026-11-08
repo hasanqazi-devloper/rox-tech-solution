@@ -72,6 +72,8 @@ export default function ContactPage() {
               <img
                 src="/rox-contact.png"
                 alt="ROX Tech Solutions Interior Showcase"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-right lg:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
@@ -151,6 +153,8 @@ export default function ContactPage() {
             <img
               src="/rox-contact.png"
               alt="ROX Tech Solutions Interior Showcase"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
           </div>
@@ -384,6 +388,8 @@ export default function ContactPage() {
                 <img
                   src="/shop-4.jpeg"
                   alt="Cashel Store"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>

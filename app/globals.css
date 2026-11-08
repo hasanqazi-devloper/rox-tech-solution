@@ -14,22 +14,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* Globals.css mein yeh add kar do taake sara focus outline / ring khatam ho jaye */
+
+/* Globals.css mein focus outline / ring khatam */
 *:focus,
 *:focus-visible {
   outline: none !important;
   box-shadow: none !important;
 }
+
 /* ✨ HIGH-END LUXURY FOCUS RESETS */
 *:focus {
-  /* outline: 2px solid #F97316 !important;  */
   box-shadow: none !important;
 }
 
 /* 🎛️ TAILWIND V4 FONTS & COLORS CONFIGURATION BINDINGS */
 @theme inline {
- --font-serif: var(--font-jakarta), sans-serif; /* 👈 Yahan update karein */
-  --font-sans: var(--font-jakarta), sans-serif;  /* 👈 Yahan update karein */
+  --font-serif: var(--font-jakarta), sans-serif;
+  --font-sans: var(--font-jakarta), sans-serif;
   
   /* ROX Brand Custom Theme Colors */
   --color-rox-silver: #C0C0C0;

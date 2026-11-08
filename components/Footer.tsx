@@ -30,7 +30,7 @@ export default function Footer() {
             <div>
               <div className="flex items-center">
                 <img
-                  src="/rox-logo.png"
+                  src="/footer-logo.png"
                   alt="ROX Tech Solutions Logo"
                   className="h-12 sm:h-16 w-auto object-contain"
                 />

@@ -72,6 +72,8 @@ export default function CategoriesGrid() {
                 <img
                   src={cat.image}
                   alt={cat.title}
+                  loading="lazy"
+                  decoding="async"
                   className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>

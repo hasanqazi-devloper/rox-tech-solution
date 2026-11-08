@@ -114,6 +114,7 @@ const VAPE_PRODUCTS = [
     flavor: "devices",
     nicotine: "12mg",
     badge: null,
+    badgeColor: "",
     image: "/vapes/Innokin_Endura_T22_Pro_Kit-removebg-preview.png",
     description: "Classic mouth-to-lung vaping experience with easy top-fill design and adjustable wattage output levels.",
     features: ["3000mAh Battery", "4 Level Wattage Adjust", "Easy Top-Fill Tank", "Optimized MTL Draw"]
@@ -175,6 +176,7 @@ const VAPE_PRODUCTS = [
     flavor: "tobacco",
     nicotine: "12mg",
     badge: null,
+    badgeColor: "",
     image: "/vapes/Nicomist_Classic_Tobacco_30ml-removebg-preview.png",
     description: "Smooth, earthy traditional tobacco flavor designed for transitioning smokers looking for an authentic taste profile.",
     features: ["Authentic Tobacco Taste", "30ml Bottle", "Smooth Throat Hit", "All-Day Vape"]
@@ -353,6 +355,8 @@ export default function VapeShopPage() {
               <img
                 src="/vape-hero-page.png"
                 alt="ROX Tech Store Showcase in Cashel"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-right"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
@@ -367,7 +371,7 @@ export default function VapeShopPage() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
-                Premium Vapes, Coils, Juices & <br /> Nicotine Pouches Hub <span className="text-[#F97316]">Cashel</span>
+                Premium Vapes, Coils, Juices &amp; <br /> Nicotine Pouches Hub <span className="text-[#F97316]">Cashel</span>
               </h1>
 
               <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
@@ -438,6 +442,8 @@ export default function VapeShopPage() {
             <img
               src="/vape-hero-page.png"
               alt="ROX Tech Store Showcase in Cashel"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
           </div>
@@ -487,7 +493,13 @@ export default function VapeShopPage() {
                   }`}
               >
                 <div className="w-full h-24 flex items-center justify-center p-1 bg-slate-50/80 rounded-xl overflow-hidden">
-                  <img src={cat.img} alt={cat.title} className="max-h-full max-w-full object-contain group-hover:scale-120 transition-transform duration-300 scale-130" />
+                  <img 
+                    src={cat.img} 
+                    alt={cat.title} 
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-full max-w-full object-contain group-hover:scale-120 transition-transform duration-300 scale-130" 
+                  />
                 </div>
                 <div className="flex items-center justify-between pt-1.5 border-t border-slate-100">
                   <h3 className="text-[11px] sm:text-xs font-bold text-[#0F172A] truncate">{cat.title}</h3>
@@ -637,6 +649,8 @@ export default function VapeShopPage() {
                       <img
                         src={product.image}
                         alt={product.name}
+                        loading="lazy"
+                        decoding="async"
                         className="max-h-full max-w-full object-contain group-hover:scale-145 transition-transform duration-300 drop-shadow-lg scale-140"
                       />
                     </div>
@@ -690,6 +704,8 @@ export default function VapeShopPage() {
                 <img
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
+                  loading="lazy"
+                  decoding="async"
                   className="max-h-full max-w-full object-contain drop-shadow-2xl scale-130"
                 />
               </div>

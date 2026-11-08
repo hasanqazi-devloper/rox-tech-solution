@@ -118,7 +118,7 @@ export default function HeroSection() {
             </Link>
 
             <a
-              href="https://wa.me/353000000000"
+              href="https://wa.me/353896091839"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-md transition"
@@ -132,6 +132,8 @@ export default function HeroSection() {
           <img
             src="/hero-mobile.png"
             alt="ROX Tech Devices Showcase"
+            loading="lazy"
+            decoding="async"
             className="w-full h-auto object-cover rounded-lg"
           />
         </div>

@@ -778,7 +778,8 @@ const INITIAL_PRODUCTS = [
     name: "Logitech G923 Racing Wheel", 
     category: "gaming", 
     brand: "logitech", 
-    specs: "TrueForce Feedback", image: "/products/Logitech_G923_Gaming_Steering_Wheel.png",
+    specs: "TrueForce Feedback", 
+    image: "/products/Logitech_G923_Gaming_Steering_Wheel.png",
     description: "High-performance racing wheel featuring TRUEFORCE high-definition force feedback connected directly to game engines.",
     features: ["TRUEFORCE Feedback", "Dual-Clutch Launch", "Brushed Metal Steering", "Responsive Floor Pedals"]
   },
@@ -1074,7 +1075,7 @@ function ShopContent() {
   };
 
   const filteredProducts = useMemo(() => {
-    return INITIAL_PRODUCTS.filter((product) => {
+    let result = INITIAL_PRODUCTS.filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.specs.toLowerCase().includes(searchQuery.toLowerCase());
@@ -1087,7 +1088,13 @@ function ShopContent() {
 
       return matchesSearch && matchesCategory && matchesBrand;
     });
-  }, [searchQuery, selectedCategories, selectedBrands]);
+
+    if (sortBy === "az") {
+      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    return result;
+  }, [searchQuery, selectedCategories, selectedBrands, sortBy]);
 
   return (
     <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans relative z-0">
@@ -1100,6 +1107,8 @@ function ShopContent() {
               <img
                 src="/shop-4.jpeg"
                 alt="Shop Tech & Accessories Showcase"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-right"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
@@ -1174,7 +1183,13 @@ function ShopContent() {
           </div>
 
           <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-            <img src="/shop-4.jpeg" alt="Shop Showcase" className="w-full h-full object-cover object-center" />
+            <img 
+              src="/shop-4.jpeg" 
+              alt="Shop Showcase" 
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-center" 
+            />
           </div>
         </div>
       </section>
@@ -1198,6 +1213,8 @@ function ShopContent() {
                     <img 
                       src={cat.img} 
                       alt={cat.title} 
+                      loading="lazy"
+                      decoding="async"
                       className="max-h-full max-w-full object-contain group-hover:scale-138 transition-transform duration-300 scale-130" 
                     />
                   </div>
@@ -1323,7 +1340,9 @@ function ShopContent() {
                           <img
                             src={product.image}
                             alt={product.name}
-                            className="max-h-full max-w-full object-contain  transition-transform duration-300 scale-[1.2]"
+                            loading="lazy"
+                            decoding="async"
+                            className="max-h-full max-w-full object-contain transition-transform duration-300 scale-[1.2]"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1363,7 +1382,13 @@ function ShopContent() {
                 <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">Visit Our Cashel Store</h3>
                   <div className="rounded-xl overflow-hidden border border-gray-200 aspect-[16/9]">
-                    <img src="/shop-4.jpeg" alt="Store" className="w-full h-full object-cover" />
+                    <img 
+                      src="/shop-4.jpeg" 
+                      alt="Store" 
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover" 
+                    />
                   </div>
                   <p className="text-[11px] text-gray-600">See our full range in person. Get expert advice and friendly support.</p>
                   <div className="grid grid-cols-2 gap-2">
@@ -1484,6 +1509,8 @@ function ShopContent() {
                 <img
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
+                  loading="lazy"
+                  decoding="async"
                   className="max-h-full max-w-full object-contain drop-shadow-2xl scale-[1.3]"
                 />
               </div>

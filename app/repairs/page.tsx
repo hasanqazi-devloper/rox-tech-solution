@@ -98,6 +98,8 @@ export default function RepairsPage() {
               <img
                 src="/rox-repair.png"
                 alt="Expert Device Repairs Workbench"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-right grayscale-[40%] lg:grayscale-0"
               />
 
@@ -199,6 +201,8 @@ export default function RepairsPage() {
             <img
               src="/rox-repair.png"
               alt="Expert Device Repairs Workbench"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
           </div>
@@ -290,6 +294,8 @@ export default function RepairsPage() {
                   <img
                     src="/screen-repair.png"
                     alt="Smartphone Screen Repairs"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -310,6 +316,8 @@ export default function RepairsPage() {
                   <img
                     src="/battery-change.png"
                     alt="Battery Replacement"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -330,6 +338,8 @@ export default function RepairsPage() {
                   <img
                     src="/charging-repair.png"
                     alt="Charging Port Repairs"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -350,6 +360,8 @@ export default function RepairsPage() {
                   <img
                     src="/sleek-phone.png"
                     alt="Device Diagnostics"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -370,6 +382,8 @@ export default function RepairsPage() {
                   <img
                     src="/laptop-repair.png"
                     alt="Laptop Repairs"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -390,6 +404,8 @@ export default function RepairsPage() {
                   <img
                     src="/tab-repair.png"
                     alt="Tablet Repairs"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -666,6 +682,8 @@ export default function RepairsPage() {
               <img
                 src="/shop-4.jpeg"
                 alt="Cashel Store"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>

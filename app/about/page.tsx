@@ -79,6 +79,8 @@ export default function AboutPage() {
               <img
                 src="/about-hero.png"
                 alt="ROX Tech Store Showcase in Cashel"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-right lg:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
@@ -166,6 +168,8 @@ export default function AboutPage() {
             <img
               src="/shop-2.jpeg"
               alt="ROX Tech Store Showcase in Cashel"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
           </div>
@@ -200,6 +204,8 @@ export default function AboutPage() {
               <img
                 src="/shop-3.jpeg"
                 alt="ROX Tech Solutions Storefront Cashel"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-center"
               />
             </div>
@@ -286,6 +292,8 @@ export default function AboutPage() {
               <img
                 src="/shop-8.jpeg"
                 alt="ROX Tech Store Interior 1"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
@@ -294,6 +302,8 @@ export default function AboutPage() {
               <img
                 src="/shop-7.jpeg"
                 alt="ROX Tech Store Interior 2"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
@@ -302,6 +312,8 @@ export default function AboutPage() {
               <img
                 src="/shop-6.jpeg"
                 alt="ROX Tech Store Interior 3"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
@@ -310,6 +322,8 @@ export default function AboutPage() {
               <img
                 src="/shop-5.jpeg"
                 alt="ROX Tech Store Interior 4"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
