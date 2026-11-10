@@ -395,7 +395,7 @@ export default function ContactPage() {
               </div>
               <div className="grid grid-cols-2 gap-2 pt-1">
                 <a
-                  href="https://share.google/XIeHDurgfiVKCpBxz"
+                  href="https://share.google/j6alfoimaC2IgJJoO"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#F97316] hover:bg-[#EA580C] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"
@@ -404,7 +404,7 @@ export default function ContactPage() {
                   <span>Shopping Centre</span>
                 </a>
                 <a
-                  href="https://share.google/j6alfoimaC2IgJJoO"
+                  href="https://share.google/XIeHDurgfiVKCpBxz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#22C55E] hover:bg-[#1da852] text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm text-center"

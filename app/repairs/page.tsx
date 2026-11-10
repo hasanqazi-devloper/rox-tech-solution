@@ -24,7 +24,9 @@ import {
   HelpCircle,
   FileText,
   Store,
-  Check
+  Check,
+  Star,
+  Quote
 } from "lucide-react";
 
 export default function RepairsPage() {
@@ -479,6 +481,110 @@ export default function RepairsPage() {
       </section>
 
 
+      {/* ================= NEW: TESTIMONIALS / CUSTOMER REVIEWS SECTION ================= */}
+      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+        <div className="max-w-[1680px] mx-auto space-y-8">
+
+          {/* Section Header */}
+          <div className="space-y-1 text-center sm:text-left">
+            <div className="inline-flex items-center gap-2">
+              <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">
+                Customer Testimonials
+              </h2>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-[#0F172A] tracking-tight pl-3">
+              Trusted by People Across <span className="text-[#F97316]">Cashel</span>
+            </h3>
+          </div>
+
+          {/* Testimonials Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {/* Review 1 */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-4 relative group hover:border-[#F97316] transition">
+              <div className="absolute top-6 right-6 text-orange-200">
+                <Quote className="w-8 h-8 opacity-40" />
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-amber-500">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-amber-500" />
+                  ))}
+                </div>
+                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed italic">
+                  &ldquo;Absolute lifesavers! My iPhone screen was completely shattered, and they had it replaced within a few hours. Super friendly staff right here in Cashel.&rdquo;
+                </p>
+              </div>
+              <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <div className="w-9 h-9 rounded-full bg-orange-500 text-white font-bold flex items-center justify-center text-xs">
+                  SO
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-[#0F172A]">Sean O&apos;Connor</h4>
+                  <p className="text-[10px] text-gray-500">Verified Local Customer</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Review 2 */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-4 relative group hover:border-[#F97316] transition">
+              <div className="absolute top-6 right-6 text-orange-200">
+                <Quote className="w-8 h-8 opacity-40" />
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-amber-500">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-amber-500" />
+                  ))}
+                </div>
+                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed italic">
+                  &ldquo;Brought my laptop in because it wasn&apos;t charging properly. They diagnosed the charging port issue quickly and gave me a very fair repair quote. Highly recommended!&rdquo;
+                </p>
+              </div>
+              <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <div className="w-9 h-9 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs">
+                  MR
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-[#0F172A]">Marie Ryan</h4>
+                  <p className="text-[10px] text-gray-500">Verified Local Customer</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Review 3 */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-4 relative group hover:border-[#F97316] transition">
+              <div className="absolute top-6 right-6 text-orange-200">
+                <Quote className="w-8 h-8 opacity-40" />
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-amber-500">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-amber-500" />
+                  ))}
+                </div>
+                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed italic">
+                  &ldquo;Fantastic service and great communication. Battery replacement for my Samsung phone made it feel brand new again. Will definitely be returning for any tech needs.&rdquo;
+                </p>
+              </div>
+              <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <div className="w-9 h-9 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs">
+                  DB
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-[#0F172A]">David Bourke</h4>
+                  <p className="text-[10px] text-gray-500">Verified Local Customer</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
       {/* ================= 5. WHY CHOOSE ROX FOR REPAIRS & QUICK CTA ================= */}
       <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -514,7 +620,7 @@ export default function RepairsPage() {
             </div>
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://maps.google.com"
+                href="https://share.google/j6alfoimaC2IgJJoO"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#F97316] hover:bg-[#EA580C] text-white px-5 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
@@ -692,7 +798,7 @@ export default function RepairsPage() {
             </p>
             <div className="space-y-2 pt-2">
               <a
-                href="https://maps.google.com"
+                href="https://share.google/j6alfoimaC2IgJJoO"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md block text-center"

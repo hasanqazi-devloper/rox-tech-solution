@@ -44,24 +44,33 @@ const products = [
   },
   {
     id: 4,
-    title: "AirPods Pro 2",
+    title: "AirPods Pro 3",
     specs: "USB-C | Active Noise Cancellation",
     tag: "Hot Deal",
     tagColor: "bg-[#F97316] text-white",
-    image: "/products/Apple_AirPods_Pro_2.png",
+    image: "/air-pods-3.png",
     category: "Audio",
   },
   {
     id: 5,
-    title: "Apple Watch Ultra 2",
+    title: "Apple Watch Ultra 4",
     specs: "Titanium Case | Fitness Tracking",
     tag: "Popular",
     tagColor: "bg-[#F97316] text-white",
-    image: "/products/Apple_Watch_Ultra_2.png",
+    image: "/ultra-watch-pro-4.png",
+    category: "Smart Gadgets",
+  },
+   {
+    id: 6,
+    title: "Samsung Galaxy Smart Watch 9",
+    specs: "Advanced Health Monitoring | Long Battery Life",
+    tag: "Popular",
+    tagColor: "bg-[#F97316] text-white",
+    image: "/sumsung-smart-watch-9.png",
     category: "Smart Gadgets",
   },
   {
-    id: 6,
+    id: 7,
     title: "Gotek Vape Pod Kit",
     specs: "Refillable Pod | Long Battery Life",
     tag: "Trending",
@@ -168,7 +177,7 @@ export default function FeaturedProducts() {
                 )}
 
                 {/* Image */}
-                <div className="w-full h-32 flex items-center justify-center my-2">
+                <div className="w-full h-36 flex items-center justify-center my-2">
                   <img
                     src={product.image}
                     alt={product.title}
@@ -183,7 +192,7 @@ export default function FeaturedProducts() {
                   <h3 className="text-xs sm:text-sm font-bold text-[#0F172A] leading-tight truncate">
                     {product.title}
                   </h3>
-                  <p className="text-[10px] text-gray-500 font-normal truncate">
+                  <p className="text-[12px] text-black font-normal truncate">
                     {product.specs}
                   </p>
                 </div>

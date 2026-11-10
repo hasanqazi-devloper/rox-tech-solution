@@ -6,31 +6,31 @@ const categories = [
     title: "Smartphones",
     subtitle: "Latest Models",
     image: "/mobile.png",
-    href: "/shop?category=smartphones",
+    href: "/shop?category=smartphones#catalog-section",
   },
   {
     title: "Laptops",
     subtitle: "Work & Play",
     image: "/laptop.png",
-    href: "/shop?category=laptops",
+    href: "/shop?category=laptops#catalog-section",
   },
   {
     title: "Accessories",
     subtitle: "Cases - Chargers - More",
     image: "/asseceries.png",
-    href: "/shop?category=accessories",
+    href: "/shop?category=accessories#catalog-section",
   },
   {
     title: "Audio",
     subtitle: "Headphones - Earbuds",
     image: "/audio.png",
-    href: "/shop?category=audio",
+    href: "/shop?category=audio#catalog-section",
   },
   {
     title: "Smart Gadgets",
     subtitle: "Innovative Tech",
     image: "/products/Samsung_Galaxy_Watch_6.png",
-    href: "/shop?category=gadgets",
+    href: "/shop?category=gadgets#catalog-section",
   },
   {
     title: "Repairs",
@@ -51,7 +51,7 @@ export default function CategoriesGrid() {
             Shop by Category
           </h2>
           <Link
-            href="/shop"
+            href="/shop#catalog-section"
             className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-[#0F172A] hover:text-[#F97316] transition"
           >
             <span>View All</span>
@@ -68,7 +68,7 @@ export default function CategoriesGrid() {
               className="group min-w-[160px] sm:min-w-[180px] lg:min-w-0 bg-gradient-to-b from-white/95 via-white/60 to-[#ECEEF1] border border-white/60 rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition transform hover:-translate-y-1 shrink-0"
             >
               {/* Product Image Preview */}
-              <div className="w-full h-28 sm:h-32 flex items-center justify-center mb-3">
+              <div className="w-full h-28 sm:h-36 flex items-center justify-center mb-3">
                 <img
                   src={cat.image}
                   alt={cat.title}
@@ -84,7 +84,7 @@ export default function CategoriesGrid() {
                   <h3 className="text-xs sm:text-sm font-bold text-[#0F172A] group-hover:text-[#F97316] transition leading-tight">
                     {cat.title}
                   </h3>
-                  <p className="text-[10px] sm:text-xs text-gray-500 font-normal mt-0.5">
+                  <p className="text-[10px] sm:text-xs text-black font-normal mt-0.5">
                     {cat.subtitle}
                   </p>
                 </div>

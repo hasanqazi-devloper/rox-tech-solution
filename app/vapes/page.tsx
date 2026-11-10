@@ -18,9 +18,9 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-// Strictly Categorized VAPE_PRODUCTS Array with Exact Folder Filenames & SEO Content
+// Strictly Categorized 29 VAPE_PRODUCTS Array with Exact Image Paths & Category Mapping
 const VAPE_PRODUCTS = [
-  // --- Coils & Batteries (Coils Category) ---
+  // --- 1. Coils, Batteries & Replacement Pods (Coils Category) ---
   {
     id: 101,
     name: "SMOK TFV Series Replacement Coils",
@@ -45,8 +45,56 @@ const VAPE_PRODUCTS = [
     description: "Reliable high-drain rechargeable battery designed for safe, consistent power output and long usage hours across all advanced vape mods.",
     features: ["3000mAh Capacity", "Overheat Protection", "High Drain Performance", "Fast Recharge Support"]
   },
+  {
+    id: 103,
+    name: "Loomix 0.8Ω Top-Fill Replacement Pods",
+    brand: "loomix",
+    flavor: "coils",
+    nicotine: "0.8Ω Mesh",
+    badge: "Top-Fill",
+    badgeColor: "bg-[#22C55E]",
+    image: "/vapes/Loomix_0.8Ω_Top-Fill_Replacement_Pods.png",
+    description: "Leakproof 2ml top-fill replacement pod cartridges with 0.8Ω mesh coil technology for smooth MTL vaping and instant flavor delivery.",
+    features: ["0.8Ω Mesh Coil", "2ml Top-Fill Capacity", "Leak-resistant Structure", "Long-lasting Wicking"]
+  },
+  {
+    id: 104,
+    name: "Elfbar ELFX Dual Mesh Pod Cartridges",
+    brand: "elfbar",
+    flavor: "coils",
+    nicotine: "Dual Mesh",
+    badge: "New Release",
+    badgeColor: "bg-[#F97316]",
+    image: "/vapes/Elfbar_ELFX_Dual_Mesh_Pod_Cartridges.png",
+    description: "Official ELFX refillable pod cartridges featuring dual mesh heating elements for rich, long-lasting e-liquid flavor and anti-leak seals.",
+    features: ["3 Pods per Pack", "Dual Mesh Heating", "Refillable 2ml Design", "Compatible with ELFX Kit"]
+  },
+  {
+    id: 105,
+    name: "Aspire Gotek / Favostix Replacement Coils & Pods",
+    brand: "aspire",
+    flavor: "coils",
+    nicotine: "Multi-Resistance",
+    badge: "Authentic",
+    badgeColor: "bg-[#22C55E]",
+    image: "/vapes/Aspire_Gotek__Favostix_Replacement_Coils___Pods.png",
+    description: "Factory authentic replacement coil packs and refillable pods built for Aspire Gotek and Favostix series vape kits.",
+    features: ["Multi-Resistance Options", "Organic Cotton Wicks", "Quick Snap Installation", "Crisp Throat Hit"]
+  },
+  {
+    id: 106,
+    name: "Voopoo Argus Top-Fill Pod Cartridge Pack",
+    brand: "voopoo",
+    flavor: "coils",
+    nicotine: "0.7Ω / 1.2Ω",
+    badge: "Top Seller",
+    badgeColor: "bg-[#F97316]",
+    image: "/vapes/Voopoo_Argus_Top-Fill_Pod_Cartridge_Pack.png",
+    description: "Upgraded top-fill replacement pods compatible with Voopoo Argus P1, Argus G, and Argus Pod systems.",
+    features: ["Patented Leakproof Design", "Top E-Juice Refill", "0.7Ω & 1.2Ω Options", "Full-View Translucent Pod"]
+  },
 
-  // --- Vaping Kits & Devices (Devices Category) ---
+  // --- 2. Vaping Kits & Hardware Devices (Devices Category) ---
   {
     id: 1,
     name: "Vaporesso Luxe X2 Pod Kit",
@@ -132,7 +180,7 @@ const VAPE_PRODUCTS = [
     features: ["Rugged Gunmetal Finish", "Advanced TC Mode", "Ergonomic Grip", "High Wattage Capability"]
   },
 
-  // --- E-Liquids & Juices (Fruits / Menthol / Tobacco Categories) ---
+  // --- 3. E-Liquids & Juices (Fruits / Menthol / Tobacco Categories) ---
   {
     id: 8,
     name: "Elfliq Blueberry Ice 10ml Nic Salt",
@@ -182,7 +230,20 @@ const VAPE_PRODUCTS = [
     features: ["Authentic Tobacco Taste", "30ml Bottle", "Smooth Throat Hit", "All-Day Vape"]
   },
 
-  // --- Disposables & Pod Devices (Pods Category) ---
+  {
+    id: 22,
+    name: "Hale Vaping Irish E-Liquid Series",
+    brand: "hale",
+    flavor: "fruits",
+    nicotine: "6mg / 12mg / 18mg",
+    badge: "Irish Made",
+    badgeColor: "bg-[#22C55E]",
+    image: "/vapes/Hale_Vaping_Irish_E-Liquid_Series.png",
+    description: "Premium TPD-compliant Irish manufactured e-liquids available in classic menthol, tobacco, and fruity blends.",
+    features: ["100% TPD Compliant", "Irish Crafted E-Liquid", "Multiple Nicotine Strengths", "Clean Coil Formulation"]
+  },
+
+  // --- 4. Disposables & Pod Devices (Pods Category) ---
   {
     id: 12,
     name: "Lost Mary BM600 Orange Ice Disposable",
@@ -232,7 +293,7 @@ const VAPE_PRODUCTS = [
     features: ["Refillable System", "10K Eco Friendly", "Fast USB-C Charging", "Ergonomic Design"]
   },
 
-  // --- Nicotine Pouches (Pouches Category) ---
+  // --- 5. Nicotine Pouches & Tins (Pouches Category) ---
   {
     id: 16,
     name: "Cuba White Ultra Strong Pouches",
@@ -293,19 +354,17 @@ const VAPE_PRODUCTS = [
     description: "An arctic blast of menthol paired with a potent nicotine kick for ultimate refreshment.",
     features: ["20mg Strength", "Arctic Menthol Blast", "Premium Metal Tin", "Fast Action"]
   },
-
-  // --- Group Collections ---
   {
-    id: 21,
-    name: "Vibrant Fruit E-Liquid 10ml Multi-Pack",
-    brand: "rox",
-    flavor: "fruits",
-    nicotine: "10mg",
-    badge: "E-Liquid Pack",
-    badgeColor: "bg-[#22C55E]",
-    image: "/vapes/Vibrant_Fruit_E-Liquid_10ml_Multi-Pack-removebg-preview.png",
-    description: "A handpicked multi-pack collection of top fruit e-liquids offering variety and value.",
-    features: ["Multi-Flavor Pack", "10ml Bottles", "Assorted Fruit Notes", "Great Value"]
+    id: 23,
+    name: "Premium Nicotine Pouches Assortment Tins",
+    brand: "pablo",
+    flavor: "pouches",
+    nicotine: "16mg - 50mg",
+    badge: "Multi Flavour",
+    badgeColor: "bg-[#F97316]",
+    image: "/vapes/Nicotine_Pouches-removebg-preview.png",
+    description: "Wide selection of premium white nicotine pouches featuring mint, berry, and freeze flavors in discrete tins.",
+    features: ["Assorted Flavor Tins", "Discreet Slim Fit", "Rapid Nicotine Buzz", "100% Tobacco Free"]
   }
 ];
 
@@ -533,13 +592,16 @@ export default function VapeShopPage() {
             {/* Brands Filter */}
             <div className="space-y-3">
               <h4 className="text-xs font-bold text-[#0F172A]">Brands</h4>
-              <div className="space-y-2 text-xs text-slate-700 max-h-40 overflow-y-auto pr-1">
+              <div className="space-y-2 text-xs text-slate-700 max-h-48 overflow-y-auto pr-1">
                 {[
                   { name: "Vaporesso", key: "vaporesso" },
                   { name: "Aspire", key: "aspire" },
                   { name: "SMOK", key: "smok" },
                   { name: "OXVA", key: "oxva" },
                   { name: "Voopoo", key: "voopoo" },
+                  { name: "Loomix", key: "loomix" },
+                  { name: "Elfbar", key: "elfbar" },
+                  { name: "Hale Vaping", key: "hale" },
                   { name: "Innokin", key: "innokin" },
                   { name: "Elfliq", key: "elfliq" },
                   { name: "IVG", key: "ivg" },

@@ -29,7 +29,7 @@ export default function Navbar() {
   ];
 
   const tickerItems = [
-    { text: "iPhone 18, Pro & Pro Max - All Colors Available Now!", icon: "https://img.icons8.com/3d-fluent/100/iphone18-pro.png" },
+    { text: "iPhone 18 Pro , Pro Max & Duo - All Colors Available Now!", icon: "https://img.icons8.com/3d-fluent/100/iphone18-pro.png" },
     { text: "Call / WhatsApp Us: 00353896091839", icon: "https://img.icons8.com/3d-fluent/100/iphone18-pro.png" },
     { text: "Experience Next-Gen iPhone Flagships in Store - Cashel, Ireland", icon: "https://img.icons8.com/3d-fluent/100/iphone18-pro.png" }
   ];

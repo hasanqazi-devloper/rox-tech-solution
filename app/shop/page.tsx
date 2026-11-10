@@ -19,9 +19,10 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-// Complete Updated Inventory with Rich Content & SEO Details for Popups
+// Complete Updated Inventory Retaining All Original Products + Added New Requested Stock
 const INITIAL_PRODUCTS = [
-  // --- 1. Smartphones ---
+  // ================= 1. SMARTPHONES =================
+  // --- iPhones ---
   { 
     id: 101, 
     name: "iPhone 11", 
@@ -231,7 +232,7 @@ const INITIAL_PRODUCTS = [
 
   { 
     id: 2001, 
-    name: "iPhone 18", 
+    name: "iPhone 18 Duo", 
     category: "smartphones", 
     brand: "apple", 
     specs: "Next-Gen Base Model | Advanced Chip", 
@@ -260,36 +261,96 @@ const INITIAL_PRODUCTS = [
     features: ["Ultimate Flagship Specs", "Massive Battery Reserve", "Elite Camera Array", "Premium Materials"]
   },
 
-  // --- Samsung Flagships ---
-  {
-    id: 320,
-    name: "Samsung Galaxy S26 Ultra",
+  // --- Samsung S Series (S22 to S26) & Foldables ---
+ {
+    id: 307,
+    name: "Samsung Galaxy S22",
     category: "smartphones",
     brand: "samsung",
-    specs: "Ultimate Flagship Edition | S-Pen",
-    image: "/products/Samsung_Galaxy_S26_Ultra.png",
-    description: "The ultimate Samsung Galaxy flagship featuring built-in S-Pen, cutting-edge AI processing, and an astonishing 200MP camera system.",
-    features: ["Built-in S-Pen Stylus", "200MP Quad Camera", "Galaxy AI Integration", "Armor Aluminum Frame"]
+    specs: "128GB | Dynamic AMOLED 2X",
+    image: "/products/Samsung_Galaxy_S22.png",
+    description: "Compact flagship performance featuring Nightography camera tools, durable Armor Aluminum body, and smooth 120Hz refresh rates.",
+    features: ["Dynamic AMOLED 2X", "Nightography Camera", "Armor Aluminum Frame", "120Hz Display"]
   },
   {
-    id: 319,
-    name: "Samsung Galaxy S26+",
+    id: 308,
+    name: "Samsung Galaxy S22+",
     category: "smartphones",
     brand: "samsung",
-    specs: "Advanced Display | Dynamic Performance",
-    image: "/products/Samsung_Galaxy_S26+.png",
-    description: "Sleek and powerful with a vibrant Dynamic AMOLED 2X display and blazing-fast multi-tasking capabilities.",
-    features: ["Dynamic AMOLED 2X", "High-Performance CPU", "Long-lasting Battery", "Sleek Bezels"]
+    specs: "6.6-inch Screen | 45W Fast Charge",
+    image: "/products/Samsung_Galaxy_S22+.png",
+    description: "Larger 6.6-inch display, extended battery life, and super-fast 45W wired charging capabilities.",
+    features: ["6.6-inch Vibrant Screen", "45W Super Fast Charging", "Snapdragon Power", "Pro Triple Camera"]
   },
   {
-    id: 318,
-    name: "Samsung Galaxy S26",
+    id: 309,
+    name: "Samsung Galaxy S22 Ultra",
     category: "smartphones",
     brand: "samsung",
-    specs: "Compact Flagship | 120Hz Display",
-    image: "/products/Samsung_Galaxy_S26.png",
-    description: "Compact form factor packed with flagship performance, pro cameras, and buttery-smooth 120Hz refresh rates.",
-    features: ["120Hz Refresh Rate", "Compact Ergonomics", "Pro Triple Camera", "Fast Charging Support"]
+    specs: "Built-in S-Pen | 108MP Camera",
+    image: "/products/Samsung_Galaxy_S22_Ultra.png",
+    description: "The first S-series phone with a built-in S Pen, 100x Space Zoom, and ultra-bright Quad HD+ display.",
+    features: ["Embedded S Pen Stylus", "108MP Quad Camera", "100x Space Zoom", "Quad HD+ Display"]
+  },
+  {
+    id: 310,
+    name: "Samsung Galaxy S23",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Snapdragon 8 Gen 2 for Galaxy",
+    image: "/products/Samsung_Galaxy_S23.png",
+    description: "Custom Snapdragon processor optimized for maximum efficiency, enhanced low-light photography, and eco-friendly build.",
+    features: ["Snapdragon 8 Gen 2", "Enhanced Night Mode", "All-Day Battery Life", "Gorilla Glass Victus 2"]
+  },
+  {
+    id: 311,
+    name: "Samsung Galaxy S23+",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "256GB | Premium Ergonomics",
+    image: "/products/Samsung_Galaxy_S23+.png",
+    description: "Expansive battery capacity, sleek camera housing alignment, and ultra-smooth performance for heavy users.",
+    features: ["4700mAh Long-life Battery", "Streamlined Design", "50MP Main Sensor", "Vision Booster Tech"]
+  },
+  {
+    id: 312,
+    name: "Samsung Galaxy S23 Ultra",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "200MP Main Camera | S-Pen",
+    image: "/products/Samsung_Galaxy_S23_ultra.png",
+    description: "Groundbreaking 200MP resolution photography paired with internal S-Pen and incredible battery longevity.",
+    features: ["200MP Ultra Resolution", "Built-in S-Pen", "Astro Hyperlapse", "Dynamic AMOLED 2X"]
+  },
+  {
+    id: 313,
+    name: "Samsung Galaxy S24",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Galaxy AI | Circle to Search",
+    image: "/products/Samsung_Galaxy_S24.png",
+    description: "Powered by Galaxy AI, bringing real-time call translation, Circle to Search, and intelligent photo editing tools.",
+    features: ["Galaxy AI Integrated", "Circle to Search with Google", "Live Call Translation", "Uniform Bezel Design"]
+  },
+  {
+    id: 3141,
+    name: "Samsung Galaxy S24+",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "QHD+ Display | Galaxy AI Suite",
+    image: "/products/Samsung_Galaxy_S24+.png",
+    description: "Upgraded QHD+ display resolution, larger battery, and seamless AI productivity tools.",
+    features: ["QHD+ Crisp Display", "Galaxy AI Editing", "Extended Battery Performance", "Armor Aluminum 2.0"]
+  },
+  {
+    id: 314,
+    name: "Samsung Galaxy S24 Ultra",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Built-in S-Pen | Titanium Frame",
+    image: "/products/Samsung_Galaxy_S24_Ultra.png",
+    description: "Titanium exterior paired with intelligent productivity tools and professional grade zoom capability.",
+    features: ["Titanium Frame", "S-Pen Included", "Galaxy AI Suite", "Quad Telephoto System"]
   },
   {
     id: 317,
@@ -302,15 +363,109 @@ const INITIAL_PRODUCTS = [
     features: ["Snapdragon Processor", "200MP Main Sensor", "Built-in S-Pen", "Titanium Body"]
   },
   {
-    id: 314,
-    name: "Samsung Galaxy S24 Ultra",
+    id: 318,
+    name: "Samsung Galaxy S26",
     category: "smartphones",
     brand: "samsung",
-    specs: "Built-in S-Pen | Titanium Frame",
-    image: "/products/Samsung_Galaxy_S24_Ultra.png",
-    description: "Titanium exterior paired with intelligent productivity tools and professional grade zoom capability.",
-    features: ["Titanium Frame", "S-Pen Included", "Galaxy AI Suite", "Quad Telephoto System"]
+    specs: "Compact Flagship | 120Hz Display",
+    image: "/products/Samsung_Galaxy_S26.png",
+    description: "Compact form factor packed with flagship performance, pro cameras, and buttery-smooth 120Hz refresh rates.",
+    features: ["120Hz Refresh Rate", "Compact Ergonomics", "Pro Triple Camera", "Fast Charging Support"]
   },
+  {
+    id: 319,
+    name: "Samsung Galaxy S26+",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Advanced Display | Dynamic Performance",
+    image: "/products/Samsung_Galaxy_S26+.png",
+    description: "Sleek and powerful with a vibrant Dynamic AMOLED 2X display and blazing-fast multi-tasking capabilities.",
+    features: ["Dynamic AMOLED 2X", "High-Performance CPU", "Long-lasting Battery", "Sleek Bezels"]
+  },
+  {
+    id: 320,
+    name: "Samsung Galaxy S26 Ultra",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Ultimate Flagship Edition | S-Pen",
+    image: "/products/Samsung_Galaxy_S26_Ultra.png",
+    description: "The ultimate Samsung Galaxy flagship featuring built-in S-Pen, cutting-edge AI processing, and an astonishing 200MP camera system.",
+    features: ["Built-in S-Pen Stylus", "200MP Quad Camera", "Galaxy AI Integration", "Armor Aluminum Frame"]
+  },
+
+  // --- Samsung A Series ---
+  {
+    id: 330,
+    name: "Samsung Galaxy A14",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "64GB / 128GB | 50MP Camera",
+    image: "/products/Samsung_Galaxy_A14.png",
+    description: "Essential everyday smartphone featuring a crisp 6.6-inch FHD+ screen, 50MP triple camera system, and long 5000mAh battery.",
+    features: ["6.6-inch FHD+ Screen", "50MP Triple Camera", "5000mAh Battery", "Side Fingerprint Sensor"]
+  },
+  {
+    id: 331,
+    name: "Samsung Galaxy A15 5G",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Super AMOLED 90Hz | 5G",
+    image: "/products/Samsung_Galaxy_A15_5G.png",
+    description: "Vibrant Super AMOLED display meets superfast 5G connectivity for smooth streaming and everyday productivity.",
+    features: ["Super AMOLED 90Hz Display", "5G Data Connectivity", "Key Island Design", "5000mAh Battery"]
+  },
+  {
+    id: 332,
+    name: "Samsung Galaxy A25 5G",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "120Hz AMOLED | OIS Camera",
+    image: "/products/Samsung_Galaxy_A25_5G.png",
+    description: "Equipped with 120Hz display refresh rates, optical image stabilization (OIS) for steady video, and stereo speakers.",
+    features: ["120Hz Super AMOLED Screen", "50MP OIS Camera", "Stereo Speakers", "Samsung Knox Security"]
+  },
+  {
+    id: 333,
+    name: "Samsung Galaxy A34 5G",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "IP67 Water Resistant | 120Hz",
+    image: "/products/Samsung_Galaxy_A34_5G.png",
+    description: "Sleek glass-like finish with IP67 water and dust resistance, bright outdoor vision, and 2-day battery life.",
+    features: ["IP67 Water & Dust Resistant", "Bright 120Hz AMOLED", "2-Day Battery Life", "Smooth Octa-Core Performance"]
+  },
+  {
+    id: 334,
+    name: "Samsung Galaxy A35 5G",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Premium Glass Back | 50MP OIS",
+    image: "/products/Samsung_Galaxy_A35_5G.png",
+    description: "Refined glass back design paired with upgraded 50MP camera sensors and Knox Vault hardware security.",
+    features: ["Glass Back Finish", "Knox Vault Hardware Protection", "50MP Nightography", "FHD+ Infinity-O Display"]
+  },
+  {
+    id: 335,
+    name: "Samsung Galaxy A54 5G",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Premium Design | VDIS Video",
+    image: "/products/Samsung_Galaxy_A54_5G.png",
+    description: "Flagship-inspired aesthetics with Video Digital Image Stabilization (VDIS) for smooth handheld video recording.",
+    features: ["Flagship Design Look", "VDIS & OIS Stabilization", "IP67 Rating", "Bright Super AMOLED"]
+  },
+  {
+    id: 336,
+    name: "Samsung Galaxy A55 5G",
+    category: "smartphones",
+    brand: "samsung",
+    specs: "Metal Frame | Exynos 1480 GPU",
+    image: "/products/Samsung_Galaxy_A55_5G.png",
+    description: "Premium metallic frame construction featuring AMD-powered graphics architecture for smooth mobile gaming.",
+    features: ["Metal Side Frame", "AMD Xclipse 530 GPU", "Knox Vault Protection", "Pro-grade Triple Camera"]
+  },
+
+  // --- Samsung Foldables ---
   {
     id: 306,
     name: "Samsung Galaxy Z Fold 6",
@@ -332,6 +487,60 @@ const INITIAL_PRODUCTS = [
     features: ["Compact Flip Design", "50MP FlexCam", "Interactive Cover Screen", "Galaxy AI Features"]
   },
 
+  // --- Samsung Galaxy Tabs ---
+  { 
+    id: 501, 
+    name: "Samsung Galaxy Tab A9", 
+    category: "smartphones", 
+    brand: "samsung", 
+    specs: "8.7-inch Display | Compact", 
+    image: "/products/Samsung_Galaxy_Tab_A9.png",
+    description: "Sleek and portable tablet perfect for entertainment, social browsing, and kids' learning apps on the go.",
+    features: ["8.7-inch Compact Size", "Dual Speakers", "Smooth Multi-Tasking", "Expandable MicroSD"]
+  },
+  { 
+    id: 502, 
+    name: "Samsung Galaxy Tab A9+", 
+    category: "smartphones", 
+    brand: "samsung", 
+    specs: "11-inch 90Hz Display | Quad Speakers", 
+    image: "/products/Samsung_Galaxy_Tab_A9+.png",
+    description: "Expansive 11-inch display with 90Hz refresh rate and 3-screen multitasking capabilities for family use.",
+    features: ["11-inch 90Hz Screen", "Quad Speakers with Dolby Atmos", "3-Split Screen View", "Slim Metal Unibody"]
+  },
+  { 
+    id: 503, 
+    name: "Samsung Galaxy Tab S9 FE", 
+    category: "smartphones", 
+    brand: "samsung", 
+    specs: "IP68 Water Resistant | S-Pen Included", 
+    image: "/products/Samsung_Galaxy_Tab_S9_FE.png",
+    description: "Durable IP68 water-resistant tablet with included inbox S-Pen for creative artists and students.",
+    features: ["Inbox S-Pen Included", "IP68 Water Resistance", "Vision Booster Technology", "Long-lasting Power"]
+  },
+  { 
+    id: 5, 
+    name: "Samsung Galaxy Tab S9", 
+    category: "smartphones", 
+    brand: "samsung", 
+    specs: "AMOLED Display | Snapdragon 8 Gen 2", 
+    image: "/products/Samsung_Galaxy_Tab_S9.png",
+    description: "Immersive Dynamic AMOLED 2X screen with included S Pen for seamless note-taking, sketching, and entertainment.",
+    features: ["AMOLED Display", "S Pen Included", "Water Resistant IP68", "Immersive Audio"]
+  },
+  { 
+    id: 504, 
+    name: "Samsung Galaxy Tab S9 Ultra", 
+    category: "smartphones", 
+    brand: "samsung", 
+    specs: "14.6-inch AMOLED | Desktop Power", 
+    image: "/products/Samsung_Galaxy_Tab_S9_Ultra.png",
+    description: "Massive 14.6-inch screen providing laptop-replacement canvas productivity with Samsung DeX support.",
+    features: ["14.6-inch Massive AMOLED", "Dual Front Cameras", "Samsung DeX Desktop Mode", "Ultra-thin Profile"]
+  },
+  // --- Samsung A Series ---
+ 
+
   // --- Tablets & iPads ---
   { 
     id: 4, 
@@ -343,16 +552,7 @@ const INITIAL_PRODUCTS = [
     description: "Stunning Liquid Retina XDR display, M-series processing power, and cellular connectivity for workflow anywhere.",
     features: ["Liquid Retina XDR", "M-Series Performance", "Cellular & Wi-Fi", "Apple Pencil Support"]
   },
-  { 
-    id: 5, 
-    name: "Samsung Galaxy Tab S9", 
-    category: "smartphones", 
-    brand: "samsung", 
-    specs: "AMOLED Display", 
-    image: "/products/sumsung-tab.png",
-    description: "Immersive Dynamic AMOLED 2X screen with included S Pen for seamless note-taking and entertainment.",
-    features: ["AMOLED Display", "S Pen Included", "Water Resistant IP68", "Immersive Audio"]
-  },
+ 
   { 
     id: 6, 
     name: "Hoco Android Tablet", 
@@ -364,38 +564,9 @@ const INITIAL_PRODUCTS = [
     features: ["Smooth Android OS", "Reliable Battery", "Bright Display", "Affordable Performance"]
   },
 
-  // --- 2. Laptops ---
-  { 
-    id: 7, 
-    name: "Apple MacBook Pro M3 (2024)", 
-    category: "laptops", 
-    brand: "apple", 
-    specs: "Space Black | 16GB RAM", 
-    image: "/products/Apple_MacBook_Pro_M3__2024.png",
-    description: "Blazing-fast M3 chip architecture with stunning Space Black finish, advanced thermal cooling, and incredible battery life.",
-    features: ["Apple M3 Chip", "Liquid Retina XDR Display", "Up to 22 Hours Battery", "Space Black Finish"]
-  },
-  { 
-    id: 204, 
-    name: "Apple MacBook Pro 2023", 
-    category: "laptops", 
-    brand: "apple", 
-    specs: "High Performance Workflow", 
-    image: "/products/Apple_MacBook_Pro_2023.png",
-    description: "Engineered for demanding workflows, video editing, and software development with pro ports and retina display.",
-    features: ["Pro Performance Architecture", "Advanced Connectivity Ports", "Stunning Retina Screen", "Quiet Cooling Fans"]
-  },
-  { 
-    id: 202, 
-    name: "Apple MacBook Pro 2020 (M1)", 
-    category: "laptops", 
-    brand: "apple", 
-    specs: "Active Cooling | Touch Bar", 
-    image: "/products/Apple_MacBook_Pro_2020__M1.png",
-    description: "Revolutionary M1 chip with active cooling fan for sustained peak performance and convenient Touch Bar control.",
-    features: ["Apple M1 Chip with Active Cooling", "Interactive Touch Bar", "Crystal Clear Retina Display", "FaceTime HD Camera"]
-  },
-  { 
+  // ================= 2. LAPTOPS & DESKTOPS =================
+  // --- MacBooks (2020 to Latest M4) ---
+ { 
     id: 201, 
     name: "Apple MacBook Air 2020 (M1)", 
     category: "laptops", 
@@ -405,6 +576,68 @@ const INITIAL_PRODUCTS = [
     description: "Incredibly thin and light notebook powered by the M1 chip with silent fanless design and all-day battery.",
     features: ["Fanless Silent Design", "Apple M1 Chip", "Retina Display", "Up to 18 Hours Battery"]
   },
+  { 
+    id: 202, 
+    name: "Apple MacBook Pro 2020 (M1)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "Active Cooling | Touch Bar", 
+    image: "/products/Apple_MacBook_Pro_2020__M1_.png",
+    description: "Revolutionary M1 chip with active cooling fan for sustained peak performance and convenient Touch Bar control.",
+    features: ["Apple M1 Chip with Active Cooling", "Interactive Touch Bar", "Crystal Clear Retina Display", "FaceTime HD Camera"]
+  },
+  { 
+    id: 203, 
+    name: "Apple MacBook Air M2 (2022)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "Redesigned Body | MagSafe 3", 
+    image: "/products/Apple_MacBook_Air_M2__2022_.png",
+    description: "Redesigned ultra-thin aluminum chassis featuring a 13.6-inch Liquid Retina screen and MagSafe charging.",
+    features: ["M2 Processing Chip", "13.6-inch Liquid Retina", "MagSafe 3 Charging Port", "1080p HD Camera"]
+  },
+  { 
+    id: 204, 
+    name: "Apple MacBook Pro 2023 (M2 Pro / Max)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "High Performance Workflow", 
+    image: "/products/Apple_MacBook_Pro_2023__M2_Pro__Max.png",
+    description: "Engineered for demanding workflows, 8K video editing, and software development with pro ports and HDMI 2.1.",
+    features: ["Pro Performance Architecture", "Advanced Connectivity Ports", "Stunning Retina Screen", "Quiet Cooling Fans"]
+  },
+  { 
+    id: 7, 
+    name: "Apple MacBook Pro M3 (2024)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "Space Black | 16GB RAM", 
+    image: "/products/Apple_MacBook_Pro_M3__2024_.png",
+    description: "Blazing-fast M3 chip architecture with stunning Space Black finish, advanced thermal cooling, and incredible battery life.",
+    features: ["Apple M3 Chip", "Liquid Retina XDR Display", "Up to 22 Hours Battery", "Space Black Finish"]
+  },
+  { 
+    id: 205, 
+    name: "Apple MacBook Air M3 (2024)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "Dual External Display Support", 
+    image: "/products/Apple_MacBook_Pro_M3__2024.png",
+    description: "Powerful M3 chip enabling dual external display output when laptop lid is closed, Wi-Fi 6E speed, and sleek build.",
+    features: ["Apple M3 Silicon", "Dual Display Support", "Wi-Fi 6E Speed", "Midnight Anti-Fingerprint"]
+  },
+  { 
+    id: 206, 
+    name: "Apple MacBook Pro M4 (Latest)", 
+    category: "laptops", 
+    brand: "apple", 
+    specs: "M4 Architecture | Quantum Speed", 
+    image: "/products/Apple_MacBook_Pro_M4__Latest_.png",
+    description: "The absolute latest workstation computing power featuring next-generation M4 architecture and nano-texture glass options.",
+    features: ["Apple M4 Processor", "Nano-Texture Display Option", "Thunderbolt 5 Speed", "Extreme AI Neural Engine"]
+  },
+
+  // --- PC & Gaming Laptops ---
   { 
     id: 8, 
     name: "ROG Gaming Laptop", 
@@ -456,7 +689,319 @@ const INITIAL_PRODUCTS = [
     features: ["1TB High-Speed Storage", "Rugged Drop Protection", "Compact Pocket Size", "USB-C Fast Transfer"]
   },
 
-  // --- 3. Accessories ---
+  // ================= 3. AUDIO (AIRPODS & SPEAKERS) =================
+  // --- AirPods Full Range ---
+  { 
+    id: 601, 
+    name: "Apple AirPods (2nd Gen)", 
+    category: "audio", 
+    brand: "apple", 
+    specs: "H1 Headphone Chip | Lightning Case", 
+    image: "/products/Apple_AirPods_Pro_2.png",
+    description: "Classic wireless earbuds with effortless setup, H1 chip connectivity, and quick access to Siri.",
+    features: ["H1 Headphone Chip", "Automatic Setup", "24-Hour Battery with Case", "Voice-Activated Siri"]
+  },
+  { 
+    id: 602, 
+    name: "Apple AirPods (3rd Gen)", 
+    category: "audio", 
+    brand: "apple", 
+    specs: "Spatial Audio | MagSafe Case", 
+    image: "/products/Apple_AirPods_Pro_2.png",
+    description: "Personalized Spatial Audio with dynamic head tracking, sweat/water resistance, and contoured ear fit.",
+    features: ["Personalized Spatial Audio", "IPX4 Water Resistant", "MagSafe Charging Case", "Adaptive EQ"]
+  },
+  { 
+    id: 603, 
+    name: "Apple AirPods 4", 
+    category: "audio", 
+    brand: "apple", 
+    specs: "H2 Chip | USB-C | Redesigned Fit", 
+    image: "/products/Apple_AirPods_Pro_2.png",
+    description: "All-new open-ear design powered by H2 chip with acoustic architecture improvements and compact USB-C case.",
+    features: ["Apple H2 Chip", "Refined Open-Ear Shape", "USB-C Charging", "Voice Isolation Tech"]
+  },
+  { 
+    id: 604, 
+    name: "Apple AirPods 4 with ANC", 
+    category: "audio", 
+    brand: "apple", 
+    specs: "Active Noise Cancellation | Speaker Case", 
+    image: "/products/Apple_AirPods_Pro_2.png",
+    description: "First open-ear AirPods featuring Active Noise Cancellation, Adaptive Audio, and wireless charging case with speaker.",
+    features: ["Active Noise Cancellation", "Adaptive Audio & Transparency", "Case Speaker for Find My", "Wireless Charging"]
+  },
+  { 
+    id: 25, 
+    name: "Apple AirPods Pro 2", 
+    category: "audio", 
+    brand: "apple", 
+    specs: "USB-C | Active Noise Cancellation", 
+    image: "/products/Apple_AirPods_Pro_2.png",
+    description: "Active Noise Cancellation, Adaptive Audio, and immersive Spatial Audio powered by the H2 chip in a USB-C charging case.",
+    features: ["Active Noise Cancellation", "Adaptive Transparency", "Personalized Spatial Audio", "USB-C MagSafe Case"]
+  },
+  { 
+    id: 605, 
+    name: "Apple AirPods Max (USB-C)", 
+    category: "audio", 
+    brand: "apple", 
+    specs: "Over-Ear | Hi-Fi Audio | USB-C", 
+    image: "/products/Studio_Wired_Over_Ear_Headphones.png",
+    description: "Ultimate over-ear listening experience featuring custom acoustic design, Digital Crown control, and USB-C port.",
+    features: ["High-Fidelity Audio", "Pro Active Noise Cancellation", "Breathable Mesh Canopy", "USB-C Fast Audio"]
+  },
+
+  // --- Other Audio Gear ---
+  { 
+    id: 26, 
+    name: "JBL Bluetooth Speaker", 
+    category: "audio", 
+    brand: "jbl", 
+    specs: "Waterproof Portable", 
+    image: "/products/JBL_Bluetooth_Speaker.png",
+    description: "Bold sound, punchy bass, and waterproof portability make this Bluetooth speaker ready for any outdoor adventure.",
+    features: ["IP67 Waterproof & Dustproof", "Long Battery Life", "Signature JBL Pro Sound", "Rugged Fabric Design"]
+  },
+  { 
+    id: 27, 
+    name: "JBL Wireless Earbuds", 
+    category: "audio", 
+    brand: "jbl", 
+    specs: "Deep Bass Sound", 
+    image: "/products/JBL_Wireless_Earbuds.png0",
+    description: "True wireless earbuds delivering crisp acoustics and deep punchy bass for all-day listening comfort.",
+    features: ["Deep Bass Sound", "Ergonomic Fit", "Touch Controls", "Charging Case Included"]
+  },
+  { 
+    id: 28, 
+    name: "Wireless Earbuds Case", 
+    category: "audio", 
+    brand: "generic", 
+    specs: "Universal Charging", 
+    image: "/products/Wireless_Earbuds_Charging_Case.png",
+    description: "Replacement or universal protective charging case designed for seamless wireless earbud refueling.",
+    features: ["Universal Compatibility", "LED Charge Status", "Compact Protection", "Pocket Friendly"]
+  },
+  { 
+    id: 29, 
+    name: "Wireless Vlogging Microphone", 
+    category: "audio", 
+    brand: "generic", 
+    specs: "Type-C Clip-on Mic", 
+    image: "/products/Wireless_Vlogging_Microphone_Type-C.png",
+    description: "Plug-and-play wireless clip-on microphone delivering crystal clear audio for mobile content creators and vloggers.",
+    features: ["Plug & Play Setup", "Crystal Clear Audio", "Low Latency Transmission", "Type-C Receiver"]
+  },
+  { 
+    id: 30, 
+    name: "Studio Wired Headphones", 
+    category: "audio", 
+    brand: "generic", 
+    specs: "Over-Ear Monitoring", 
+    image: "/products/Studio_Wired_Over_Ear_Headphones.png",
+    description: "Over-ear studio monitoring headphones designed for accurate sound reproduction, mixing, and casual listening.",
+    features: ["Over-Ear Comfort", "Accurate Sound Profile", "Durable Headband", "Detachable Audio Cable"]
+  },
+
+  // ================= 4. SMART WATCHES =================
+  // --- Apple Watch Ultra Lineup (1 to 4) ---
+  { 
+    id: 701, 
+    name: "Apple Watch Ultra 1", 
+    category: "smartwatches", 
+    brand: "apple", 
+    specs: "49mm Titanium Case | Cellular", 
+    image: "/products/Apple_Watch_Ultra_2.png",
+    description: "Built for endurance, exploration, and adventure with a 49mm aerospace titanium case and precision dual-frequency GPS.",
+    features: ["49mm Aerospace Titanium", "Action Button Customization", "Depth Gauge to 40m", "Dual Frequency GPS"]
+  },
+  { 
+    id: 31, 
+    name: "Apple Watch Ultra 2", 
+    category: "smartwatches", 
+    brand: "apple", 
+    specs: "S9 SiP | 3000 Nits Brightness", 
+    image: "/products/Apple_Watch_Ultra_2.png",
+    description: "Powered by the S9 SiP with Double Tap gesture control, 3000 nits display, and expanded altitude range.",
+    features: ["3000 Nits Bright Display", "Double Tap Gesture Control", "S9 SiP Architecture", "On-Device Siri Processing"]
+  },
+  { 
+    id: 703, 
+    name: "Apple Watch Ultra 3", 
+    category: "smartwatches", 
+    brand: "apple", 
+    specs: "MicroLED Display | Satellite Messaging", 
+    image: "/products/Apple_Watch_Ultra_2.png",
+    description: "Next-generation adventure timepiece with enhanced satellite communication capabilities and extreme battery endurance.",
+    features: ["Satellite Connectivity", "Advanced Thermal Sensors", "Enhanced Titanium Finish", "Multi-day Battery Reserve"]
+  },
+  { 
+    id: 704, 
+    name: "Apple Watch Ultra 4", 
+    category: "smartwatches", 
+    brand: "apple", 
+    specs: "Ultimate Future Flagship Watch", 
+    image: "/products/Apple_Watch_Ultra_2.png",
+    description: "The peak of wearable smartwatch technology designed for extreme sports enthusiasts and professional divers.",
+    features: ["Ultimate Titanium Build", "Bio-Metric Health Monitoring", "Maximum Depth Capability", "Quantum Display Tech"]
+  },
+
+  // --- Samsung Galaxy Watches (Active 2 to Watch 9 & Ultra) ---
+  { 
+    id: 801, 
+    name: "Samsung Galaxy Watch Active 2", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Digital Bezel | Fitness Tracker", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Lightweight sport smartwatch featuring a touch bezel, heart rate monitoring, and sleep analysis.",
+    features: ["Touch Bezel Navigation", "Heart Rate Monitor", "Lightweight Build", "Auto Workout Tracking"]
+  },
+  { 
+    id: 802, 
+    name: "Samsung Galaxy Watch 3", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Physical Rotating Bezel | ECG", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Classic design with a precision physical rotating bezel, fall detection, and advanced ECG diagnostics.",
+    features: ["Physical Rotating Bezel", "ECG & Blood Pressure", "Fall Detection Safety", "Leather Strap Finish"]
+  },
+  { 
+    id: 803, 
+    name: "Samsung Galaxy Watch 4", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Wear OS Powered | BioActive Sensor", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "First Galaxy Watch powered by Wear OS featuring body composition analysis and sleek aluminum casing.",
+    features: ["Wear OS Powered by Samsung", "Body Composition BIA", "Vibrant Touch Display", "Seamless Google Play"]
+  },
+  { 
+    id: 804, 
+    name: "Samsung Galaxy Watch 4 Classic", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Stainless Steel | Rotating Bezel", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Timeless stainless steel watch housing with tactile rotating bezel and comprehensive fitness tracking.",
+    features: ["Stainless Steel Casing", "Tactile Rotating Bezel", "Sleep Cycle Score", "Google Maps Navigation"]
+  },
+  { 
+    id: 805, 
+    name: "Samsung Galaxy Watch 5", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Sapphire Crystal | Fast Charging", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Enhanced battery durability featuring a scratch-resistant Sapphire Crystal front and fast wireless charging.",
+    features: ["Sapphire Crystal Glass", "Curved BioActive Sensor", "Fast Wireless Charging", "Route Workout Support"]
+  },
+  { 
+    id: 806, 
+    name: "Samsung Galaxy Watch 5 Pro", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Titanium Body | GPX Navigation", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Outdoor adventure watch with rugged titanium chassis, GPX route navigation, and massive battery life.",
+    features: ["Titanium Body Casing", "GPX Route File Export", "Huge Battery Reserve", "Raised Bezel Protection"]
+  },
+  { 
+    id: 32, 
+    name: "Samsung Galaxy Watch 6", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Super AMOLED | Slim Bezel", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Advanced wellness coaching, sleep score monitoring, and a 20% larger display with slimmer bezels.",
+    features: ["Advanced Sleep Coaching", "20% Larger Screen", "Vibrant Sapphire Crystal", "Seamless Galaxy Sync"]
+  },
+  { 
+    id: 807, 
+    name: "Samsung Galaxy Watch 6 Classic", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Rotating Bezel | Premium Steel", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "The iconic rotating bezel returns on a slimmed-down stainless steel frame with personalized HR zones.",
+    features: ["Interactive Rotating Bezel", "Stainless Steel Frame", "Personalized HR Zones", "One-Click Band System"]
+  },
+  { 
+    id: 808, 
+    name: "Samsung Galaxy Watch 7", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "3nm Processor | Galaxy AI Health", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Powered by a 3nm processor for extreme responsiveness and Galaxy AI Energy Score tracking.",
+    features: ["Blazing 3nm Processor", "Galaxy AI Energy Score", "Dual-Frequency GPS", "Enhanced BioActive Sensor"]
+  },
+  { 
+    id: 809, 
+    name: "Samsung Galaxy Watch Ultra", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Titanium Cushion Design | 100M Water", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Extreme adventure watch crafted in grade 4 titanium with 100m water resistance and Quick Button action.",
+    features: ["Grade 4 Titanium Case", "10ATM / 100M Water Proof", "Multi-Course Workout Mode", "Emergency Siren 86dB"]
+  },
+  { 
+    id: 810, 
+    name: "Samsung Galaxy Watch 8", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Next-Gen AI Bio-Monitoring", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "Next-generation smartwatch featuring advanced continuous glucose trend insights and AI workout optimization.",
+    features: ["Continuous Health AI", "Ultra-thin Profile", "All-Day Display", "Multi-Day Battery"]
+  },
+  { 
+    id: 811, 
+    name: "Samsung Galaxy Watch 9", 
+    category: "smartwatches", 
+    brand: "samsung", 
+    specs: "Futuristic Health Ecosystem", 
+    image: "/products/Samsung_Galaxy_Watch_6.png",
+    description: "The future of Samsung wearable technology with comprehensive cellular independence and micro-sensor telemetry.",
+    features: ["Micro-Sensor Suite", "Independent Cellular", "Zero-Bezel AMOLED", "Quantum Health Engine"]
+  },
+
+  // --- Other Smartwatches & Wearables ---
+  { 
+    id: 33, 
+    name: "Hoco Smartwatch", 
+    category: "smartwatches", 
+    brand: "hoco", 
+    specs: "Bluetooth Calling", 
+    image: "/products/Hoco_Smartwatch.png",
+    description: "Affordable smartwatch featuring Bluetooth calling capability, daily activity tracking, and customizable watch faces.",
+    features: ["Bluetooth Calling", "Activity Tracker", "Customizable Faces", "Touchscreen Display"]
+  },
+  { 
+    id: 34, 
+    name: "Casio G-Shock Watch", 
+    category: "smartwatches", 
+    brand: "casio", 
+    specs: "Shock Resistant", 
+    image: "/products/Casio_G-Shock_Watch.png",
+    description: "Legendary shock-resistant toughness paired with rugged digital utility for outdoor and sports enthusiasts.",
+    features: ["Shock Resistant Build", "200M Water Resistance", "World Time & Stopwatch", "Durable Resin Band"]
+  },
+  { 
+    id: 35, 
+    name: "Smart Health Ring", 
+    category: "smartwatches", 
+    brand: "generic", 
+    specs: "Sleep & Fitness Tracker", 
+    image: "/products/Smart_Health_Ring.png",
+    description: "Discreet titanium smart ring that tracks your sleep quality, daily steps, and vital health metrics seamlessly.",
+    features: ["Sleep & Recovery Tracking", "Heart Rate Monitor", "Lightweight Titanium", "Long Battery Life"]
+  },
+
+  // ================= 5. ACCESSORIES =================
   { 
     id: 36, 
     name: "iPhone Camera Lens Protector", 
@@ -618,121 +1163,7 @@ const INITIAL_PRODUCTS = [
     features: ["Magnetic Attachment & Charging", "Double-Tap Tool Switch", "Pressure Sensitive", "Pixel-Perfect Accuracy"]
   },
 
-  // --- 4. Audio ---
-  { 
-    id: 25, 
-    name: "Apple AirPods Pro 2", 
-    category: "audio", 
-    brand: "apple", 
-    specs: "USB-C | ANC", 
-    image: "/products/Apple_AirPods_Pro_2.png",
-    description: "Active Noise Cancellation, Adaptive Audio, and immersive Spatial Audio powered by the H2 chip in a USB-C charging case.",
-    features: ["Active Noise Cancellation", "Adaptive Transparency", "Personalized Spatial Audio", "USB-C MagSafe Case"]
-  },
-  { 
-    id: 26, 
-    name: "JBL Bluetooth Speaker", 
-    category: "audio", 
-    brand: "jbl", 
-    specs: "Waterproof Portable", 
-    image: "/products/JBL_Bluetooth_Speaker.png",
-    description: "Bold sound, punchy bass, and waterproof portability make this Bluetooth speaker ready for any outdoor adventure.",
-    features: ["IP67 Waterproof & Dustproof", "Long Battery Life", "Signature JBL Pro Sound", "Rugged Fabric Design"]
-  },
-  { 
-    id: 27, 
-    name: "JBL Wireless Earbuds", 
-    category: "audio", 
-    brand: "jbl", 
-    specs: "Deep Bass Sound", 
-    image: "/products/JBL_Wireless_Earbuds.png0",
-    description: "True wireless earbuds delivering crisp acoustics and deep punchy bass for all-day listening comfort.",
-    features: ["Deep Bass Sound", "Ergonomic Fit", "Touch Controls", "Charging Case Included"]
-  },
-  { 
-    id: 28, 
-    name: "Wireless Earbuds Case", 
-    category: "audio", 
-    brand: "generic", 
-    specs: "Universal Charging", 
-    image: "/products/Wireless_Earbuds_Charging_Case.png",
-    description: "Replacement or universal protective charging case designed for seamless wireless earbud refueling.",
-    features: ["Universal Compatibility", "LED Charge Status", "Compact Protection", "Pocket Friendly"]
-  },
-  { 
-    id: 29, 
-    name: "Wireless Vlogging Microphone", 
-    category: "audio", 
-    brand: "generic", 
-    specs: "Type-C Clip-on Mic", 
-    image: "/products/Wireless_Vlogging_Microphone_Type-C.png",
-    description: "Plug-and-play wireless clip-on microphone delivering crystal clear audio for mobile content creators and vloggers.",
-    features: ["Plug & Play Setup", "Crystal Clear Audio", "Low Latency Transmission", "Type-C Receiver"]
-  },
-  { 
-    id: 30, 
-    name: "Studio Wired Headphones", 
-    category: "audio", 
-    brand: "generic", 
-    specs: "Over-Ear Monitoring", 
-    image: "/products/Studio_Wired_Over_Ear_Headphones.png",
-    description: "Over-ear studio monitoring headphones designed for accurate sound reproduction, mixing, and casual listening.",
-    features: ["Over-Ear Comfort", "Accurate Sound Profile", "Durable Headband", "Detachable Audio Cable"]
-  },
-  { 
-    id: 34, 
-    name: "Casio G-Shock Watch", 
-    category: "audio", 
-    brand: "casio", 
-    specs: "Shock Resistant", 
-    image: "/products/Casio_G-Shock_Watch.png",
-    description: "Legendary shock-resistant toughness paired with rugged digital utility for outdoor and sports enthusiasts.",
-    features: ["Shock Resistant Build", "200M Water Resistance", "World Time & Stopwatch", "Durable Resin Band"]
-  },
-  { 
-    id: 35, 
-    name: "Smart Health Ring", 
-    category: "audio", 
-    brand: "generic", 
-    specs: "Sleep & Fitness Tracker", 
-    image: "/products/Smart_Health_Ring.png",
-    description: "Discreet titanium smart ring that tracks your sleep quality, daily steps, and vital health metrics seamlessly.",
-    features: ["Sleep & Recovery Tracking", "Heart Rate Monitor", "Lightweight Titanium", "Long Battery Life"]
-  },
-
-  // --- 5. Smart Watches ---
-  { 
-    id: 31, 
-    name: "Apple Watch Ultra 2", 
-    category: "smartwatches", 
-    brand: "apple", 
-    specs: "Titanium Case | Fitness", 
-    image: "/products/Apple_Watch_Ultra_2.png",
-    description: "The ultimate sports and adventure watch featuring a rugged titanium case, precision dual-frequency GPS, and ultra-bright display.",
-    features: ["Rugged Titanium Case", "Precision Dual-Frequency GPS", "Up to 36 Hours Battery", "Extreme Temperature Tolerant"]
-  },
-  { 
-    id: 32, 
-    name: "Samsung Galaxy Watch 6", 
-    category: "smartwatches", 
-    brand: "samsung", 
-    specs: "Health Tracking", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
-    description: "Advanced wellness coaching, sleep score monitoring, and a sleek rotating bezel design on your wrist.",
-    features: ["Advanced Sleep Coaching", "Body Composition Analysis", "Vibrant Sapphire Crystal", "Seamless Galaxy Sync"]
-  },
-  { 
-    id: 33, 
-    name: "Hoco Smartwatch", 
-    category: "smartwatches", 
-    brand: "hoco", 
-    specs: "Bluetooth Calling", 
-    image: "/products/Hoco_Smartwatch.png",
-    description: "Affordable smartwatch featuring Bluetooth calling capability, daily activity tracking, and customizable watch faces.",
-    features: ["Bluetooth Calling", "Activity Tracker", "Customizable Faces", "Touchscreen Display"]
-  },
-
-  // --- 6. Gaming Zone ---
+  // ================= 6. GAMING ZONE =================
   { 
     id: 13, 
     name: "Sony PlayStation 5 Console", 
@@ -763,16 +1194,16 @@ const INITIAL_PRODUCTS = [
     description: "Featuring a vibrant 7-inch OLED screen, wide adjustable stand, and enhanced audio for gaming at home or on the go.",
     features: ["7-inch OLED Screen", "Wide Adjustable Stand", "Enhanced Audio Speakers", "64GB Internal Storage"]
   },
-  { 
-    id: 16, 
-    name: "PS5 DualSense Controller", 
-    category: "gaming", 
-    brand: "sony", 
-    specs: "Wireless Controller", 
-    image: "/products/PS5_DualSense_Controller.png",
-    description: "Discover a deeper, highly immersive gaming experience with haptic feedback and dynamic trigger effects.",
-    features: ["Haptic Feedback", "Adaptive Triggers", "Built-in Microphone", "Create Button"]
-  },
+  // { 
+  //   id: 16, 
+  //   name: "PS5 DualSense Controller", 
+  //   category: "gaming", 
+  //   brand: "sony", 
+  //   specs: "Wireless Controller", 
+  //   image: "/products/PS5_DualSense_Controller.png",
+  //   description: "Discover a deeper, highly immersive gaming experience with haptic feedback and dynamic trigger effects.",
+  //   features: ["Haptic Feedback", "Adaptive Triggers", "Built-in Microphone", "Create Button"]
+  // },
   { 
     id: 17, 
     name: "Logitech G923 Racing Wheel", 
@@ -833,6 +1264,27 @@ const INITIAL_PRODUCTS = [
     description: "Tactile mechanical switches and per-key RGB backlighting engineered for competitive gaming and fast typing.",
     features: ["Tactile Mechanical Switches", "Per-Key RGB Lighting", "Anti-Ghosting Keys", "Durable Metal Plate"]
   },
+  // --- Gaming Accessories ---
+{ 
+    id: 24, 
+    name: "PS5 DualSense Wireless Controller", 
+    category: "gaming", 
+    brand: "sony", 
+    specs: "Next-Gen Haptic Feedback", 
+    image: "/products/ps5.png",
+    description: "Immersive wireless controller for PlayStation 5 featuring haptic feedback, dynamic adaptive triggers, and built-in microphone.",
+    features: ["Haptic Feedback Tech", "Adaptive Dynamic Triggers", "Built-in Microphone", "Signature Ergonomic Design"]
+  },
+  { 
+    id: 295, 
+    name: "PS4 DualShock 4 Wireless Controller", 
+    category: "gaming", 
+    brand: "sony", 
+    specs: "Precision Control", 
+    image: "/products/ps4.png",
+    description: "Ergonomic wireless controller for PlayStation 4 offering precise analog sticks, integrated light bar, and intuitive touch pad.",
+    features: ["Precision Analog Sticks", "Integrated Touch Pad", "Light Bar Tracking", "Built-in Mono Speaker"]
+  },
   { 
     id: 23, 
     name: "Laptop Gaming Cooling Pad", 
@@ -844,7 +1296,7 @@ const INITIAL_PRODUCTS = [
     features: ["Dual High-Speed Fans", "RGB Accent Lighting", "Adjustable Elevation Angles", "USB Powered"]
   },
   { 
-    id: 24, 
+    id: 246, 
     name: "Over-Ear Gaming Headset", 
     category: "gaming", 
     brand: "generic", 
@@ -986,11 +1438,11 @@ const INITIAL_PRODUCTS = [
 ];
 
 const SHOP_CATEGORIES = [
-  { title: "Smartphones", key: "smartphones", desc: "iPhone 11 to 18 & Samsung", img: "/mobile.png" },
-  { title: "Laptops", key: "laptops", desc: "MacBooks (M1-M3) & PCs", img: "/laptop.png" },
+  { title: "Smartphones", key: "smartphones", desc: "iPhone 11-18 & Samsung Galaxy", img: "/mobile.png" },
+  { title: "Laptops", key: "laptops", desc: "MacBooks (M1-M4) & PCs", img: "/laptop.png" },
   { title: "Accessories", key: "accessories", desc: "Cases, Chargers & More", img: "/asseceries.png" },
-  { title: "Audio", key: "audio", desc: "Headphones & Speakers", img: "/audio.png" },
-  { title: "Smart Watches", key: "smartwatches", desc: "Apple Watch & Galaxy Watch", img: "/products/Samsung_Galaxy_Watch_6.png" },
+  { title: "Audio", key: "audio", desc: "AirPods (1-4, Pro, Max) & JBL", img: "/audio.png" },
+  { title: "Smart Watches", key: "smartwatches", desc: "Apple Ultra (1-4) & Galaxy Watches", img: "/products/Samsung_Galaxy_Watch_6.png" },
   { title: "Gaming Zone", key: "gaming", desc: "PS5, Xbox & Gear", img: "/repair.png" }
 ];
 
@@ -1022,9 +1474,10 @@ function ShopContent() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
 
+  // Single Category Selection Logic
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+      prev.includes(cat) ? [] : [cat]
     );
   };
 
@@ -1194,7 +1647,7 @@ function ShopContent() {
         </div>
       </section>
 
-      {/* ================= 2. SHOP CATEGORY CARDS BAR (130% SCALED PNGs) ================= */}
+      {/* ================= 2. SHOP CATEGORY CARDS BAR ================= */}
       <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -1235,7 +1688,7 @@ function ShopContent() {
       </section>
 
       {/* ================= 3. MAIN CONTENT: FILTERS & PRODUCT GRID ================= */}
-      <section className="w-full bg-[#C0C0C0] py-12 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-[#C0C0C0] py-8 sm:py-12 px-4 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Left Sidebar: Interactive Filters */}
@@ -1268,10 +1721,11 @@ function ShopContent() {
                   <label key={item.key} className="flex items-center justify-between cursor-pointer">
                     <div className="flex items-center gap-2">
                       <input
-                        type="checkbox"
+                        type="radio"
+                        name="categoryFilter"
                         checked={selectedCategories.includes(item.key)}
                         onChange={() => toggleCategory(item.key)}
-                        className="rounded text-[#F97316] focus:ring-[#F97316]"
+                        className="text-[#F97316] focus:ring-[#F97316]"
                       />
                       <span>{item.name}</span>
                     </div>
@@ -1284,7 +1738,7 @@ function ShopContent() {
             <div className="space-y-3 pt-2 border-t border-gray-100">
               <h4 className="text-xs font-bold text-[#0F172A]">Brand</h4>
               <div className="space-y-2 text-xs text-gray-700 max-h-48 overflow-y-auto">
-                {["apple", "samsung", "asus", "sony", "microsoft", "nintendo", "meta", "jbl", "hoco"].map((brand) => (
+                {["apple", "samsung", "asus", "sony", "microsoft", "nintendo", "meta", "jbl", "hoco", "casio", "sandisk", "lenovo", "tplink", "amazon"].map((brand) => (
                   <label key={brand} className="flex items-center justify-between cursor-pointer capitalize">
                     <div className="flex items-center gap-2">
                       <input
@@ -1305,7 +1759,10 @@ function ShopContent() {
           <div className="lg:col-span-9 space-y-6">
 
             {/* Sorting Header */}
-            <div className="bg-white border border-gray-200 rounded-2xl px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
+            <div 
+              id="catalog-section" 
+              className="bg-white border border-gray-200 rounded-2xl px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm scroll-mt-28 sm:scroll-mt-36"
+            >
               <div>
                 <h2 className="text-sm font-bold text-[#0F172A]">Shop Catalog ({filteredProducts.length} Items)</h2>
                 <p className="text-[11px] text-gray-500">Click any product for details or inquire instantly via WhatsApp</p>
@@ -1326,7 +1783,7 @@ function ShopContent() {
             {/* Grid Layout: Products + Right Sidebars */}
             <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
 
-              {/* Filtered Products Grid with 130% Scaled PNGs & Click Modal */}
+              {/* Filtered Products Grid */}
               <div className="xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {filteredProducts.length > 0 ? (
                   filteredProducts.map((product) => (
@@ -1490,12 +1947,11 @@ function ShopContent() {
         </div>
       </section>
 
-      {/* ================= 5. BULLETPROOF CENTERED POPUP MODAL (Z-[99999] & PT-36) ================= */}
+      {/* ================= 5. POPUP MODAL ================= */}
       {selectedProduct && (
         <div className="fixed inset-0 z-[99999] flex items-start justify-center p-4 sm:p-6 pt-36 sm:pt-44 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto">
           <div className="bg-white border border-slate-300 rounded-3xl max-w-4xl w-[95%] sm:w-[85%] lg:w-[75%] p-6 sm:p-10 shadow-2xl relative space-y-6 max-h-[85vh] overflow-y-auto my-auto mb-12">
             
-            {/* Close Button */}
             <button
               onClick={() => setSelectedProduct(null)}
               className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full p-2.5 transition outline-none z-10 shadow-md"
@@ -1504,7 +1960,6 @@ function ShopContent() {
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              {/* Large Centered Modal Image */}
               <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner">
                 <img
                   src={selectedProduct.image}
@@ -1515,7 +1970,6 @@ function ShopContent() {
                 />
               </div>
 
-              {/* Modal Information & SEO Rich Content */}
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2">
                   <span className="text-xs font-bold px-3 py-1 rounded-md bg-orange-100 text-[#F97316] uppercase tracking-wider">
@@ -1534,7 +1988,6 @@ function ShopContent() {
                   {selectedProduct.description || "Experience top-tier quality and seamless performance with this verified device, available directly at ROX Tech Solutions in Cashel."}
                 </p>
 
-                {/* Extended SEO Value Section */}
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
                   <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-[#F97316]" />
@@ -1545,7 +1998,6 @@ function ShopContent() {
                   </p>
                 </div>
 
-                {/* Key Features List */}
                 {selectedProduct.features && (
                   <div className="space-y-2 pt-1">
                     <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">Key Specifications:</h4>
@@ -1562,7 +2014,6 @@ function ShopContent() {
               </div>
             </div>
 
-            {/* Modal Footer WhatsApp CTA */}
             <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-slate-500 font-medium">
                 📍 Available now at ROX Tech Store, Cashel, Co. Tipperary.
