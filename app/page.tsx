@@ -7,7 +7,7 @@ import FeaturedProducts from "@/components/FeaturedProducts";
 import RepairQuoteWidget from "@/components/RepairQuoteWidget";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BottomFeatureBar from "@/components/BottomFeatureBar";
-
+import ChristmasClubBanner from "@/components/ChristmasClubBanner";
 export default function RoxTechHomePage() {
   return (
     <LazyMotion features={domMax}>
@@ -20,7 +20,7 @@ export default function RoxTechHomePage() {
 
         {/* Section 3: Shop by Category Grid */}
         <CategoriesGrid />
-
+        <ChristmasClubBanner/>
         {/* Section 4: Featured Products & Deals */}
         <FeaturedProducts />
 

@@ -805,14 +805,14 @@ const INITIAL_PRODUCTS = [
   },
 
   // ================= 4. SMART WATCHES =================
-  // --- Apple Watch Ultra Lineup (1 to 4) ---
+ // --- Apple Watch Ultra Lineup (1 to 4) ---
   { 
     id: 701, 
     name: "Apple Watch Ultra 1", 
     category: "smartwatches", 
     brand: "apple", 
     specs: "49mm Titanium Case | Cellular", 
-    image: "/products/Apple_Watch_Ultra_2.png",
+    image: "/products/apple-ultra-watch-1.png",
     description: "Built for endurance, exploration, and adventure with a 49mm aerospace titanium case and precision dual-frequency GPS.",
     features: ["49mm Aerospace Titanium", "Action Button Customization", "Depth Gauge to 40m", "Dual Frequency GPS"]
   },
@@ -822,7 +822,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "apple", 
     specs: "S9 SiP | 3000 Nits Brightness", 
-    image: "/products/Apple_Watch_Ultra_2.png",
+    image: "/products/apple-ultra-watch-2.png",
     description: "Powered by the S9 SiP with Double Tap gesture control, 3000 nits display, and expanded altitude range.",
     features: ["3000 Nits Bright Display", "Double Tap Gesture Control", "S9 SiP Architecture", "On-Device Siri Processing"]
   },
@@ -832,7 +832,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "apple", 
     specs: "MicroLED Display | Satellite Messaging", 
-    image: "/products/Apple_Watch_Ultra_2.png",
+    image: "/products/apple-ultra-watch-3.png",
     description: "Next-generation adventure timepiece with enhanced satellite communication capabilities and extreme battery endurance.",
     features: ["Satellite Connectivity", "Advanced Thermal Sensors", "Enhanced Titanium Finish", "Multi-day Battery Reserve"]
   },
@@ -842,7 +842,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "apple", 
     specs: "Ultimate Future Flagship Watch", 
-    image: "/products/Apple_Watch_Ultra_2.png",
+    image: "/products/apple-ultra-watch-4.png",
     description: "The peak of wearable smartwatch technology designed for extreme sports enthusiasts and professional divers.",
     features: ["Ultimate Titanium Build", "Bio-Metric Health Monitoring", "Maximum Depth Capability", "Quantum Display Tech"]
   },
@@ -854,7 +854,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Digital Bezel | Fitness Tracker", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/sumsung-galaxy-smart-watch-1.png",
     description: "Lightweight sport smartwatch featuring a touch bezel, heart rate monitoring, and sleep analysis.",
     features: ["Touch Bezel Navigation", "Heart Rate Monitor", "Lightweight Build", "Auto Workout Tracking"]
   },
@@ -864,7 +864,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Physical Rotating Bezel | ECG", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_3.png",
     description: "Classic design with a precision physical rotating bezel, fall detection, and advanced ECG diagnostics.",
     features: ["Physical Rotating Bezel", "ECG & Blood Pressure", "Fall Detection Safety", "Leather Strap Finish"]
   },
@@ -874,7 +874,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Wear OS Powered | BioActive Sensor", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_4.png",
     description: "First Galaxy Watch powered by Wear OS featuring body composition analysis and sleek aluminum casing.",
     features: ["Wear OS Powered by Samsung", "Body Composition BIA", "Vibrant Touch Display", "Seamless Google Play"]
   },
@@ -884,7 +884,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Stainless Steel | Rotating Bezel", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_4.png",
     description: "Timeless stainless steel watch housing with tactile rotating bezel and comprehensive fitness tracking.",
     features: ["Stainless Steel Casing", "Tactile Rotating Bezel", "Sleep Cycle Score", "Google Maps Navigation"]
   },
@@ -894,7 +894,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Sapphire Crystal | Fast Charging", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_5.png",
     description: "Enhanced battery durability featuring a scratch-resistant Sapphire Crystal front and fast wireless charging.",
     features: ["Sapphire Crystal Glass", "Curved BioActive Sensor", "Fast Wireless Charging", "Route Workout Support"]
   },
@@ -904,7 +904,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Titanium Body | GPX Navigation", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_5.png",
     description: "Outdoor adventure watch with rugged titanium chassis, GPX route navigation, and massive battery life.",
     features: ["Titanium Body Casing", "GPX Route File Export", "Huge Battery Reserve", "Raised Bezel Protection"]
   },
@@ -914,7 +914,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Super AMOLED | Slim Bezel", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_6.png",
     description: "Advanced wellness coaching, sleep score monitoring, and a 20% larger display with slimmer bezels.",
     features: ["Advanced Sleep Coaching", "20% Larger Screen", "Vibrant Sapphire Crystal", "Seamless Galaxy Sync"]
   },
@@ -924,7 +924,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Rotating Bezel | Premium Steel", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_6.png",
     description: "The iconic rotating bezel returns on a slimmed-down stainless steel frame with personalized HR zones.",
     features: ["Interactive Rotating Bezel", "Stainless Steel Frame", "Personalized HR Zones", "One-Click Band System"]
   },
@@ -934,7 +934,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "3nm Processor | Galaxy AI Health", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_7.png",
     description: "Powered by a 3nm processor for extreme responsiveness and Galaxy AI Energy Score tracking.",
     features: ["Blazing 3nm Processor", "Galaxy AI Energy Score", "Dual-Frequency GPS", "Enhanced BioActive Sensor"]
   },
@@ -944,7 +944,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Titanium Cushion Design | 100M Water", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_2.png",
     description: "Extreme adventure watch crafted in grade 4 titanium with 100m water resistance and Quick Button action.",
     features: ["Grade 4 Titanium Case", "10ATM / 100M Water Proof", "Multi-Course Workout Mode", "Emergency Siren 86dB"]
   },
@@ -954,7 +954,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Next-Gen AI Bio-Monitoring", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_8.png",
     description: "Next-generation smartwatch featuring advanced continuous glucose trend insights and AI workout optimization.",
     features: ["Continuous Health AI", "Ultra-thin Profile", "All-Day Display", "Multi-Day Battery"]
   },
@@ -964,7 +964,7 @@ const INITIAL_PRODUCTS = [
     category: "smartwatches", 
     brand: "samsung", 
     specs: "Futuristic Health Ecosystem", 
-    image: "/products/Samsung_Galaxy_Watch_6.png",
+    image: "/products/samsung_galaxy_watch_9.png",
     description: "The future of Samsung wearable technology with comprehensive cellular independence and micro-sensor telemetry.",
     features: ["Micro-Sensor Suite", "Independent Cellular", "Zero-Bezel AMOLED", "Quantum Health Engine"]
   },
