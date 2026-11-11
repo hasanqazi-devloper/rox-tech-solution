@@ -103,7 +103,7 @@ export default function ContactPage() {
                   <span>WhatsApp Us</span>
                 </a>
                 <a
-                  href="https://share.google/XIeHDurgfiVKCpBxz"
+                  href="https://share.google/j6alfoimaC2IgJJoO"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#F97316] hover:bg-[#EA580C] text-white px-7 py-3.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-md"
@@ -139,7 +139,7 @@ export default function ContactPage() {
                 <span>WhatsApp Us</span>
               </a>
               <a
-                href="https://share.google/XIeHDurgfiVKCpBxz"
+                href="https://share.google/j6alfoimaC2IgJJoO"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-[#F97316] text-white py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
@@ -161,7 +161,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ================= 2. DUAL GMB LOCATIONS CARDS BAR ================= */}
+      {/* ================= 2. DUAL GMB LOCATIONS CARDS BAR (CORRECTED MATCHING) ================= */}
       <section className="w-full bg-white py-8 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
         <div className="max-w-[1680px] mx-auto space-y-4">
           <div className="flex items-center gap-2">
@@ -172,7 +172,7 @@ export default function ContactPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Location 1 */}
+            {/* Location 1: Shopping Centre */}
             <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 hover:border-[#F97316] transition">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -191,7 +191,7 @@ export default function ContactPage() {
               <div className="pt-2 border-t border-gray-200 flex items-center justify-between">
                 <span className="text-[11px] text-gray-500 font-medium">Open for Tech, Vapes & Repairs</span>
                 <a
-                  href="https://share.google/XIeHDurgfiVKCpBxz"
+                  href="https://share.google/j6alfoimaC2IgJJoO"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#F97316] hover:bg-[#EA580C] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm"
@@ -202,7 +202,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Location 2 */}
+            {/* Location 2: Bank Place */}
             <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 hover:border-[#F97316] transition">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -221,7 +221,7 @@ export default function ContactPage() {
               <div className="pt-2 border-t border-gray-200 flex items-center justify-between">
                 <span className="text-[11px] text-gray-500 font-medium">In-store Support & Quick Assistance</span>
                 <a
-                  href="https://share.google/j6alfoimaC2IgJJoO"
+                  href="https://share.google/XIeHDurgfiVKCpBxz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#22C55E] hover:bg-[#1da852] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm"
