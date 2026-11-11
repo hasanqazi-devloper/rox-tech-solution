@@ -11,12 +11,12 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://roxtechsolutions.com"),
+  metadataBase: new URL("https://roxtechsolutions.ie"),
   title: "ROX Tech Solutions | #1 Tech, Vape & Repair Hub in Cashel, Ireland",
   description:
     "Looking for the latest tech, mobile accessories, vapes, or expert device repairs in Cashel? Visit ROX Tech Solutions or order via WhatsApp today!",
   verification: {
-    google: "ayaV56lRfxsR7MTQ-5rsbkhwIpX0U9sefBIZ0uiM0XA",
+    google: "vOzP0wZkT5zoXwO8OhXFeb6YNqHaFybY0ns1nTFB5Iw",
   },
   icons: {
     icon: "/fav.png",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "ROX Tech Solutions | Premier Tech, Vape & Repair Hub in Cashel",
     description:
       "Your go-to local destination for electronics, everyday accessories, vape products and professional device repair assistance in Cashel.",
-    url: "https://roxtechsolutions.com",
+    url: "https://roxtechsolutions.ie",
     siteName: "ROX Tech Solutions",
     images: [
       {
