@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   ShieldCheck,
@@ -93,14 +94,14 @@ export default function HeroSection() {
 
       {/* ================= MOBILE ONLY IMAGE ================= */}
       <div className="block lg:hidden w-full px-4 pt-2 pb-4 space-y-3">
-        <div className="w-full overflow-hidden my-1 relative">
-          <img
+        <div className="w-full overflow-hidden my-1 relative h-64 sm:h-80">
+          <Image
             src="/home-hero-mobile.png?v=2"
             alt="ROX Tech Devices Showcase"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            className="w-full h-auto object-cover rounded-lg shadow-sm"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover rounded-lg shadow-sm"
           />
         </div>
 

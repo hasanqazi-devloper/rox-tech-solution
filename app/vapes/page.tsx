@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   MessageCircle,
@@ -404,19 +405,20 @@ export default function VapeShopPage() {
   }, [selectedBrands, selectedFlavors, selectedNicotine, activeCategory, searchQuery]);
 
   return (
-    <div className="w-full bg-[#F1F5F9] min-h-screen text-[#0F172A] font-sans relative z-0">
+    <main className="w-full bg-[#F1F5F9] min-h-screen text-[#0F172A] font-sans relative z-0">
 
       {/* ================= 1. HERO BANNER SECTION ================= */}
-      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
+      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60" aria-label="Vape Shop Hero">
         <div className="hidden lg:block">
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
-              <img
+              <Image
                 src="/vape-hero-page.png"
                 alt="ROX Tech Store Showcase in Cashel"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover object-right"
+                fill
+                priority
+                sizes="75vw"
+                className="object-cover object-right"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
             </div>
@@ -497,20 +499,20 @@ export default function VapeShopPage() {
             </div>
           </div>
 
-          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-            <img
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
+            <Image
               src="/vape-hero-page.png"
               alt="ROX Tech Store Showcase in Cashel"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
             />
           </div>
         </div>
       </section>
 
       {/* ================= 2. CATEGORY NAVIGATION CARDS BAR ================= */}
-      <section className="w-full bg-[#E2E8F0] py-6 px-4 sm:px-10 lg:px-16 border-b border-slate-300 z-10 relative" id="shop">
+      <section className="w-full bg-[#E2E8F0] py-6 px-4 sm:px-10 lg:px-16 border-b border-slate-300 z-10 relative" id="shop" aria-label="Vape Categories">
         <div className="max-w-[1680px] mx-auto">
           <div className="flex lg:grid lg:grid-cols-6 gap-3 overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
             {[
@@ -551,17 +553,17 @@ export default function VapeShopPage() {
                 className={`min-w-[150px] sm:min-w-0 flex-1 bg-white border rounded-2xl p-3.5 shadow-sm hover:shadow-md transition cursor-pointer group flex flex-col justify-between h-40 snap-start outline-none ${activeCategory === cat.key ? "border-[#F97316] ring-2 ring-[#F97316]/30 bg-orange-50/40" : "border-slate-300"
                   }`}
               >
-                <div className="w-full h-24 flex items-center justify-center p-1 bg-slate-50/80 rounded-xl overflow-hidden">
-                  <img 
+                <div className="w-full h-24 flex items-center justify-center p-1 bg-slate-50/80 rounded-xl overflow-hidden relative">
+                  <Image 
                     src={cat.img} 
                     alt={cat.title} 
-                    loading="lazy"
-                    decoding="async"
-                    className="max-h-full max-w-full object-contain group-hover:scale-120 transition-transform duration-300 scale-130" 
+                    fill
+                    sizes="(max-width: 640px) 150px, (max-width: 1024px) 25vw, 16vw"
+                    className="object-contain group-hover:scale-110 transition-transform duration-300" 
                   />
                 </div>
                 <div className="flex items-center justify-between pt-1.5 border-t border-slate-100">
-                  <h3 className="text-[11px] sm:text-xs font-bold text-[#0F172A] truncate">{cat.title}</h3>
+                  <h2 className="text-[11px] sm:text-xs font-bold text-[#0F172A] truncate">{cat.title}</h2>
                   <ChevronRight className="w-3.5 h-3.5 text-[#F97316] group-hover:translate-x-1 transition shrink-0" />
                 </div>
               </div>
@@ -571,7 +573,7 @@ export default function VapeShopPage() {
       </section>
 
       {/* ================= 3. MAIN CONTENT: FILTERS SIDEBAR + PRODUCT GRID ================= */}
-      <section className="w-full py-8 px-4 sm:px-10 lg:px-16 z-0 relative">
+      <section className="w-full py-8 px-4 sm:px-10 lg:px-16 z-0 relative" aria-label="Catalog Inventory">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
           {/* Left Sidebar: Filters */}
@@ -618,6 +620,7 @@ export default function VapeShopPage() {
                         type="checkbox"
                         checked={selectedBrands.includes(b.key)}
                         onChange={() => toggleItem(selectedBrands, setSelectedBrands, b.key)}
+                        aria-label={b.name}
                         className="rounded text-[#F97316] focus:ring-0 outline-none accent-[#F97316]"
                       />
                       <span>{b.name}</span>
@@ -644,6 +647,7 @@ export default function VapeShopPage() {
                         type="checkbox"
                         checked={selectedFlavors.includes(f.key)}
                         onChange={() => toggleItem(selectedFlavors, setSelectedFlavors, f.key)}
+                        aria-label={f.name}
                         className="rounded text-[#F97316] focus:ring-0 outline-none accent-[#F97316]"
                       />
                       <span>{f.name}</span>
@@ -675,6 +679,7 @@ export default function VapeShopPage() {
                   placeholder="Search product, coil, battery..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  aria-label="Search products"
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-[#0F172A] outline-none focus:border-[#F97316] transition"
                 />
               </div>
@@ -708,12 +713,12 @@ export default function VapeShopPage() {
                         </span>
                       )}
 
-                      <img
+                      <Image
                         src={product.image}
                         alt={product.name}
-                        loading="lazy"
-                        decoding="async"
-                        className="max-h-full max-w-full object-contain group-hover:scale-145 transition-transform duration-300 drop-shadow-lg scale-140"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        className="object-contain group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
 
@@ -749,12 +754,13 @@ export default function VapeShopPage() {
 
       {/* ================= 4. PERFECT LOWER-START MODAL (CLEARS NAVBAR COMPLETELY WITH PT-36 / PT-44) ================= */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-[99999] flex items-start justify-center p-4 sm:p-6 pt-36 sm:pt-44 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto">
+        <div className="fixed inset-0 z-[99999] flex items-start justify-center p-4 sm:p-6 pt-36 sm:pt-44 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto" role="dialog" aria-modal="true">
           <div className="bg-white border border-slate-300 rounded-3xl max-w-4xl w-[95%] sm:w-[85%] lg:w-[75%] p-6 sm:p-10 shadow-2xl relative space-y-6 max-h-[85vh] overflow-y-auto my-auto mb-12">
             
             {/* Close Button */}
             <button
               onClick={() => setSelectedProduct(null)}
+              aria-label="Close dialog"
               className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full p-2.5 transition outline-none z-10 shadow-md"
             >
               <X className="w-5 h-5" />
@@ -762,13 +768,13 @@ export default function VapeShopPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Large Centered Modal Image */}
-              <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner">
-                <img
+              <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner relative">
+                <Image
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="max-h-full max-w-full object-contain drop-shadow-2xl scale-130"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain drop-shadow-2xl"
                 />
               </div>
 
@@ -838,7 +844,7 @@ export default function VapeShopPage() {
       )}
 
       {/* Trust Footer */}
-      <section className="w-full bg-white py-8 px-6 sm:px-10 lg:px-16 border-t border-slate-300 mt-6 relative z-10 shadow-sm">
+      <section className="w-full bg-white py-8 px-6 sm:px-10 lg:px-16 border-t border-slate-300 mt-6 relative z-10 shadow-sm" aria-label="Trust Footer">
         <div className="max-w-[1680px] mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-center">
             <div className="flex items-center gap-3 p-2">
@@ -884,6 +890,6 @@ export default function VapeShopPage() {
         </div>
       </section>
 
-    </div>
+    </main>
   );
 }

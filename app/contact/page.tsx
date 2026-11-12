@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   MessageCircle,
-  Clock,
-  PhoneCall,
   Navigation,
   Send,
   ShoppingBag,
@@ -69,12 +68,13 @@ export default function ContactPage() {
         <div className="hidden lg:block">
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
-              <img
+              <Image
                 src="/rox-contact.png"
                 alt="ROX Tech Solutions Interior Showcase"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover object-right lg:grayscale-0"
+                fill
+                priority
+                sizes="75vw"
+                className="object-cover object-right"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
             </div>
@@ -149,13 +149,13 @@ export default function ContactPage() {
               </a>
             </div>
           </div>
-          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-            <img
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
+            <Image
               src="/rox-contact.png"
               alt="ROX Tech Solutions Interior Showcase"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
             />
           </div>
         </div>
@@ -302,6 +302,7 @@ export default function ContactPage() {
                 <label className="text-[11px] font-bold text-[#0F172A]">Reason for Contact *</label>
                 <select
                   required
+                  aria-label="Reason for Contact"
                   value={formData.reason}
                   onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                   className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
@@ -384,13 +385,13 @@ export default function ContactPage() {
                   See our full range in person. Get expert advice and friendly support at either location.
                 </p>
               </div>
-              <div className="rounded-2xl overflow-hidden border border-gray-300 aspect-[16/10] bg-gray-50">
-                <img
+              <div className="rounded-2xl overflow-hidden border border-gray-300 aspect-[16/10] bg-gray-50 relative">
+                <Image
                   src="/shop-4.jpeg"
                   alt="Cashel Store"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
                 />
               </div>
               <div className="grid grid-cols-2 gap-2 pt-1">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Wrench, BatteryCharging, ShieldCheck, ArrowRight } from "lucide-react";
 
 export default function RepairQuoteWidget() {
@@ -54,9 +55,11 @@ export default function RepairQuoteWidget() {
         {/* ================= LEFT CARD ================= */}
         <div className="lg:col-span-6 relative overflow-hidden rounded-3xl bg-[#0F291E] text-white shadow-sm flex flex-col md:flex-row items-stretch">
           <div className="w-full md:w-[42%] h-48 md:h-auto shrink-0 relative overflow-hidden">
-            <img
+            <Image
               src="/mobile-repair.png"
               alt="Device Repair Tools & Smartphone"
+              width={600}
+              height={600}
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0F291E] hidden md:block" />
@@ -76,7 +79,7 @@ export default function RepairQuoteWidget() {
               <div className="flex items-start gap-1.5">
                 <Wrench className="w-4 h-4 text-[#F97316] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-[11px] font-bold text-white leading-tight">Screen Repairs</h4>
+                  <h3 className="text-[11px] font-bold text-white leading-tight">Screen Repairs</h3>
                   <p className="text-[9px] text-gray-300 font-normal mt-0.5 leading-tight">Cracked or unresponsive</p>
                 </div>
               </div>
@@ -84,7 +87,7 @@ export default function RepairQuoteWidget() {
               <div className="flex items-start gap-1.5 border-l border-white/15 pl-2">
                 <BatteryCharging className="w-4 h-4 text-[#22C55E] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-[11px] font-bold text-white leading-tight">Battery & Charging</h4>
+                  <h3 className="text-[11px] font-bold text-white leading-tight">Battery & Charging</h3>
                   <p className="text-[9px] text-gray-300 font-normal mt-0.5 leading-tight">Power & performance</p>
                 </div>
               </div>
@@ -92,7 +95,7 @@ export default function RepairQuoteWidget() {
               <div className="flex items-start gap-1.5 border-l border-white/15 pl-2">
                 <ShieldCheck className="w-4 h-4 text-[#F97316] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-[11px] font-bold text-white leading-tight">Device Diagnostics</h4>
+                  <h3 className="text-[11px] font-bold text-white leading-tight">Device Diagnostics</h3>
                   <p className="text-[9px] text-gray-300 font-normal mt-0.5 leading-tight">Find the real issue</p>
                 </div>
               </div>
@@ -113,10 +116,12 @@ export default function RepairQuoteWidget() {
             </div>
 
             <div className="hidden sm:flex flex-col items-center justify-center shrink-0 pr-1">
-              <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-black flex items-center justify-center shadow-inner">
-                <img
+              <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-black flex items-center justify-center shadow-inner relative">
+                <Image
                   src="/freidly-mobile.png"
                   alt="Quick Response Phone Mascot"
+                  width={100}
+                  height={100}
                   className="w-full h-full object-cover scale-110"
                 />
               </div>
@@ -154,6 +159,7 @@ export default function RepairQuoteWidget() {
 
               <select
                 required
+                aria-label="Select Service"
                 value={formData.service}
                 onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                 className="w-full bg-white/95 border border-gray-300 rounded-lg px-3.5 py-2 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#F97316]"

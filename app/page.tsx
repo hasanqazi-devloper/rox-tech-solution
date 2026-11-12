@@ -8,11 +8,12 @@ import RepairQuoteWidget from "@/components/RepairQuoteWidget";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BottomFeatureBar from "@/components/BottomFeatureBar";
 import ChristmasClubBanner from "@/components/ChristmasClubBanner";
+
 export default function RoxTechHomePage() {
   return (
     <LazyMotion features={domMax}>
       {/* ✅ Clean block rendering matching the #C0C0C0 Light Silver European Retail Theme */}
-      <main className="w-full min-h-screen bg-[#C0C0C0] text-[#0F172A] font-sans overflow-x-hidden m-0 p-0 block">
+      <div className="w-full flex flex-col items-center justify-start bg-[#C0C0C0] text-[#0F172A] font-sans m-0 p-0">
         <WhatsAppButton />
         
         {/* Section 2: Hero Section */}
@@ -20,13 +21,19 @@ export default function RoxTechHomePage() {
 
         {/* Section 3: Shop by Category Grid */}
         <CategoriesGrid />
-        <ChristmasClubBanner/>
+        
+        {/* Section: Christmas Club Banner */}
+        <ChristmasClubBanner />
+
         {/* Section 4: Featured Products & Deals */}
         <FeaturedProducts />
 
         {/* Section 5: Interactive Repair Quote Estimator */}
         <RepairQuoteWidget />
-      </main>
+        
+        {/* Optional Bottom Feature Bar if needed */}
+        {/* <BottomFeatureBar /> */}
+      </div>
     </LazyMotion>
   );
 }

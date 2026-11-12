@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 
 const categories = [
@@ -69,12 +70,13 @@ export default function CategoriesGrid() {
             >
               {/* Product Image Preview */}
               <div className="w-full h-28 sm:h-36 flex items-center justify-center mb-3">
-                <img
+                <Image
                   src={cat.image}
                   alt={cat.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-300"
+                  width={200}
+                  height={200}
+                  sizes="(max-width: 640px) 160px, 200px"
+                  className="max-h-full max-w-full w-auto h-auto object-contain group-hover:scale-105 transition duration-300"
                 />
               </div>
 

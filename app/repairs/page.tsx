@@ -2,28 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   MessageCircle,
-  MessageSquare,
-  Lightbulb,
-  Wrench,
+  Users,
   Cog,
   ShieldCheck,
-  Users,
-  UserCheck,
   ArrowRight,
-  Smartphone,
-  Laptop,
-  Tablet,
-  Headphones,
-  CheckCircle2,
-  BatteryCharging,
+  FileText,
   Navigation,
   Send,
-  HelpCircle,
-  FileText,
-  Store,
   Check,
   Star,
   Quote
@@ -87,51 +76,45 @@ export default function RepairsPage() {
   };
 
   return (
-    <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
+    <main className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans">
 
       {/* ================= 1. HERO SECTION ================= */}
-      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60">
+      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60" aria-label="Repairs Hero">
 
-        {/* ================= 1. DESKTOP HERO VIEW (EXACT UNTOUCHED CODE) ================= */}
+        {/* ================= 1. DESKTOP HERO VIEW ================= */}
         <div className="hidden lg:block">
-          {/* Background Image Wrapper (Right Aligned & Smoothly Blended to Left) */}
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] sm:w-[10%] h-full">
-              <img
+              <Image
                 src="/rox-repair.png"
                 alt="Expert Device Repairs Workbench"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover object-right grayscale-[40%] lg:grayscale-0"
+                fill
+                priority
+                sizes="75vw"
+                className="object-cover object-right grayscale-[40%] lg:grayscale-0"
               />
 
-              {/* Soft Horizontal Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
             </div>
           </div>
 
-          {/* Content Overlay Layer (Text & CTA Buttons on Left) */}
           <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
             <div className="max-w-xl space-y-6">
 
-              {/* Cashel, Ireland Location Badge */}
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
                 <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
                 <span>Cashel, Ireland</span>
               </div>
 
-              {/* Main Heading */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
                 Expert Device Repairs <br />
                 in <span className="text-[#F97316]">Cashel</span>
               </h1>
 
-              {/* Description */}
               <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
                 Professional, reliable and affordable repair assistance for smartphones, tablets, laptops and other supported devices. Get your devices back in top shape with our expert technicians.
               </p>
 
-              {/* CTA Action Buttons */}
               <div className="flex items-center gap-3 pt-2">
                 <a
                   href="#quote-form"
@@ -156,11 +139,8 @@ export default function RepairsPage() {
           </div>
         </div>
 
-
-        {/* ================= 2. MOBILE HERO VIEW (MATCHING EXACT REFERENCE UI) ================= */}
+        {/* ================= 2. MOBILE HERO VIEW ================= */}
         <div className="block lg:hidden px-5 py-8 space-y-6">
-          
-          {/* Top Content: Badge, Heading, Subtext */}
           <div className="space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
               <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
@@ -176,7 +156,6 @@ export default function RepairsPage() {
               Professional, reliable and affordable repair assistance for smartphones, tablets, laptops and other supported devices. Get your devices back in top shape with our expert technicians.
             </p>
 
-            {/* Buttons */}
             <div className="flex items-center gap-2.5 pt-1">
               <a
                 href="#quote-form"
@@ -198,24 +177,22 @@ export default function RepairsPage() {
             </div>
           </div>
 
-          {/* Bottom Workbench Image Box */}
-          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-            <img
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
+            <Image
               src="/rox-repair.png"
               alt="Expert Device Repairs Workbench"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
             />
           </div>
-
         </div>
 
       </section>
 
 
       {/* ================= 2. CORE FEATURES BAR ================= */}
-      <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60" aria-label="Core Features">
         <div className="max-w-[1680px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
 
@@ -265,10 +242,9 @@ export default function RepairsPage() {
 
 
       {/* ================= 3. OUR REPAIR SERVICES ================= */}
-      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60" aria-label="Repair Services">
         <div className="max-w-[1680px] mx-auto space-y-6">
 
-          {/* Section Header */}
           <div className="flex justify-between items-end">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
@@ -286,19 +262,18 @@ export default function RepairsPage() {
             </Link>
           </div>
 
-          {/* Services Grid (6 Cards Layout matching the reference image) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
 
-            {/* Service 1: Smartphone Screen Repairs */}
+            {/* Service 1 */}
             <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm hover:border-[#F97316] transition flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2">
-                  <img
+                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2 relative">
+                  <Image
                     src="/screen-repair.png"
                     alt="Smartphone Screen Repairs"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 16vw"
+                    className="object-contain"
                   />
                 </div>
                 <div className="space-y-1">
@@ -311,16 +286,16 @@ export default function RepairsPage() {
               </a>
             </div>
 
-            {/* Service 2: Battery Replacement */}
+            {/* Service 2 */}
             <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm hover:border-[#F97316] transition flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2">
-                  <img
+                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2 relative">
+                  <Image
                     src="/battery-change.png"
                     alt="Battery Replacement"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 16vw"
+                    className="object-contain"
                   />
                 </div>
                 <div className="space-y-1">
@@ -333,16 +308,16 @@ export default function RepairsPage() {
               </a>
             </div>
 
-            {/* Service 3: Charging Port Repairs */}
+            {/* Service 3 */}
             <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm hover:border-[#F97316] transition flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2">
-                  <img
+                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2 relative">
+                  <Image
                     src="/charging-repair.png"
                     alt="Charging Port Repairs"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 16vw"
+                    className="object-contain"
                   />
                 </div>
                 <div className="space-y-1">
@@ -355,16 +330,16 @@ export default function RepairsPage() {
               </a>
             </div>
 
-            {/* Service 4: Device Diagnostics */}
+            {/* Service 4 */}
             <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm hover:border-[#F97316] transition flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2">
-                  <img
+                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2 relative">
+                  <Image
                     src="/sleek-phone.png"
                     alt="Device Diagnostics"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 16vw"
+                    className="object-contain"
                   />
                 </div>
                 <div className="space-y-1">
@@ -377,16 +352,16 @@ export default function RepairsPage() {
               </a>
             </div>
 
-            {/* Service 5: Laptop Repairs */}
+            {/* Service 5 */}
             <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm hover:border-[#F97316] transition flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2">
-                  <img
+                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2 relative">
+                  <Image
                     src="/laptop-repair.png"
                     alt="Laptop Repairs"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 16vw"
+                    className="object-contain"
                   />
                 </div>
                 <div className="space-y-1">
@@ -399,16 +374,16 @@ export default function RepairsPage() {
               </a>
             </div>
 
-            {/* Service 6: Tablet Repairs */}
+            {/* Service 6 */}
             <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-sm hover:border-[#F97316] transition flex flex-col justify-between">
               <div className="space-y-2">
-                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2">
-                  <img
+                <div className="w-full h-28 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-2 relative">
+                  <Image
                     src="/tab-repair.png"
                     alt="Tablet Repairs"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 16vw"
+                    className="object-contain"
                   />
                 </div>
                 <div className="space-y-1">
@@ -428,7 +403,7 @@ export default function RepairsPage() {
 
 
       {/* ================= 4. HOW OUR REPAIR PROCESS WORKS ================= */}
-      <section className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60" aria-label="Repair Process">
         <div className="max-w-[1680px] mx-auto space-y-6">
 
           <div className="space-y-1">
@@ -482,10 +457,9 @@ export default function RepairsPage() {
 
 
       {/* ================= NEW: TESTIMONIALS / CUSTOMER REVIEWS SECTION ================= */}
-      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60" aria-label="Customer Testimonials">
         <div className="max-w-[1680px] mx-auto space-y-8">
 
-          {/* Section Header */}
           <div className="space-y-1 text-center sm:text-left">
             <div className="inline-flex items-center gap-2">
               <span className="w-1 h-3.5 bg-[#F97316] rounded-full inline-block" />
@@ -498,10 +472,8 @@ export default function RepairsPage() {
             </h3>
           </div>
 
-          {/* Testimonials Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {/* Review 1 */}
             <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-4 relative group hover:border-[#F97316] transition">
               <div className="absolute top-6 right-6 text-orange-200">
                 <Quote className="w-8 h-8 opacity-40" />
@@ -527,7 +499,6 @@ export default function RepairsPage() {
               </div>
             </div>
 
-            {/* Review 2 */}
             <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-4 relative group hover:border-[#F97316] transition">
               <div className="absolute top-6 right-6 text-orange-200">
                 <Quote className="w-8 h-8 opacity-40" />
@@ -553,7 +524,6 @@ export default function RepairsPage() {
               </div>
             </div>
 
-            {/* Review 3 */}
             <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-4 relative group hover:border-[#F97316] transition">
               <div className="absolute top-6 right-6 text-orange-200">
                 <Quote className="w-8 h-8 opacity-40" />
@@ -586,10 +556,9 @@ export default function RepairsPage() {
 
 
       {/* ================= 5. WHY CHOOSE ROX FOR REPAIRS & QUICK CTA ================= */}
-      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-[#C0C0C0] py-12 sm:py-16 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60" aria-label="Why Choose ROX">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-          {/* Why Choose ROX */}
           <div className="lg:col-span-6 bg-white/95 border border-gray-300 rounded-2xl p-6 sm:p-8 space-y-4">
             <h2 className="text-lg font-black text-[#0F172A]">Why Choose ROX for Repairs?</h2>
             <ul className="space-y-2 text-xs text-gray-700 font-medium">
@@ -612,7 +581,6 @@ export default function RepairsPage() {
             </ul>
           </div>
 
-          {/* Quick CTA Banner */}
           <div className="lg:col-span-6 bg-white/95 border border-gray-300 rounded-2xl p-6 sm:p-8 space-y-4 flex flex-col justify-between">
             <div className="space-y-1">
               <h2 className="text-lg font-black text-[#0F172A]">Need a Repair? We&apos;re Here to Help!</h2>
@@ -645,10 +613,9 @@ export default function RepairsPage() {
 
 
       {/* ================= 6 & 7. GET A REPAIR QUOTE FORM & VISIT STORE SECTION ================= */}
-      <section id="quote-form" className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16">
+      <section id="quote-form" className="w-full bg-white py-12 sm:py-16 px-6 sm:px-10 lg:px-16" aria-label="Repair Quote Form">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-          {/* Detailed Form (Left Side) */}
           <div className="lg:col-span-8 bg-gray-50/80 border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
@@ -671,7 +638,9 @@ export default function RepairsPage() {
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
               <div className="space-y-1">
+                <label htmlFor="repairs-name" className="text-[11px] font-bold text-[#0F172A]">Full Name *</label>
                 <input
+                  id="repairs-name"
                   type="text"
                   required
                   placeholder="Full Name *"
@@ -682,8 +651,11 @@ export default function RepairsPage() {
               </div>
 
               <div className="space-y-1">
+                <label htmlFor="repairs-devicetype" className="text-[11px] font-bold text-[#0F172A]">Device Type *</label>
                 <select
+                  id="repairs-devicetype"
                   required
+                  aria-label="Device Type"
                   value={formData.deviceType}
                   onChange={(e) => setFormData({ ...formData, deviceType: e.target.value })}
                   className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
@@ -696,7 +668,9 @@ export default function RepairsPage() {
               </div>
 
               <div className="space-y-1">
+                <label htmlFor="repairs-email" className="text-[11px] font-bold text-[#0F172A]">Email Address *</label>
                 <input
+                  id="repairs-email"
                   type="email"
                   required
                   placeholder="Email Address *"
@@ -707,7 +681,9 @@ export default function RepairsPage() {
               </div>
 
               <div className="space-y-1">
+                <label htmlFor="repairs-brand" className="text-[11px] font-bold text-[#0F172A]">Device Brand *</label>
                 <input
+                  id="repairs-brand"
                   type="text"
                   required
                   placeholder="Device Brand *"
@@ -718,7 +694,9 @@ export default function RepairsPage() {
               </div>
 
               <div className="space-y-1">
+                <label htmlFor="repairs-phone" className="text-[11px] font-bold text-[#0F172A]">Phone Number *</label>
                 <input
+                  id="repairs-phone"
                   type="tel"
                   required
                   placeholder="Phone Number *"
@@ -729,7 +707,9 @@ export default function RepairsPage() {
               </div>
 
               <div className="space-y-1">
+                <label htmlFor="repairs-issue" className="text-[11px] font-bold text-[#0F172A]">Repair Issue *</label>
                 <input
+                  id="repairs-issue"
                   type="text"
                   required
                   placeholder="Repair Issue *"
@@ -740,7 +720,9 @@ export default function RepairsPage() {
               </div>
 
               <div className="sm:col-span-2 space-y-1">
+                <label htmlFor="repairs-desc" className="text-[11px] font-bold text-[#0F172A]">Description of the Problem</label>
                 <textarea
+                  id="repairs-desc"
                   rows={3}
                   placeholder="Description of the Problem"
                   value={formData.description}
@@ -750,8 +732,11 @@ export default function RepairsPage() {
               </div>
 
               <div className="sm:col-span-2 space-y-1">
+                <label htmlFor="repairs-contact" className="text-[11px] font-bold text-[#0F172A]">Preferred Contact Method *</label>
                 <select
+                  id="repairs-contact"
                   required
+                  aria-label="Preferred Contact Method"
                   value={formData.contactMethod}
                   onChange={(e) => setFormData({ ...formData, contactMethod: e.target.value })}
                   className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:ring-2 focus:ring-[#F97316] outline-none"
@@ -777,20 +762,19 @@ export default function RepairsPage() {
             </form>
           </div>
 
-          {/* Visit Store Card (Right Side) */}
           <div className="lg:col-span-4 bg-gray-50/80 border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
             <div className="space-y-1">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#0F172A]">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-[#0F172A]">
                 Visit Our Cashel Store
-              </h2>
+              </h3>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-gray-300 aspect-[16/10] bg-white">
-              <img
+            <div className="rounded-2xl overflow-hidden border border-gray-300 aspect-[16/10] bg-white relative">
+              <Image
                 src="/shop-4.jpeg"
                 alt="Cashel Store"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover"
               />
             </div>
             <p className="text-xs text-gray-700 leading-relaxed">
@@ -821,6 +805,6 @@ export default function RepairsPage() {
         </div>
       </section>
 
-    </div>
+    </main>
   );
 }

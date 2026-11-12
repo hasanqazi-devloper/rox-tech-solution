@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, MessageCircle, ArrowRight, ChevronLeft } from "lucide-react";
 
 const filterTabs = [
@@ -177,13 +178,14 @@ export default function FeaturedProducts() {
                 )}
 
                 {/* Image */}
-                <div className="w-full h-36 flex items-center justify-center my-2">
-                  <img
+                <div className="w-full h-36 flex items-center justify-center my-2 relative">
+                  <Image
                     src={product.image}
                     alt={product.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="max-h-full max-w-full object-contain"
+                    width={200}
+                    height={200}
+                    sizes="200px"
+                    className="max-h-full max-w-full w-auto h-auto object-contain"
                   />
                 </div>
 

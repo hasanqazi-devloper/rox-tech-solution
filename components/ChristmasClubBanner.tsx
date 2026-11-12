@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { ArrowRight, Calendar, Clock, CheckCircle2, Sparkles } from "lucide-react";
 
 export default function ChristmasClubBanner() {
@@ -76,13 +77,16 @@ export default function ChristmasClubBanner() {
 
         {/* 2. CENTER SECTION: Responsive Pro-Sized club.png Image */}
         <div className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-md flex items-center justify-center my-4 lg:my-0">
-          <div className="relative w-full flex items-center justify-center">
+          <div className="relative w-full h-48 sm:h-64 lg:h-80 flex items-center justify-center">
             {/* Ambient Backlight Glow behind the PNG */}
             <div className="absolute w-40 h-40 bg-amber-400/25 rounded-full blur-3xl pointer-events-none" />
             
-            <img
+            <Image
               src="/club.png" 
               alt="ROX Christmas Tech Gifts"
+              width={500}
+              height={500}
+              sizes="(max-width: 768px) 320px, 400px"
               className="h-48 sm:h-64 lg:h-80 w-auto object-contain drop-shadow-[0_30px_45px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500 ease-out"
             />
           </div>

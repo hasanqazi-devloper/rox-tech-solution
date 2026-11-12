@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   MessageCircle,
@@ -17,8 +18,7 @@ import {
   Headphones,
   CheckCircle2,
   Navigation,
-  Send,
-  ExternalLink
+  Send
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -76,12 +76,13 @@ export default function AboutPage() {
         <div className="hidden lg:block">
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
-              <img
+              <Image
                 src="/about-hero.png"
                 alt="ROX Tech Store Showcase in Cashel"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover object-right lg:grayscale-0"
+                fill
+                priority
+                sizes="75vw"
+                className="object-cover object-right"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
             </div>
@@ -164,13 +165,13 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-            <img
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
+            <Image
               src="/shop-2.jpeg"
               alt="ROX Tech Store Showcase in Cashel"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover object-center"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
             />
           </div>
         </div>
@@ -201,12 +202,12 @@ export default function AboutPage() {
 
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/10 aspect-[16/10] w-full bg-white">
-              <img
+              <Image
                 src="/shop-3.jpeg"
                 alt="ROX Tech Solutions Storefront Cashel"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover object-center"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
               />
             </div>
           </div>
@@ -288,43 +289,43 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
-              <img
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
+              <Image
                 src="/shop-8.jpeg"
                 alt="ROX Tech Store Interior 1"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
 
-            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
-              <img
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
+              <Image
                 src="/shop-7.jpeg"
                 alt="ROX Tech Store Interior 2"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
 
-            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
-              <img
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
+              <Image
                 src="/shop-6.jpeg"
                 alt="ROX Tech Store Interior 3"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
 
-            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group">
-              <img
+            <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
+              <Image
                 src="/shop-5.jpeg"
                 alt="ROX Tech Store Interior 4"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition duration-300"
               />
             </div>
           </div>
@@ -590,6 +591,7 @@ export default function AboutPage() {
                 <div className="space-y-1">
                   <select
                     required
+                    aria-label="Select Reason or Department"
                     value={formData.reason}
                     onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                     className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#F97316]"

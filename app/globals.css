@@ -15,19 +15,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Globals.css mein focus outline / ring khatam */
+/* 🎛️ CLEAN FOCUS RESETS (Consolidated) */
 *:focus,
 *:focus-visible {
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* ✨ HIGH-END LUXURY FOCUS RESETS */
-*:focus {
-  box-shadow: none !important;
-}
-
-/* 🎛️ TAILWIND V4 FONTS & COLORS CONFIGURATION BINDINGS */
+/* ⚡ TAILWIND V4 THEME BINDINGS */
 @theme inline {
   --font-serif: var(--font-jakarta), sans-serif;
   --font-sans: var(--font-jakarta), sans-serif;

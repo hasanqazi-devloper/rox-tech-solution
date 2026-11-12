@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   MessageCircle,
@@ -538,8 +539,6 @@ const INITIAL_PRODUCTS = [
     description: "Massive 14.6-inch screen providing laptop-replacement canvas productivity with Samsung DeX support.",
     features: ["14.6-inch Massive AMOLED", "Dual Front Cameras", "Samsung DeX Desktop Mode", "Ultra-thin Profile"]
   },
-  // --- Samsung A Series ---
- 
 
   // --- Tablets & iPads ---
   { 
@@ -1194,16 +1193,6 @@ const INITIAL_PRODUCTS = [
     description: "Featuring a vibrant 7-inch OLED screen, wide adjustable stand, and enhanced audio for gaming at home or on the go.",
     features: ["7-inch OLED Screen", "Wide Adjustable Stand", "Enhanced Audio Speakers", "64GB Internal Storage"]
   },
-  // { 
-  //   id: 16, 
-  //   name: "PS5 DualSense Controller", 
-  //   category: "gaming", 
-  //   brand: "sony", 
-  //   specs: "Wireless Controller", 
-  //   image: "/products/PS5_DualSense_Controller.png",
-  //   description: "Discover a deeper, highly immersive gaming experience with haptic feedback and dynamic trigger effects.",
-  //   features: ["Haptic Feedback", "Adaptive Triggers", "Built-in Microphone", "Create Button"]
-  // },
   { 
     id: 17, 
     name: "Logitech G923 Racing Wheel", 
@@ -1264,8 +1253,7 @@ const INITIAL_PRODUCTS = [
     description: "Tactile mechanical switches and per-key RGB backlighting engineered for competitive gaming and fast typing.",
     features: ["Tactile Mechanical Switches", "Per-Key RGB Lighting", "Anti-Ghosting Keys", "Durable Metal Plate"]
   },
-  // --- Gaming Accessories ---
-{ 
+  { 
     id: 24, 
     name: "PS5 DualSense Wireless Controller", 
     category: "gaming", 
@@ -1550,19 +1538,20 @@ function ShopContent() {
   }, [searchQuery, selectedCategories, selectedBrands, sortBy]);
 
   return (
-    <div className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans relative z-0">
+    <main className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans relative z-0">
 
       {/* ================= 1. HERO BANNER SECTION ================= */}
-      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/65">
+      <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/65" aria-label="Shop Hero">
         <div className="hidden lg:block">
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
-              <img
+              <Image
                 src="/shop-4.jpeg"
                 alt="Shop Tech & Accessories Showcase"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover object-right"
+                fill
+                priority
+                sizes="75vw"
+                className="object-cover object-right"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#D1D5DB] via-[#D1D5DB]/80 lg:via-[#D1D5DB]/40 to-transparent" />
             </div>
@@ -1595,6 +1584,7 @@ function ShopContent() {
                     placeholder="Search for products, brands or categories..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    aria-label="Search products"
                     className="w-full bg-white/90 backdrop-blur-sm border border-gray-300/80 rounded-full pl-11 pr-32 py-3.5 text-xs font-medium text-[#0F172A] placeholder-gray-400 shadow-sm transition-all duration-200 focus:bg-white focus:border-[#F97316] focus:ring-4 focus:ring-[#F97316]/10 outline-none"
                   />
                 </div>
@@ -1629,26 +1619,27 @@ function ShopContent() {
                   placeholder="Search products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  aria-label="Search products mobile"
                   className="w-full bg-white border border-gray-300/80 rounded-full pl-9 pr-4 py-3 text-xs font-medium text-[#0F172A] placeholder-gray-400 shadow-xs focus:border-[#F97316] outline-none"
                 />
               </div>
             </div>
           </div>
 
-          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white">
-            <img 
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
+            <Image 
               src="/shop-4.jpeg" 
               alt="Shop Showcase" 
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover object-center" 
+              fill
+              sizes="100vw"
+              className="object-cover object-center" 
             />
           </div>
         </div>
       </section>
 
       {/* ================= 2. SHOP CATEGORY CARDS BAR ================= */}
-      <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-white py-6 px-6 sm:px-10 lg:px-16 border-b border-gray-300/60" aria-label="Shop Categories">
         <div className="max-w-[1680px] mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {SHOP_CATEGORIES.map((cat) => {
@@ -1662,18 +1653,18 @@ function ShopContent() {
                     : "border-gray-200 hover:border-[#F97316] hover:shadow-md"
                     }`}
                 >
-                  <div className="w-full h-24 flex items-center justify-center p-1 overflow-hidden">
-                    <img 
+                  <div className="w-full h-24 flex items-center justify-center p-1 overflow-hidden relative">
+                    <Image 
                       src={cat.img} 
                       alt={cat.title} 
-                      loading="lazy"
-                      decoding="async"
-                      className="max-h-full max-w-full object-contain group-hover:scale-138 transition-transform duration-300 scale-130" 
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                      className="object-contain group-hover:scale-110 transition-transform duration-300" 
                     />
                   </div>
                   <div className="flex items-end justify-between pt-2 border-t border-gray-100">
                     <div className="space-y-0.5">
-                      <h3 className="text-xs font-bold text-[#0F172A] leading-tight">{cat.title}</h3>
+                      <h2 className="text-xs font-bold text-[#0F172A] leading-tight">{cat.title}</h2>
                       <p className="text-[10px] text-gray-500 font-medium leading-tight">{cat.desc}</p>
                     </div>
                     <div className="w-6 h-6 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 group-hover:bg-[#F97316] group-hover:text-white group-hover:border-[#F97316] transition shrink-0">
@@ -1688,7 +1679,7 @@ function ShopContent() {
       </section>
 
       {/* ================= 3. MAIN CONTENT: FILTERS & PRODUCT GRID ================= */}
-      <section className="w-full bg-[#C0C0C0] py-8 sm:py-12 px-4 sm:px-10 lg:px-16 border-b border-gray-300/60">
+      <section className="w-full bg-[#C0C0C0] py-8 sm:py-12 px-4 sm:px-10 lg:px-16 border-b border-gray-300/60" aria-label="Catalog Section">
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Left Sidebar: Interactive Filters */}
@@ -1725,6 +1716,7 @@ function ShopContent() {
                         name="categoryFilter"
                         checked={selectedCategories.includes(item.key)}
                         onChange={() => toggleCategory(item.key)}
+                        aria-label={item.name}
                         className="text-[#F97316] focus:ring-[#F97316]"
                       />
                       <span>{item.name}</span>
@@ -1745,6 +1737,7 @@ function ShopContent() {
                         type="checkbox"
                         checked={selectedBrands.includes(brand)}
                         onChange={() => toggleBrand(brand)}
+                        aria-label={brand}
                         className="rounded text-[#F97316] focus:ring-[#F97316]"
                       />
                       <span>{brand}</span>
@@ -1772,6 +1765,7 @@ function ShopContent() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
+                  aria-label="Sort products by"
                   className="bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs text-[#0F172A] outline-none"
                 >
                   <option value="popular">Popularity</option>
@@ -1794,12 +1788,12 @@ function ShopContent() {
                     >
                       <div className="space-y-3">
                         <div className="relative w-full h-52 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-4">
-                          <img
+                          <Image
                             src={product.image}
                             alt={product.name}
-                            loading="lazy"
-                            decoding="async"
-                            className="max-h-full max-w-full object-contain transition-transform duration-300 scale-[1.2]"
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                            className="object-contain transition-transform duration-300 scale-110"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1838,13 +1832,13 @@ function ShopContent() {
               <div className="xl:col-span-4 space-y-6">
                 <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">Visit Our Cashel Store</h3>
-                  <div className="rounded-xl overflow-hidden border border-gray-200 aspect-[16/9]">
-                    <img 
+                  <div className="rounded-xl overflow-hidden border border-gray-200 aspect-[16/9] relative">
+                    <Image 
                       src="/shop-4.jpeg" 
                       alt="Store" 
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover" 
+                      fill
+                      sizes="(max-width: 1280px) 100vw, 33vw"
+                      className="object-cover" 
                     />
                   </div>
                   <p className="text-[11px] text-gray-600">See our full range in person. Get expert advice and friendly support.</p>
@@ -1868,30 +1862,42 @@ function ShopContent() {
                   )}
 
                   <form onSubmit={handleQuickInquirySubmit} className="space-y-3">
-                    <input
-                      type="text"
-                      placeholder="Your Name *"
-                      required
-                      value={quickForm.name}
-                      onChange={(e) => setQuickForm({ ...quickForm, name: e.target.value })}
-                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Email or Phone *"
-                      required
-                      value={quickForm.emailOrPhone}
-                      onChange={(e) => setQuickForm({ ...quickForm, emailOrPhone: e.target.value })}
-                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]"
-                    />
-                    <textarea
-                      rows={2}
-                      placeholder="Tell us what you're looking for..."
-                      required
-                      value={quickForm.message}
-                      onChange={(e) => setQuickForm({ ...quickForm, message: e.target.value })}
-                      className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none resize-none focus:ring-2 focus:ring-[#F97316]"
-                    ></textarea>
+                    <div className="space-y-1">
+                      <label htmlFor="shop-quick-name" className="text-[11px] font-bold text-[#0F172A]">Your Name *</label>
+                      <input
+                        id="shop-quick-name"
+                        type="text"
+                        placeholder="Your Name *"
+                        required
+                        value={quickForm.name}
+                        onChange={(e) => setQuickForm({ ...quickForm, name: e.target.value })}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="shop-quick-contact" className="text-[11px] font-bold text-[#0F172A]">Email or Phone *</label>
+                      <input
+                        id="shop-quick-contact"
+                        type="text"
+                        placeholder="Email or Phone *"
+                        required
+                        value={quickForm.emailOrPhone}
+                        onChange={(e) => setQuickForm({ ...quickForm, emailOrPhone: e.target.value })}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#F97316]"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="shop-quick-msg" className="text-[11px] font-bold text-[#0F172A]">Message *</label>
+                      <textarea
+                        id="shop-quick-msg"
+                        rows={2}
+                        placeholder="Tell us what you're looking for..."
+                        required
+                        value={quickForm.message}
+                        onChange={(e) => setQuickForm({ ...quickForm, message: e.target.value })}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs outline-none resize-none focus:ring-2 focus:ring-[#F97316]"
+                      ></textarea>
+                    </div>
                     <button
                       type="submit"
                       disabled={loading}
@@ -1911,7 +1917,7 @@ function ShopContent() {
       </section>
 
       {/* ================= 4. TRUST HIGHLIGHTS BAR ================= */}
-      <section className="w-full bg-[#C0C0C0] py-8 px-6 sm:px-10 lg:px-16">
+      <section className="w-full bg-[#C0C0C0] py-8 px-6 sm:px-10 lg:px-16" aria-label="Trust Highlights">
         <div className="max-w-[1680px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
             <div className="bg-white border border-gray-300 rounded-2xl p-4 flex items-center gap-3">
@@ -1949,24 +1955,25 @@ function ShopContent() {
 
       {/* ================= 5. POPUP MODAL ================= */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-[99999] flex items-start justify-center p-4 sm:p-6 pt-36 sm:pt-44 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto">
+        <div className="fixed inset-0 z-[99999] flex items-start justify-center p-4 sm:p-6 pt-36 sm:pt-44 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto" role="dialog" aria-modal="true">
           <div className="bg-white border border-slate-300 rounded-3xl max-w-4xl w-[95%] sm:w-[85%] lg:w-[75%] p-6 sm:p-10 shadow-2xl relative space-y-6 max-h-[85vh] overflow-y-auto my-auto mb-12">
             
             <button
               onClick={() => setSelectedProduct(null)}
+              aria-label="Close dialog"
               className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full p-2.5 transition outline-none z-10 shadow-md"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner">
-                <img
+              <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner relative">
+                <Image
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="max-h-full max-w-full object-contain drop-shadow-2xl scale-[1.3]"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain drop-shadow-2xl"
                 />
               </div>
 
@@ -2033,7 +2040,7 @@ function ShopContent() {
         </div>
       )}
 
-    </div>
+    </main>
   );
 }
 

@@ -82,9 +82,11 @@ export default function Navbar() {
 
           {/* Brand Logo (Mobile) */}
           <Link href="/" className="flex items-center shrink-0 outline-none">
-            <img
+            <Image
               src="/rox-logo.png"
               alt="ROX Tech Solutions Logo"
+              width={160}
+              height={40}
               className="h-10 w-auto object-contain"
             />
           </Link>
@@ -92,9 +94,11 @@ export default function Navbar() {
 
         {/* 1. Brand Logo (Desktop) */}
         <Link href="/" className="hidden lg:flex items-center gap-2.5 group shrink-0 outline-none">
-          <img
+          <Image
             src="/rox-logo.png"
             alt="ROX Tech Solutions Logo"
+            width={180}
+            height={56}
             className="h-12 xl:h-14 w-auto object-contain transition-transform group-hover:scale-105"
           />
         </Link>
@@ -119,21 +123,9 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Search Bar (Desktop) */}
-        {/* <div className="hidden md:flex items-center relative w-56 lg:w-72">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-gray-100 border border-gray-300 rounded-full py-2 pl-4 pr-10 text-xs text-gray-800 placeholder-gray-400 focus:bg-white focus:border-[#F97316] outline-none transition"
-          />
-          <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
-        </div> */}
-
         {/* Right Actions */}
         <div className="flex items-center space-x-2 sm:space-x-3">
-          <button className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none">
+          <button aria-label="Search" className="lg:hidden p-1 text-gray-800 hover:text-[#F97316] outline-none">
             <Search className="w-5 h-5" />
           </button>
 
