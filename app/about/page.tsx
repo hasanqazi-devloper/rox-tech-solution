@@ -167,7 +167,7 @@ export default function AboutPage() {
 
           <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
             <Image
-              src="/shop-2.jpeg"
+              src="/shop-2.jpg"
               alt="ROX Tech Store Showcase in Cashel"
               fill
               sizes="100vw"
@@ -203,7 +203,7 @@ export default function AboutPage() {
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-black/10 aspect-[16/10] w-full bg-white">
               <Image
-                src="/shop-3.jpeg"
+                src="/shop-3.jpg"
                 alt="ROX Tech Solutions Storefront Cashel"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -291,7 +291,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
             <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
               <Image
-                src="/shop-8.jpeg"
+                src="/shop-8.jpg"
                 alt="ROX Tech Store Interior 1"
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -301,7 +301,7 @@ export default function AboutPage() {
 
             <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
               <Image
-                src="/shop-7.jpeg"
+                src="/shop-7.jpg"
                 alt="ROX Tech Store Interior 2"
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -311,7 +311,7 @@ export default function AboutPage() {
 
             <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
               <Image
-                src="/shop-6.jpeg"
+                src="/shop-6.jpg"
                 alt="ROX Tech Store Interior 3"
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -321,7 +321,7 @@ export default function AboutPage() {
 
             <div className="rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm aspect-[16/10] group relative">
               <Image
-                src="/shop-5.jpeg"
+                src="/shop-5.jpg"
                 alt="ROX Tech Store Interior 4"
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

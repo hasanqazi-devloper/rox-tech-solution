@@ -219,7 +219,7 @@ export default function FeaturedProducts() {
         <div className="lg:col-span-4 xl:col-span-3 relative overflow-hidden rounded-3xl min-h-[220px] lg:min-h-full shadow-sm bg-white">
           <div 
             className="absolute inset-0 bg-cover bg-right bg-no-repeat"
-            style={{ backgroundImage: "url('/card.jpeg')" }}
+            style={{ backgroundImage: "url('/card.jpg')" }}
           />
           <div 
             className="absolute inset-0 bg-[#0F291E] [clip-path:polygon(0_0,62%_0,48%_100%,0_100%)] z-10"

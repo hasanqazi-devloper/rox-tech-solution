@@ -1546,7 +1546,7 @@ function ShopContent() {
           <div className="absolute inset-0 w-full h-full flex justify-end">
             <div className="relative w-full lg:w-[75%] h-full">
               <Image
-                src="/shop-4.jpeg"
+                src="/shop-4.jpg"
                 alt="Shop Tech & Accessories Showcase"
                 fill
                 priority

@@ -770,7 +770,7 @@ export default function RepairsPage() {
             </div>
             <div className="rounded-2xl overflow-hidden border border-gray-300 aspect-[16/10] bg-white relative">
               <Image
-                src="/shop-4.jpeg"
+                src="/shop-4.jpg"
                 alt="Cashel Store"
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
