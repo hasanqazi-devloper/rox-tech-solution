@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "@/app/utils/supabase";
 import {
   MapPin,
   MessageCircle,
@@ -19,9 +20,8 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-// Strictly Categorized 29 VAPE_PRODUCTS Array with Exact Image Paths & Category Mapping
-const VAPE_PRODUCTS = [
-  // --- 1. Coils, Batteries & Replacement Pods (Coils Category) ---
+// Fallback Inventory agar database mein data na ho ya load ho raha ho
+const FALLBACK_VAPE_PRODUCTS = [
   {
     id: 101,
     name: "SMOK TFV Series Replacement Coils",
@@ -94,8 +94,6 @@ const VAPE_PRODUCTS = [
     description: "Upgraded top-fill replacement pods compatible with Voopoo Argus P1, Argus G, and Argus Pod systems.",
     features: ["Patented Leakproof Design", "Top E-Juice Refill", "0.7Ω & 1.2Ω Options", "Full-View Translucent Pod"]
   },
-
-  // --- 2. Vaping Kits & Hardware Devices (Devices Category) ---
   {
     id: 1,
     name: "Vaporesso Luxe X2 Pod Kit",
@@ -180,8 +178,6 @@ const VAPE_PRODUCTS = [
     description: "Heavy-duty gunmetal mod crafted for cloud chasers who demand rugged durability and advanced temperature control modes.",
     features: ["Rugged Gunmetal Finish", "Advanced TC Mode", "Ergonomic Grip", "High Wattage Capability"]
   },
-
-  // --- 3. E-Liquids & Juices (Fruits / Menthol / Tobacco Categories) ---
   {
     id: 8,
     name: "Elfliq Blueberry Ice 10ml Nic Salt",
@@ -230,7 +226,6 @@ const VAPE_PRODUCTS = [
     description: "Smooth, earthy traditional tobacco flavor designed for transitioning smokers looking for an authentic taste profile.",
     features: ["Authentic Tobacco Taste", "30ml Bottle", "Smooth Throat Hit", "All-Day Vape"]
   },
-
   {
     id: 22,
     name: "Hale Vaping Irish E-Liquid Series",
@@ -243,8 +238,6 @@ const VAPE_PRODUCTS = [
     description: "Premium TPD-compliant Irish manufactured e-liquids available in classic menthol, tobacco, and fruity blends.",
     features: ["100% TPD Compliant", "Irish Crafted E-Liquid", "Multiple Nicotine Strengths", "Clean Coil Formulation"]
   },
-
-  // --- 4. Disposables & Pod Devices (Pods Category) ---
   {
     id: 12,
     name: "Lost Mary BM600 Orange Ice Disposable",
@@ -293,8 +286,6 @@ const VAPE_PRODUCTS = [
     description: "Advanced refillable pod kit offering long-term economic vaping with premium IVG flavor pods.",
     features: ["Refillable System", "10K Eco Friendly", "Fast USB-C Charging", "Ergonomic Design"]
   },
-
-  // --- 5. Nicotine Pouches & Tins (Pouches Category) ---
   {
     id: 16,
     name: "Cuba White Ultra Strong Pouches",
@@ -370,14 +361,38 @@ const VAPE_PRODUCTS = [
 ];
 
 export default function VapeShopPage() {
+  const [products, setProducts] = useState<any[]>(FALLBACK_VAPE_PRODUCTS);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedFlavors, setSelectedFlavors] = useState<string[]>([]);
   const [selectedNicotine, setSelectedNicotine] = useState<string[]>([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   // Selected product for Modal Popup
-  const [selectedProduct, setSelectedProduct] = useState<typeof VAPE_PRODUCTS[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
+
+  useEffect(() => {
+    fetchVapesProducts();
+  }, []);
+
+  const fetchVapesProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("vapes_products")
+        .select("*")
+        .order("id", { ascending: false });
+
+      if (!error && data && data.length > 0) {
+        const dbNames = new Set(data.map((item: any) => item.name.trim().toLowerCase()));
+        const remainingFallback = FALLBACK_VAPE_PRODUCTS.filter(
+          (item) => !dbNames.has(item.name.trim().toLowerCase())
+        );
+        setProducts([...data, ...remainingFallback]);
+      }
+    } catch (err) {
+      console.error("Error fetching vapes products:", err);
+    }
+  };
 
   const toggleItem = (list: string[], setList: Function, value: string) => {
     setList(list.includes(value) ? list.filter(i => i !== value) : [...list, value]);
@@ -392,8 +407,8 @@ export default function VapeShopPage() {
   };
 
   const filteredProducts = useMemo(() => {
-    return VAPE_PRODUCTS.filter(product => {
-      const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+    return products.filter(product => {
+      const matchBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand?.toLowerCase());
       const matchFlavor = selectedFlavors.length === 0 || selectedFlavors.includes(product.flavor);
       const matchNicotine = selectedNicotine.length === 0 || selectedNicotine.includes(product.nicotine);
       const matchCategory = !activeCategory || product.flavor === activeCategory || (activeCategory === "fruits" && (product.flavor === "fruits" || product.flavor === "menthol" || product.flavor === "tobacco"));
@@ -402,7 +417,7 @@ export default function VapeShopPage() {
 
       return matchBrand && matchFlavor && matchNicotine && matchCategory && matchSearch;
     });
-  }, [selectedBrands, selectedFlavors, selectedNicotine, activeCategory, searchQuery]);
+  }, [products, selectedBrands, selectedFlavors, selectedNicotine, activeCategory, searchQuery]);
 
   return (
     <main className="w-full bg-[#F1F5F9] min-h-screen text-[#0F172A] font-sans relative z-0">
@@ -516,50 +531,25 @@ export default function VapeShopPage() {
         <div className="max-w-[1680px] mx-auto">
           <div className="flex lg:grid lg:grid-cols-6 gap-3 overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
             {[
-              {
-                title: "Vaping Kits",
-                img: "/vapes/Vaping_Kits-removebg-preview.png",
-                key: "devices"
-              },
-              {
-                title: "Coils & Batteries",
-                img: "/vapes/coils.png",
-                key: "coils"
-              },
-              {
-                title: "All Juices",
-                img: "/vapes/All_Juices-removebg-preview.png",
-                key: "fruits"
-              },
-              {
-                title: "Disposables & Pods",
-                img: "/vapes/Disposables___Pods-removebg-preview.png",
-                key: "pods"
-              },
-              {
-                title: "Nicotine Pouches",
-                img: "/vapes/Nicotine_Pouches-removebg-preview.png",
-                key: "pouches"
-              },
-              {
-                title: "All Products",
-                img: "/vapes/All_Products-removebg-preview.png",
-                key: null
-              }
+              { title: "Vaping Kits", img: "/vapes/Vaping_Kits-removebg-preview.png", key: "devices" },
+              { title: "Coils & Batteries", img: "/vapes/coils.png", key: "coils" },
+              { title: "All Juices", img: "/vapes/All_Juices-removebg-preview.png", key: "fruits" },
+              { title: "Disposables & Pods", img: "/vapes/Disposables___Pods-removebg-preview.png", key: "pods" },
+              { title: "Nicotine Pouches", img: "/vapes/Nicotine_Pouches-removebg-preview.png", key: "pouches" },
+              { title: "All Products", img: "/vapes/All_Products-removebg-preview.png", key: null }
             ].map((cat, idx) => (
               <div
                 key={idx}
                 onClick={() => setActiveCategory(cat.key)}
-                className={`min-w-[150px] sm:min-w-0 flex-1 bg-white border rounded-2xl p-3.5 shadow-sm hover:shadow-md transition cursor-pointer group flex flex-col justify-between h-40 snap-start outline-none ${activeCategory === cat.key ? "border-[#F97316] ring-2 ring-[#F97316]/30 bg-orange-50/40" : "border-slate-300"
-                  }`}
+                className={`min-w-[150px] sm:min-w-0 flex-1 bg-white border rounded-2xl p-3.5 shadow-sm hover:shadow-md transition cursor-pointer group flex flex-col justify-between h-40 snap-start outline-none ${activeCategory === cat.key ? "border-[#F97316] ring-2 ring-[#F97316]/30 bg-orange-50/40" : "border-slate-300"}`}
               >
                 <div className="w-full h-24 flex items-center justify-center p-1 bg-slate-50/80 rounded-xl overflow-hidden relative">
-                  <Image 
-                    src={cat.img} 
-                    alt={cat.title} 
+                  <Image
+                    src={cat.img}
+                    alt={cat.title}
                     fill
                     sizes="(max-width: 640px) 150px, (max-width: 1024px) 25vw, 16vw"
-                    className="object-contain group-hover:scale-110 transition-transform duration-300" 
+                    className="object-contain group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
                 <div className="flex items-center justify-between pt-1.5 border-t border-slate-100">
@@ -699,24 +689,25 @@ export default function VapeShopPage() {
 
             {/* Enhanced Product Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filteredProducts.map((product) => (
+              {filteredProducts.map((product, index) => (
                 <div
-                  key={product.id}
+                  key={`${product.id}-${index}`}
                   onClick={() => setSelectedProduct(product)}
                   className="bg-white border border-slate-300 rounded-2xl p-4 shadow-sm hover:shadow-xl hover:border-[#22C55E] transition-all duration-300 flex flex-col justify-between space-y-4 group relative z-0 cursor-pointer"
                 >
                   <div className="space-y-3">
                     <div className="relative w-full h-64 sm:h-72 rounded-xl bg-[#F8FAFC] border border-slate-200 overflow-hidden flex items-center justify-center p-4 group-hover:bg-slate-100/80 transition-colors">
                       {product.badge && (
-                        <span className={`absolute top-2.5 left-2.5 ${product.badgeColor || "bg-[#22C55E]"} text-white text-[10px] font-bold px-2 py-0.5 rounded-md z-10 shadow-sm`}>
+                        <span className={`absolute top-2.5 left-2.5 ${product.badge_color || product.badgeColor || "bg-[#22C55E]"} text-white text-[10px] font-bold px-2 py-0.5 rounded-md z-10 shadow-sm`}>
                           {product.badge}
                         </span>
                       )}
 
                       <Image
-                        src={product.image}
+                        src={product.image || "/vapes/Vaporesso_Luxe_X2_Pod_Kit-removebg-preview.png"}
                         alt={product.name}
                         fill
+                        unoptimized={(product.image || "").startsWith("http")}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="object-contain group-hover:scale-110 transition-transform duration-300"
                       />
@@ -752,11 +743,11 @@ export default function VapeShopPage() {
         </div>
       </section>
 
-      {/* ================= 4. PERFECT LOWER-START MODAL (CLEARS NAVBAR COMPLETELY WITH PT-36 / PT-44) ================= */}
+      {/* ================= 4. POPUP MODAL ================= */}
       {selectedProduct && (
         <div className="fixed inset-0 z-[99999] flex items-start justify-center p-4 sm:p-6 pt-36 sm:pt-44 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto" role="dialog" aria-modal="true">
           <div className="bg-white border border-slate-300 rounded-3xl max-w-4xl w-[95%] sm:w-[85%] lg:w-[75%] p-6 sm:p-10 shadow-2xl relative space-y-6 max-h-[85vh] overflow-y-auto my-auto mb-12">
-            
+
             {/* Close Button */}
             <button
               onClick={() => setSelectedProduct(null)}
@@ -767,18 +758,17 @@ export default function VapeShopPage() {
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              {/* Large Centered Modal Image */}
               <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner relative">
                 <Image
-                  src={selectedProduct.image}
+                  src={selectedProduct.image || "/vapes/Vaporesso_Luxe_X2_Pod_Kit-removebg-preview.png"}
                   alt={selectedProduct.name}
                   fill
+                  unoptimized={(selectedProduct.image || "").startsWith("http")}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain drop-shadow-2xl"
                 />
               </div>
 
-              {/* Modal Information & SEO Rich Content */}
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2">
                   <span className="text-xs font-bold px-3 py-1 rounded-md bg-orange-100 text-[#F97316] uppercase tracking-wider">
@@ -794,36 +784,42 @@ export default function VapeShopPage() {
                 </h2>
 
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                  {selectedProduct.description}
+                  {selectedProduct.description || "Authentic high-quality vaping product available directly at ROX Tech Solutions in Cashel."}
                 </p>
 
-                {/* Extended SEO Value Section */}
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
                   <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-[#F97316]" />
                     <span>Why Choose This Product at ROX Tech Cashel</span>
                   </h4>
                   <p className="text-[11px] text-slate-500 leading-relaxed">
-                    Verified authentic stock available directly at our physical store in Cashel, County Tipperary. Enjoy expert local advice, quick WhatsApp inquiries, and guaranteed top-tier performance for all vaping kits, e-liquids, coils, and pouches.
+                    Verified authentic stock available directly at our physical store in Cashel, County Tipperary. Enjoy expert local advice, quick WhatsApp inquiries, and guaranteed top-tier performance.
                   </p>
                 </div>
 
-                {/* Key Features List */}
-                <div className="space-y-2 pt-1">
-                  <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">Key Specifications:</h4>
-                  <div className="grid grid-cols-2 gap-2.5">
-                    {selectedProduct.features.map((feat, i) => (
-                      <div key={i} className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
-                        <CheckCircle2 className="w-4 h-4 text-[#22C55E] shrink-0" />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
+                {selectedProduct.features && (
+                  <div className="space-y-2 pt-1">
+                    <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">Key Specifications:</h4>
+                    <div className="grid grid-cols-2 gap-2.5">
+                      {Array.isArray(selectedProduct.features) ? (
+                        selectedProduct.features.map((feat: string, i: number) => (
+                          <div key={i} className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-[#22C55E] shrink-0" />
+                            <span>{feat}</span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                          <CheckCircle2 className="w-4 h-4 text-[#22C55E] shrink-0" />
+                          <span>{selectedProduct.features}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
 
-            {/* Modal Footer WhatsApp CTA */}
             <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-slate-500 font-medium">
                 📍 Available now at ROX Tech Store, Cashel, Co. Tipperary.

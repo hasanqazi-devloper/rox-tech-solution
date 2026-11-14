@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "@/app/utils/supabase";
 import {
   MapPin,
   MessageCircle,
@@ -20,8 +21,8 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-// Complete Updated Inventory Retaining All Original Products + Added New Requested Stock
-const INITIAL_PRODUCTS = [
+// Complete Updated Inventory Retaining All Original Products + Database Support
+const FALLBACK_PRODUCTS = [
   // ================= 1. SMARTPHONES =================
   // --- iPhones ---
   { 
@@ -263,7 +264,7 @@ const INITIAL_PRODUCTS = [
   },
 
   // --- Samsung S Series (S22 to S26) & Foldables ---
- {
+  {
     id: 307,
     name: "Samsung Galaxy S22",
     category: "smartphones",
@@ -551,7 +552,6 @@ const INITIAL_PRODUCTS = [
     description: "Stunning Liquid Retina XDR display, M-series processing power, and cellular connectivity for workflow anywhere.",
     features: ["Liquid Retina XDR", "M-Series Performance", "Cellular & Wi-Fi", "Apple Pencil Support"]
   },
- 
   { 
     id: 6, 
     name: "Hoco Android Tablet", 
@@ -565,7 +565,7 @@ const INITIAL_PRODUCTS = [
 
   // ================= 2. LAPTOPS & DESKTOPS =================
   // --- MacBooks (2020 to Latest M4) ---
- { 
+  { 
     id: 201, 
     name: "Apple MacBook Air 2020 (M1)", 
     category: "laptops", 
@@ -768,7 +768,7 @@ const INITIAL_PRODUCTS = [
     category: "audio", 
     brand: "jbl", 
     specs: "Deep Bass Sound", 
-    image: "/products/JBL_Wireless_Earbuds.png0",
+    image: "/products/JBL_Wireless_Earbuds.png",
     description: "True wireless earbuds delivering crisp acoustics and deep punchy bass for all-day listening comfort.",
     features: ["Deep Bass Sound", "Ergonomic Fit", "Touch Controls", "Charging Case Included"]
   },
@@ -804,7 +804,7 @@ const INITIAL_PRODUCTS = [
   },
 
   // ================= 4. SMART WATCHES =================
- // --- Apple Watch Ultra Lineup (1 to 4) ---
+  // --- Apple Watch Ultra Lineup (1 to 4) ---
   { 
     id: 701, 
     name: "Apple Watch Ultra 1", 
@@ -1438,13 +1438,39 @@ function ShopContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
 
+  const [products, setProducts] = useState<any[]>(FALLBACK_PRODUCTS);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>("popular");
 
   // Selected product for Modal Popup
-  const [selectedProduct, setSelectedProduct] = useState<typeof INITIAL_PRODUCTS[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
+
+  // Fetch live products from Supabase database, seamlessly merging without duplicating items
+  useEffect(() => {
+    fetchLiveProducts();
+  }, []);
+
+  const fetchLiveProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .order("id", { ascending: false });
+
+      if (!error && data && data.length > 0) {
+        // Deduplicate by normalized product name so zero products are missed and zero duplicates appear
+        const dbNames = new Set(data.map((item) => item.name.trim().toLowerCase()));
+        const remainingFallback = FALLBACK_PRODUCTS.filter(
+          (item) => !dbNames.has(item.name.trim().toLowerCase())
+        );
+        setProducts([...data, ...remainingFallback]);
+      }
+    } catch (err) {
+      console.error("Error fetching live products:", err);
+    }
+  };
 
   // Sync category selection with URL parameter
   useEffect(() => {
@@ -1462,7 +1488,6 @@ function ShopContent() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
 
-  // Single Category Selection Logic
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
       prev.includes(cat) ? [] : [cat]
@@ -1516,10 +1541,10 @@ function ShopContent() {
   };
 
   const filteredProducts = useMemo(() => {
-    let result = INITIAL_PRODUCTS.filter((product) => {
+    let result = products.filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.specs.toLowerCase().includes(searchQuery.toLowerCase());
+        (product.specs && product.specs.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchesCategory =
         selectedCategories.length === 0 || selectedCategories.includes(product.category);
@@ -1535,10 +1560,39 @@ function ShopContent() {
     }
 
     return result;
-  }, [searchQuery, selectedCategories, selectedBrands, sortBy]);
+  }, [products, searchQuery, selectedCategories, selectedBrands, sortBy]);
+
+  // SEO Structured Data (JSON-LD) for Local Store & Product Catalog
+  const jsonLd = useMemo(() => ({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "ROX Tech Solutions Product Catalog - Cashel, Ireland",
+    "description": "Smartphones, Laptops, Gaming Consoles, Smartwatches, Audio & Tech Accessories available in Cashel, Co. Tipperary.",
+    "numberOfItems": filteredProducts.length,
+    "itemListElement": filteredProducts.slice(0, 30).map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Product",
+        "name": product.name,
+        "description": product.description || product.specs,
+        "brand": {
+          "@type": "Brand",
+          "name": product.brand ? product.brand.toUpperCase() : "ROX Tech"
+        },
+        "category": product.category,
+        "image": product.image
+      }
+    }))
+  }), [filteredProducts]);
 
   return (
     <main className="w-full bg-[#C0C0C0] min-h-screen text-[#0F172A] font-sans relative z-0">
+      {/* Structured SEO Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* ================= 1. HERO BANNER SECTION ================= */}
       <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/65" aria-label="Shop Hero">
@@ -1547,9 +1601,10 @@ function ShopContent() {
             <div className="relative w-full lg:w-[75%] h-full">
               <Image
                 src="/shop-4.jpg"
-                alt="Shop Tech & Accessories Showcase"
+                alt="ROX Tech Solutions Shop Tech & Accessories Showcase Cashel"
                 fill
                 priority
+                quality={85}
                 sizes="75vw"
                 className="object-cover object-right"
               />
@@ -1629,8 +1684,10 @@ function ShopContent() {
           <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
             <Image 
               src="/shop-4.jpeg" 
-              alt="Shop Showcase" 
+              alt="ROX Tech Cashel Store Showcase" 
               fill
+              priority
+              quality={85}
               sizes="100vw"
               className="object-cover object-center" 
             />
@@ -1656,9 +1713,11 @@ function ShopContent() {
                   <div className="w-full h-24 flex items-center justify-center p-1 overflow-hidden relative">
                     <Image 
                       src={cat.img} 
-                      alt={cat.title} 
+                      alt={`${cat.title} - ${cat.desc}`} 
                       fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                      loading="eager"
+                      quality={80}
+                      sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15vw"
                       className="object-contain group-hover:scale-110 transition-transform duration-300" 
                     />
                   </div>
@@ -1683,7 +1742,7 @@ function ShopContent() {
         <div className="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Left Sidebar: Interactive Filters */}
-          <div className="lg:col-span-3 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
+          <aside className="lg:col-span-3 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-6">
             <div className="flex items-center justify-between border-b border-gray-200 pb-4">
               <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A] flex items-center gap-2">
                 <SlidersHorizontal className="w-4 h-4 text-[#F97316]" />
@@ -1746,7 +1805,7 @@ function ShopContent() {
                 ))}
               </div>
             </div>
-          </div>
+          </aside>
 
           {/* Product Listing Area */}
           <div className="lg:col-span-9 space-y-6">
@@ -1780,41 +1839,51 @@ function ShopContent() {
               {/* Filtered Products Grid */}
               <div className="xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {filteredProducts.length > 0 ? (
-                  filteredProducts.map((product) => (
-                    <div 
-                      key={product.id} 
-                      onClick={() => setSelectedProduct(product)}
-                      className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:border-[#F97316] transition cursor-pointer flex flex-col justify-between space-y-4 group"
-                    >
-                      <div className="space-y-3">
-                        <div className="relative w-full h-52 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-4">
-                          <Image
-                            src={product.image}
-                            alt={product.name}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                            className="object-contain transition-transform duration-300 scale-110"
-                          />
+                  filteredProducts.map((product, index) => {
+                    const imgSrc = product.image || "/products/iphone-15.png";
+                    const isExternalUrl = imgSrc.startsWith("http");
+                    const isPriority = index < 6;
+
+                    return (
+                      <article 
+                        key={`${product.id}-${product.name}-${index}`} 
+                        onClick={() => setSelectedProduct(product)}
+                        className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:border-[#F97316] transition cursor-pointer flex flex-col justify-between space-y-4 group"
+                      >
+                        <div className="space-y-3">
+                          <div className="relative w-full h-52 rounded-xl bg-gray-50 overflow-hidden flex items-center justify-center p-4">
+                            <Image
+                              src={imgSrc}
+                              alt={`${product.name} - ${product.specs || product.category} | ROX Tech Cashel`}
+                              fill
+                              priority={isPriority}
+                              loading={isPriority ? "eager" : "lazy"}
+                              quality={80}
+                              unoptimized={isExternalUrl}
+                              sizes="(max-width: 640px) 90vw, (max-width: 1280px) 45vw, 22vw"
+                              className="object-contain transition-transform duration-300 scale-110"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <h3 className="text-xs font-bold text-[#0F172A] group-hover:text-[#F97316] transition-colors">{product.name}</h3>
+                            <p className="text-[11px] text-gray-500">{product.specs}</p>
+                          </div>
                         </div>
-                        <div className="space-y-1">
-                          <h3 className="text-xs font-bold text-[#0F172A] group-hover:text-[#F97316] transition-colors">{product.name}</h3>
-                          <p className="text-[11px] text-gray-500">{product.specs}</p>
+                        <div className="space-y-2 pt-2">
+                          <a
+                            href={`https://wa.me/353896091839?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-2.5 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1.5 transition shadow-sm"
+                          >
+                            <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                            <span>WhatsApp Inquiry</span>
+                          </a>
                         </div>
-                      </div>
-                      <div className="space-y-2 pt-2">
-                        <a
-                          href={`https://wa.me/353896091839?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-full bg-[#00D66C] hover:bg-[#00B85C] text-white py-2.5 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1.5 transition shadow-sm"
-                        >
-                          <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                          <span>WhatsApp Inquiry</span>
-                        </a>
-                      </div>
-                    </div>
-                  ))
+                      </article>
+                    );
+                  })
                 ) : (
                   <div className="col-span-2 bg-white rounded-2xl p-8 text-center space-y-3 border border-gray-200">
                     <p className="text-xs text-gray-500 font-bold">No products match your selected filters.</p>
@@ -1829,15 +1898,17 @@ function ShopContent() {
               </div>
 
               {/* Right Side Banners & Quick Inquiry Form */}
-              <div className="xl:col-span-4 space-y-6">
+              <aside className="xl:col-span-4 space-y-6">
                 <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">Visit Our Cashel Store</h3>
                   <div className="rounded-xl overflow-hidden border border-gray-200 aspect-[16/9] relative">
                     <Image 
                       src="/shop-4.jpeg" 
-                      alt="Store" 
+                      alt="ROX Tech Physical Storefront in Cashel, Co. Tipperary" 
                       fill
-                      sizes="(max-width: 1280px) 100vw, 33vw"
+                      loading="lazy"
+                      quality={80}
+                      sizes="(max-width: 1280px) 95vw, 30vw"
                       className="object-cover" 
                     />
                   </div>
@@ -1908,7 +1979,7 @@ function ShopContent() {
                     </button>
                   </form>
                 </div>
-              </div>
+              </aside>
 
             </div>
           </div>
@@ -1969,10 +2040,12 @@ function ShopContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="w-full h-80 sm:h-96 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center p-6 shadow-inner relative">
                 <Image
-                  src={selectedProduct.image}
-                  alt={selectedProduct.name}
+                  src={selectedProduct.image || "/products/iphone-15.png"}
+                  alt={`${selectedProduct.name} detailed view`}
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                  unoptimized={(selectedProduct.image || "").startsWith("http")}
+                  sizes="(max-width: 768px) 90vw, 45vw"
                   className="object-contain drop-shadow-2xl"
                 />
               </div>
@@ -2009,12 +2082,19 @@ function ShopContent() {
                   <div className="space-y-2 pt-1">
                     <h4 className="text-xs font-bold text-[#0F172A] uppercase tracking-wider">Key Specifications:</h4>
                     <div className="grid grid-cols-2 gap-2.5">
-                      {selectedProduct.features.map((feat, i) => (
-                        <div key={i} className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                      {Array.isArray(selectedProduct.features) ? (
+                        selectedProduct.features.map((feat: string, i: number) => (
+                          <div key={i} className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-[#22C55E] shrink-0" />
+                            <span>{feat}</span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
                           <CheckCircle2 className="w-4 h-4 text-[#22C55E] shrink-0" />
-                          <span>{feat}</span>
+                          <span>{selectedProduct.features}</span>
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
                 )}

@@ -1,16 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  
-  // Ye line 'out' folder banaye gi
+  output: "export", // Yeh static 'out' folder generate karega
+
   images: {
-    unoptimized: true,
+    unoptimized: true, // Static export ('export') ke liye zaroori hai
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '**',
+        protocol: "https",
+        hostname: "**.supabase.co", // Supabase Storage images ke liye
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com", // Unsplash images ke liye
+        pathname: "**",
       },
     ],
   },
