@@ -1683,7 +1683,7 @@ function ShopContent() {
 
           <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
             <Image 
-              src="/shop-4.jpeg" 
+              src="/shop-4.jpg" 
               alt="ROX Tech Cashel Store Showcase" 
               fill
               priority
@@ -1903,7 +1903,7 @@ function ShopContent() {
                   <h3 className="text-xs font-bold uppercase tracking-widest text-[#0F172A]">Visit Our Cashel Store</h3>
                   <div className="rounded-xl overflow-hidden border border-gray-200 aspect-[16/9] relative">
                     <Image 
-                      src="/shop-4.jpeg" 
+                      src="/shop-4.jpg" 
                       alt="ROX Tech Physical Storefront in Cashel, Co. Tipperary" 
                       fill
                       loading="lazy"
