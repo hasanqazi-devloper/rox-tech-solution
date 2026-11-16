@@ -17,7 +17,8 @@ import {
   ArrowRight,
   Sparkles,
   X,
-  CheckCircle2
+  CheckCircle2,
+  ShieldAlert
 } from "lucide-react";
 
 // Fallback Inventory agar database mein data na ho ya load ho raha ho
@@ -239,6 +240,18 @@ const FALLBACK_VAPE_PRODUCTS = [
     features: ["100% TPD Compliant", "Irish Crafted E-Liquid", "Multiple Nicotine Strengths", "Clean Coil Formulation"]
   },
   {
+    id: 24,
+    name: "LIQUA Premium 10ml E-Liquid Collection",
+    brand: "liqua",
+    flavor: "fruits",
+    nicotine: "3mg / 6mg / 12mg / 18mg",
+    badge: "Classic Range",
+    badgeColor: "bg-[#F97316]",
+    image: "/vapes/e-liquids-liqua.png",
+    description: "Authentic LIQUA 10ml premium vape liquids featuring popular blends including American Blend, Sweet Tobacco, Menthol, Mango Milkshake, and Berry Mix. Available in store at ROX Tech Solutions Cashel.",
+    features: ["10ml TPD Compliant Bottles", "American Blend & Tobacco", "Menthol, Berry & Mango Mix", "Multiple Nicotine Strengths"]
+  },
+  {
     id: 12,
     name: "Lost Mary BM600 Orange Ice Disposable",
     brand: "lostmary",
@@ -371,9 +384,26 @@ export default function VapeShopPage() {
   // Selected product for Modal Popup
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
 
+  // 18+ Age Verification Modal State
+  const [showAgeModal, setShowAgeModal] = useState<boolean>(false);
+
   useEffect(() => {
     fetchVapesProducts();
+
+    const isVerified = sessionStorage.getItem("rox_age_verified");
+    if (!isVerified) {
+      setShowAgeModal(true);
+    }
   }, []);
+
+  const handleConfirmAge = () => {
+    sessionStorage.setItem("rox_age_verified", "true");
+    setShowAgeModal(false);
+  };
+
+  const handleRejectAge = () => {
+    window.location.href = "/";
+  };
 
   const fetchVapesProducts = async () => {
     try {
@@ -422,6 +452,63 @@ export default function VapeShopPage() {
   return (
     <main className="w-full bg-[#F1F5F9] min-h-screen text-[#0F172A] font-sans relative z-0">
 
+      {/* ================= 0. 18+ AGE VERIFICATION POPUP MODAL ================= */}
+      {showAgeModal && (
+        <div
+          className="fixed inset-0 z-[999999] flex items-center justify-center p-4 bg-[#0F172A]/85 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="age-gate-title"
+        >
+          <div className="bg-white border border-slate-200 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl text-center space-y-5 relative overflow-hidden">
+            {/* Top Orange Accent Strip */}
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#F97316] via-amber-500 to-[#F97316]" />
+
+            {/* 18+ Circular Badge */}
+            <div className="mx-auto w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-[#F97316]">
+              <span className="text-2xl font-black tracking-tighter">18+</span>
+            </div>
+
+            <div className="space-y-2">
+              <h2
+                id="age-gate-title"
+                className="text-xl sm:text-2xl font-black text-[#0F172A] tracking-tight"
+              >
+                Age Verification Required
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                The vaping products, e-liquids, and nicotine pouches displayed on this page are strictly intended for adults aged{" "}
+                <strong className="text-[#0F172A]">18 years or older</strong> in Ireland.
+              </p>
+            </div>
+
+            {/* Legal Notice Box */}
+            <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center gap-2.5 text-left">
+              <ShieldAlert className="w-4 h-4 text-[#F97316] shrink-0" />
+              <p className="text-[11px] text-slate-500 leading-snug">
+                Valid photo ID (Passport, Driving Licence, or Garda Age Card) is required for all in-store collections at our Cashel branches.
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
+              <button
+                onClick={handleConfirmAge}
+                className="flex-1 bg-[#F97316] hover:bg-[#EA580C] text-white py-3.5 px-5 rounded-xl text-xs font-bold transition shadow-md cursor-pointer"
+              >
+                Yes, I am 18 or Older
+              </button>
+              <button
+                onClick={handleRejectAge}
+                className="sm:w-28 bg-slate-100 hover:bg-slate-200 text-slate-700 py-3.5 px-4 rounded-xl text-xs font-bold transition cursor-pointer"
+              >
+                Exit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ================= 1. HERO BANNER SECTION ================= */}
       <section className="relative w-full bg-[#D1D5DB] overflow-hidden border-b border-gray-300/60" aria-label="Vape Shop Hero">
         <div className="hidden lg:block">
@@ -441,9 +528,15 @@ export default function VapeShopPage() {
 
           <div className="relative z-10 max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
             <div className="max-w-xl space-y-6">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
-                <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
-                <span>Cashel, Ireland</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+                  <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+                  <span>Cashel, Ireland</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0F172A] text-white text-xs font-bold shadow-xs">
+                  <span className="text-[#F97316] font-black">18+</span>
+                  <span>Adults Only • ID Required</span>
+                </div>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
@@ -480,9 +573,15 @@ export default function VapeShopPage() {
         {/* Mobile Hero View */}
         <div className="block lg:hidden px-5 py-8 space-y-6">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
-              <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
-              <span>Cashel, Ireland</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+                <MapPin className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+                <span>Cashel, Ireland</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0F172A] text-white text-xs font-bold shadow-xs">
+                <span className="text-[#F97316] font-black">18+</span>
+                <span>Adults Only</span>
+              </div>
             </div>
 
             <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
@@ -594,6 +693,7 @@ export default function VapeShopPage() {
                   { name: "Loomix", key: "loomix" },
                   { name: "Elfbar", key: "elfbar" },
                   { name: "Hale Vaping", key: "hale" },
+                  { name: "LIQUA", key: "liqua" },
                   { name: "Innokin", key: "innokin" },
                   { name: "Elfliq", key: "elfliq" },
                   { name: "IVG", key: "ivg" },
