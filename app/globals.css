@@ -7,26 +7,19 @@ html {
 
 /* 🏙️ ABSOLUTE RE-ENGINEERED BASE STYLES FOR ROX TECH */
 body {
-  background-color: #C0C0C0; /* Light Silver/Grey luxury background base */
-  color: #0F172A; /* Dark Slate high-contrast typography for readability */
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background-color: #C0C0C0;
+  color: #0F172A;
+  font-family: var(--font-jakarta), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* 🎛️ CLEAN FOCUS RESETS (Consolidated) */
-*:focus,
-*:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
 }
 
 /* ⚡ TAILWIND V4 THEME BINDINGS */
 @theme inline {
   --font-serif: var(--font-jakarta), sans-serif;
   --font-sans: var(--font-jakarta), sans-serif;
-  
+
   /* ROX Brand Custom Theme Colors */
   --color-rox-silver: #C0C0C0;
   --color-rox-orange: #F97316;
@@ -47,10 +40,37 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Custom Scrollbar for Sleek European Retail Look */
+/* ⚡ NAVBAR ANNOUNCEMENT MARQUEE ANIMATION */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ⚡ HIDE HORIZONTAL SCROLLBAR ON MOBILE CATEGORY SLIDERS */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Vertical Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -58,7 +78,7 @@ body {
   background: #E5E7EB;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C0C0C0;
+  background: #9CA3AF;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
