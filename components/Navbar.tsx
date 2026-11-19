@@ -28,6 +28,7 @@ export default function Navbar() {
     { name: "Shop", href: "/shop" },
     { name: "Vapes", href: "/vapes" },
     { name: "Repairs", href: "/repairs" },
+    { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
@@ -226,7 +227,9 @@ export default function Navbar() {
           </div>
 
           {navLinks.slice(4).map((link) => {
-            const isActive = pathname === link.href;
+            const isActive =
+              pathname === link.href ||
+              (link.href === "/blog" && pathname?.startsWith("/blog/"));
             return (
               <Link
                 key={link.name}
@@ -331,7 +334,9 @@ export default function Navbar() {
         <div className="lg:hidden bg-white border-b border-gray-300 px-4 pt-3 pb-6 space-y-4 shadow-xl animate-fadeIn">
           <div className="flex flex-col space-y-3 font-bold text-sm text-[#0F172A]">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive =
+                pathname === link.href ||
+                (link.href === "/blog" && pathname?.startsWith("/blog/"));
               return (
                 <Link
                   key={link.name}

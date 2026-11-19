@@ -256,6 +256,7 @@ export default function Footer() {
                 { name: "Shop", href: "/shop" },
                 { name: "Vapes", href: "/vapes" },
                 { name: "Repairs", href: "/repairs" },
+                { name: "Blog", href: "/blog" },
                 { name: "Unit 3 Store", href: "/cashel-shopping-centre" },
                 { name: "Bank Place Store", href: "/bank-place-cashel" },
                 { name: "About", href: "/about" },

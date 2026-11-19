@@ -1861,7 +1861,7 @@ function ShopContent() {
                               quality={80}
                               unoptimized={isExternalUrl}
                               sizes="(max-width: 640px) 90vw, (max-width: 1280px) 45vw, 22vw"
-                              className="object-contain transition-transform duration-300 scale-110"
+                              className="object-contain transition-transform duration-300 scale-100"
                             />
                           </div>
                           <div className="space-y-1">

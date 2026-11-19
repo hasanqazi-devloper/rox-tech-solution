@@ -1,339 +1,423 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { 
-  Calendar, 
-  Clock, 
-  User, 
-  ArrowRight, 
-  Search, 
-  Tag,
-  
-  BookOpen,
+import { useState, useMemo } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { BLOG_POSTS } from "@/app/data/blogsData";
+import {
+  MapPin,
+  Search,
+  Wrench,
+  Lightbulb,
+  Home,
+  Flame,
   ChevronRight,
-  ArrowDown
-} from 'lucide-react';
+  CircleDot,
+  LayoutGrid,
+  Star,
+  Clock,
+  Calendar,
+  ArrowRight,
+  MessageCircle
+} from "lucide-react";
 
-export default function BlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+const CATEGORIES = [
+  { label: "All Guides", value: "All", icon: LayoutGrid },
+  { label: "Phone Repairs", value: "Phone Repairs", icon: Wrench },
+  { label: "Buying Tips", value: "Buying Tips", icon: Lightbulb },
+  { label: "Vape Hub 18+", value: "Vape Hub 18+", icon: Flame }
+];
 
-  // Categories List
-  const categories = ['All', 'Export Guide', 'Quality & Standards', 'Market Analysis', 'Pistachio Varieties'];
+export default function BlogHubPage() {
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Sample Blog Posts Data
-  const blogPosts = [
-    {
-      id: '1',
-      title: 'Guide to Importing Iranian Pistachios: Quality, Grading & Logistics',
-      slug: 'guide-to-importing-iranian-pistachios',
-      excerpt: 'Comprehensive guide for international buyers on understanding pistachio sizes (ounce counts), moisture levels, and export documentation.',
-      category: 'Export Guide',
-      author: 'Ali Fathi Nasab',
-      date: 'September 18, 2026',
-      readTime: '6 min read',
-      image: '/p4.png',
-      featured: true
-    },
-    {
-      id: '2',
-      title: 'Understanding EU Aflatoxin Regulations for Pistachio Exports',
-      slug: 'eu-aflatoxin-regulations-pistachio-export',
-      excerpt: 'How strict HPLC laboratory testing and proper vacuum processing ensure 100% compliance with European import standards.',
-      category: 'Quality & Standards',
-      author: 'Hossein Fathi Nasab',
-      date: 'September 12, 2026',
-      readTime: '4 min read',
-      image: '/about.png',
-      featured: false
-    },
-    {
-      id: '3',
-      title: 'Akbari vs. Fandoghi: Which Pistachio Variety Fits Your Market?',
-      slug: 'akbari-vs-fandoghi-pistachio-comparison',
-      excerpt: 'A detailed commercial breakdown comparing long Super Long Akbari pistachios with round Fandoghi varieties for bulk trade.',
-      category: 'Pistachio Varieties',
-      author: 'Naser Haji Abadi',
-      date: 'August 28, 2026',
-      readTime: '5 min read',
-      image: '/p2.png',
-      featured: false
-    },
-    {
-      id: '4',
-      title: 'Global Pistachio Price Trends & Supply Chain Forecast 2026-2027',
-      slug: 'global-pistachio-price-trends-2026',
-      excerpt: 'In-depth market analysis on harvest yields in Razavi Khorasan, global demand shifts, and shipping route optimization.',
-      category: 'Market Analysis',
-      author: 'Hossein Fathi Nasab',
-      date: 'August 15, 2026',
-      readTime: '7 min read',
-      image: '/p-bag.png',
-      featured: false
-    }
-  ];
+  const featuredPost = useMemo(
+    () => BLOG_POSTS.find((post) => post.featured) || BLOG_POSTS[0],
+    []
+  );
 
-  // Filtering Logic
-  const filteredPosts = blogPosts.filter((post) => {
-    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredPosts = useMemo(() => {
+    return BLOG_POSTS.filter((post) => {
+      if (activeCategory === "All" && !searchQuery.trim() && post.id === featuredPost.id) {
+        return false;
+      }
+      const matchesCategory =
+        activeCategory === "All" || post.category === activeCategory;
+      const query = searchQuery.toLowerCase().trim();
+      const matchesSearch =
+        !query ||
+        post.title.toLowerCase().includes(query) ||
+        post.excerpt.toLowerCase().includes(query) ||
+        post.category.toLowerCase().includes(query);
 
-  const featuredPost = blogPosts.find((post) => post.featured) || blogPosts[0];
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery, featuredPost.id]);
+
+  const getCategoryIcon = (category: string) => {
+    if (category === "Phone Repairs") return <Wrench className="w-3.5 h-3.5" />;
+    if (category === "Buying Tips") return <Lightbulb className="w-3.5 h-3.5" />;
+    return <Flame className="w-3.5 h-3.5" />;
+  };
 
   return (
-    <div className="bg-[#0B2B22] text-[#F4F0E6] min-h-screen selection:bg-[#C5922E] selection:text-[#0B2B22]">
+    <main className="w-full bg-[#F1F5F9] min-h-screen text-[#0F172A] font-sans">
+      {/* ================= 1. HERO HEADER SECTION ================= */}
+    {/* ================= 1. HERO HEADER SECTION (MATCHING STORE HERO STYLE) ================= */}
+      <section className="relative w-full bg-[#C0C0C0] overflow-hidden border-b border-gray-300/80">
+        
+        {/* ================= DESKTOP VIEW ================= */}
+        <div className="hidden lg:flex relative min-h-[480px] xl:min-h-[520px] items-center">
+          <div className="absolute inset-0 w-full h-full flex justify-end">
+            <div className="relative w-full lg:w-[65%] h-full">
+              <Image
+                src="/blog-hero.png"
+                alt="Tech Repair Guides & Vape Insights - ROX Tech Solutions Cashel"
+                fill
+                priority
+                sizes="65vw"
+                className="object-cover object-center brightness-105 contrast-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#C0C0C0] via-[#C0C0C0]/80 lg:via-[#C0C0C0]/30 to-transparent" />
+            </div>
+          </div>
 
-   
+          <div className="relative z-10 w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 py-14">
+            <div className="max-w-2xl space-y-5">
+              {/* Breadcrumb Pill */}
+              <nav className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-800 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-300 shadow-xs">
+                <Home className="w-3.5 h-3.5 text-[#F97316]" />
+                <Link href="/" className="hover:text-[#F97316] transition">
+                  Home
+                </Link>
+                <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+                <span className="text-[#0F172A] font-black">Blog &amp; Guides</span>
+              </nav>
 
-<section className="relative bg-[#0B2B22] text-[#F4F0E6] overflow-hidden py-16 md:py-18 border-b border-[#1A4337]">
-  {/* Background Image & Dark Overlay */}
-  <div className="absolute inset-0 z-0">
-    <Image
-      src="https://images.unsplash.com/photo-1756749442845-4973b7cede48?auto=format&fit=crop&w=1920&q=100"
-      alt="International Export Shipping Logistics"
-      fill
-      priority
-      unoptimized
-      className="object-cover object-center opacity-40 -scale-x-100"
-    />
-    <div className="absolute inset-0 bg-gradient-to-r from-[#0B2B22]/90 via-[#0B2B22]/60 to-transparent" />
-  </div>
-
-  {/* Hero Content */}
-  <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-    <div className="max-w-3xl space-y-7 text-left">
-  
-
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight uppercase leading-tight">
-        <span className="text-[#F4F0E6]">EXPORTS &amp; TRADE </span>
-        <span className="text-[#C5922E] drop-shadow-[0_0_25px_rgba(197,146,46,0.3)]">BLOG</span>
-      </h1>
-
-      <p className="text-[#F4F0E6]/80 text-sm md:text-base leading-relaxed">
-        Latest market trends, quality compliance updates, and practical import guides directly from our executive team.
-      </p>
-
-      <div className="pt-2">
-        <a
-          href="#articles"
-          className="inline-flex items-center gap-3 bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] font-black text-xs uppercase tracking-wider px-8 py-4 rounded-xl transition-all duration-300 shadow-xl shadow-[#C5922E]/20 hover:shadow-[#C5922E]/40 transform active:scale-95 group"
-        >
-          <span>EXPLORE LATEST ARTICLES</span>
-          <ArrowDown className="w-4 h-4 stroke-[3] transition-transform duration-300 group-hover:translate-y-1" />
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-      {/* 2. FEATURED ARTICLE SECTION */}
-      {featuredPost && (
-        <section className="py-12 bg-[#133A2E] border-b border-[#1A4337]">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <div className="bg-[#0B2B22] border border-[#1A4337] rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 group hover:border-[#C5922E]/50 transition-all duration-300 shadow-2xl">
-              
-              {/* Image Side */}
-              <div className="lg:col-span-6 relative h-72 sm:h-96 lg:h-auto bg-[#133A2E] overflow-hidden">
-                <Image
-                  src={featuredPost.image}
-                  alt={featuredPost.title}
-                  fill
-                  priority
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest bg-[#C5922E] text-[#0B2B22] px-3 py-1 rounded-full">
-                    Featured Post
-                  </span>
+              {/* Location Status Pill */}
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+                  <CircleDot className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+                  <span>Cashel, Ireland • Tech &amp; Vape Hub</span>
                 </div>
               </div>
 
-              {/* Content Side */}
-              <div className="lg:col-span-6 p-8 sm:p-12 flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 text-xs text-[#C5922E] font-bold">
-                    <span className="bg-[#133A2E] border border-[#1A4337] px-3 py-1 rounded-full">
-                      {featuredPost.category}
-                    </span>
-                    <span className="flex items-center gap-1 text-[#F4F0E6]/60">
-                      <Clock className="w-3.5 h-3.5" />
-                      {featuredPost.readTime}
-                    </span>
+              {/* Main H1 Heading */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] leading-[1.15] tracking-tight">
+                Tech Repair Guides <br /> &amp; Vape <span className="text-[#F97316]">Insights</span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed max-w-lg">
+                Expert tips, local updates and honest advice from ROX Tech Solutions in Cashel, Co. Tipperary.
+              </p>
+
+              {/* Integrated Search Bar */}
+              <div className="pt-1 max-w-xl">
+                <div className="flex items-center bg-white border border-gray-300 rounded-full p-1.5 shadow-md focus-within:border-[#F97316] transition">
+                  <div className="pl-4 pr-2 text-slate-400">
+                    <Search className="w-4 h-4" />
                   </div>
-
-                  <h2 className="text-2xl sm:text-3xl font-black text-[#F4F0E6] group-hover:text-[#C5922E] transition-colors leading-tight">
-                    {featuredPost.title}
-                  </h2>
-
-                  <p className="text-xs sm:text-sm text-[#F4F0E6]/70 leading-relaxed">
-                    {featuredPost.excerpt}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-[#1A4337] flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs text-[#F4F0E6]/80 font-medium">
-                    <User className="w-4 h-4 text-[#C5922E]" />
-                    <span>{featuredPost.author}</span>
-                  </div>
-
-                  <button className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#C5922E] hover:text-[#F4F0E6] transition-colors">
-                    <span>Read Article</span>
-                    <ArrowRight className="w-4 h-4" />
+                  <input
+                    type="text"
+                    placeholder="Search repair guides, iPhone tips, vapes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    aria-label="Search blog articles"
+                    className="w-full bg-transparent text-xs sm:text-sm text-[#0F172A] placeholder:text-slate-400 outline-none py-2"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className="text-xs text-slate-400 hover:text-slate-600 px-2 font-semibold cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="bg-[#F97316] hover:bg-[#EA580C] text-white px-6 py-2.5 rounded-full text-xs font-bold transition shadow-xs shrink-0 cursor-pointer"
+                  >
+                    Search
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
+        {/* ================= MOBILE VIEW ================= */}
+        <div className="block lg:hidden px-5 py-8 space-y-6">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-xs font-bold text-[#0F172A] shadow-xs">
+              <CircleDot className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" />
+              <span>Cashel, Ireland • Tech &amp; Vape Hub</span>
+            </div>
+
+            <h1 className="text-3xl font-black text-[#0F172A] leading-tight tracking-tight">
+              Tech Repair Guides &amp; Vape <span className="text-[#F97316]">Insights</span>
+            </h1>
+
+            <p className="text-xs text-gray-800 font-medium leading-relaxed">
+              Expert tips, local updates and honest advice from ROX Tech Solutions in Cashel, Co. Tipperary.
+            </p>
+
+            {/* Mobile Search Bar */}
+            <div className="flex items-center bg-white border border-gray-300 rounded-full p-1 shadow-sm">
+              <div className="pl-3.5 pr-2 text-slate-400">
+                <Search className="w-4 h-4" />
+              </div>
+              <input
+                type="text"
+                placeholder="Search guides, iPhone tips..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search blog articles"
+                className="w-full bg-transparent text-xs text-[#0F172A] placeholder:text-slate-400 outline-none py-2"
+              />
+              <button
+                type="button"
+                className="bg-[#F97316] text-white px-5 py-2 rounded-full text-xs font-bold shrink-0"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+
+          <div className="w-full rounded-2xl overflow-hidden shadow-md border border-gray-300/80 aspect-[16/9] bg-white relative">
+            <Image
+              src="/blog-hero.png"
+              alt="Tech Repair Guides & Vape Insights"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
+        </div>
+
+        {/* ================= BOTTOM CATEGORY FILTER PATTI (WHITE BAR) ================= */}
+        <div className="w-full bg-white border-t border-gray-300/80 shadow-sm py-4 px-6 sm:px-10 lg:px-16">
+          <div className="max-w-[1680px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+              {CATEGORIES.map((cat) => {
+                const Icon = cat.icon;
+                const isActive = activeCategory === cat.value;
+                return (
+                  <button
+                    key={cat.value}
+                    onClick={() => setActiveCategory(cat.value)}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border ${
+                      isActive
+                        ? "bg-[#F97316] text-white border-[#F97316] shadow-sm"
+                        : "bg-slate-50 text-slate-700 border-slate-300 hover:border-[#F97316] hover:text-[#F97316]"
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>{cat.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="hidden md:flex items-center gap-2 text-xs font-bold text-[#0F172A]">
+              <MapPin className="w-4 h-4 text-[#F97316]" />
+              <span>Local Guides by ROX Tech Cashel</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      {/* ================= 2. FEATURED EDITOR'S PICK BANNER ================= */}
+      {activeCategory === "All" && !searchQuery.trim() && (
+        <section className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-14 pt-6">
+          <div className="bg-white border border-slate-300 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all grid grid-cols-1 lg:grid-cols-12">
+            {/* Left Image */}
+            <div className="lg:col-span-7 relative min-h-[240px] sm:min-h-[320px] bg-slate-900">
+              <Image
+                src={featuredPost.image}
+                alt={featuredPost.title}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="object-cover"
+              />
+              <div className="absolute top-4 left-4 bg-[#F97316] text-white px-3.5 py-1.5 rounded-full text-xs font-bold inline-flex items-center gap-1.5 shadow-md">
+                <Star className="w-3.5 h-3.5 fill-white" />
+                <span>Editor&apos;s Pick</span>
+              </div>
+            </div>
+
+            {/* Right Content */}
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-center space-y-4">
+              <div className="flex items-center gap-4 text-xs font-bold text-slate-600">
+                <span className="inline-flex items-center gap-1.5 text-[#0F172A]">
+                  <Wrench className="w-3.5 h-3.5 text-[#F97316]" />
+                  {featuredPost.category}
+                </span>
+                <span className="inline-flex items-center gap-1 text-slate-500 font-semibold">
+                  <Clock className="w-3.5 h-3.5" />
+                  {featuredPost.readTime}
+                </span>
+              </div>
+
+              <h2 className="text-xl sm:text-2xl lg:text-[26px] font-black text-[#0F172A] leading-snug tracking-tight">
+                {featuredPost.title}
+              </h2>
+
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {featuredPost.excerpt}
+              </p>
+
+              <div className="pt-2">
+                <Link
+                  href={`/blog/${featuredPost.slug}`}
+                  className="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white px-6 py-3 rounded-full text-xs font-bold transition shadow-md"
+                >
+                  <span>Read Full Guide</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
       )}
 
-      {/* 3. FILTER & SEARCH BAR */}
-      <section className="py-8 bg-[#0B2B22] border-b border-[#1A4337] sticky top-0 z-20 backdrop-blur-md bg-[#0B2B22]/90">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-          
-          {/* Categories Filter */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`text-xs font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-all duration-300 border ${
-                  selectedCategory === cat
-                    ? 'bg-[#C5922E] text-[#0B2B22] border-[#C5922E]'
-                    : 'bg-[#133A2E] text-[#F4F0E6]/80 border-[#1A4337] hover:border-[#C5922E]/50'
-                }`}
+      {/* ================= 3. BLOG ARTICLES 3-COLUMN GRID ================= */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-14 py-8">
+        {filteredPosts.length === 0 ? (
+          <div className="bg-white border border-slate-300 rounded-2xl p-10 text-center space-y-3">
+            <h3 className="text-lg font-black text-[#0F172A]">No matching guides found</h3>
+            <p className="text-xs text-slate-500">
+              Try searching a different keyword or reset the category filter.
+            </p>
+            <button
+              onClick={() => {
+                setActiveCategory("All");
+                setSearchQuery("");
+              }}
+              className="bg-[#F97316] text-white px-5 py-2.5 rounded-full text-xs font-bold cursor-pointer"
+            >
+              Show All Guides
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredPosts.map((post) => (
+              <article
+                key={post.id}
+                className="bg-white border border-slate-300 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#F97316]/60 transition-all duration-300 flex flex-col justify-between group"
               >
-                {cat}
-              </button>
-            ))}
-          </div>
+                <div>
+                  {/* Card Image */}
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="block relative w-full h-52 bg-slate-100 overflow-hidden"
+                  >
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute top-3 left-3 bg-[#0F172A]/90 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1 rounded-full inline-flex items-center gap-1.5 shadow-sm">
+                      {getCategoryIcon(post.category)}
+                      <span>{post.category}</span>
+                    </span>
+                  </Link>
 
-          {/* Search Box */}
-          <div className="relative w-full md:w-72">
-            <input
-              type="text"
-              placeholder="Search articles..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#133A2E] border border-[#1A4337] focus:border-[#C5922E] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#F4F0E6] outline-none transition"
-            />
-            <Search className="w-4 h-4 text-[#C5922E] absolute left-3.5 top-3" />
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. ARTICLES GRID */}
-      <section className="py-16 bg-[#0B2B22]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-10">
-          
-          {filteredPosts.length === 0 ? (
-            <div className="text-center py-16 space-y-3 bg-[#133A2E] border border-[#1A4337] rounded-3xl">
-              <BookOpen className="w-10 h-10 text-[#C5922E] mx-auto opacity-60" />
-              <h3 className="text-lg font-bold text-[#F4F0E6]">No articles found</h3>
-              <p className="text-xs text-[#F4F0E6]/60">Try searching for another keyword or change the category filter.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="bg-[#133A2E] border border-[#1A4337] rounded-3xl overflow-hidden flex flex-col justify-between hover:border-[#C5922E]/50 transition-all duration-300 group shadow-lg"
-                >
-                  <div>
-                    {/* Card Image Header */}
-                    <div className="relative h-56 w-full bg-[#0B2B22] overflow-hidden">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <span className="text-[10px] font-black uppercase tracking-widest bg-[#0B2B22]/90 text-[#C5922E] border border-[#1A4337] px-3 py-1 rounded-full backdrop-blur-md">
-                          {post.category}
-                        </span>
-                      </div>
+                  {/* Card Body */}
+                  <div className="p-5 space-y-2.5">
+                    <div className="flex items-center gap-3 text-[11px] text-slate-500 font-semibold">
+                      <span className="inline-flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                        {post.date}
+                      </span>
+                      <span>|</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-slate-400" />
+                        {post.readTime}
+                      </span>
                     </div>
 
-                    {/* Card Content */}
-                    <div className="p-6 space-y-3">
-                      <div className="flex items-center gap-3 text-[11px] text-[#F4F0E6]/60">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3 text-[#C5922E]" />
-                          {post.date}
-                        </span>
-                        <span>•</span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3 text-[#C5922E]" />
-                          {post.readTime}
-                        </span>
-                      </div>
-
-                      <h3 className="text-lg font-black text-[#F4F0E6] group-hover:text-[#C5922E] transition-colors leading-snug line-clamp-2">
+                    <Link href={`/blog/${post.slug}`}>
+                      <h3 className="text-base sm:text-lg font-black text-[#0F172A] leading-snug line-clamp-2 group-hover:text-[#F97316] transition-colors">
                         {post.title}
                       </h3>
+                    </Link>
 
-                      <p className="text-xs text-[#F4F0E6]/70 leading-relaxed line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                      {post.excerpt}
+                    </p>
                   </div>
+                </div>
 
-                  {/* Card Footer */}
-                  <div className="p-6 pt-0 space-y-4">
-                    <div className="border-t border-[#1A4337] pt-4 flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-[11px] text-[#F4F0E6]/80">
-                        <User className="w-3.5 h-3.5 text-[#C5922E]" />
-                        <span>{post.author}</span>
-                      </div>
+                {/* Card Footer */}
+                <div className="px-5 pb-5 pt-2 flex items-center justify-between">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#F97316] hover:text-[#EA580C] transition"
+                  >
+                    <span>Read Article</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
 
-                      <button className="inline-flex items-center gap-1 text-xs font-bold text-[#C5922E] hover:text-[#F4F0E6] transition-colors">
-                        <span>Read</span>
-                        <ChevronRight className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
+                  <a
+                    href={`https://wa.me/353896091839?text=Hi%20ROX%20Tech%20Cashel,%20I%20just%20read%20your%20guide:%20${encodeURIComponent(
+                      post.title
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Ask on WhatsApp"
+                    className="w-8 h-8 rounded-full bg-[#22C55E] hover:bg-[#1ea950] text-white flex items-center justify-center shadow-xs transition"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ================= 4. BOTTOM LOCAL CONVERSION CTA BANNER ================= */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-14 pb-12">
+        <div className="bg-[#0F172A] rounded-2xl p-6 sm:p-8 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl border border-slate-800 relative overflow-hidden">
+          <div className="flex items-center gap-4 text-center sm:text-left flex-col sm:flex-row z-10">
+            <div className="w-12 h-12 rounded-2xl bg-[#F97316]/15 border border-[#F97316]/30 flex items-center justify-center shrink-0">
+              <Wrench className="w-6 h-6 text-[#F97316]" />
             </div>
-          )}
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-black text-white tracking-tight">
+              Need a Fast Repair Quote or Stock Check in{" "}
+              <span className="text-[#F97316]">Cashel?</span>
+            </h2>
+          </div>
 
-        </div>
-      </section>
-
-      {/* 5. NEWSLETTER / TRADE UPDATES SECTION */}
-      <section className="py-16 bg-[#133A2E] border-t border-[#1A4337]">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-6">
-          <span className="text-xs font-black uppercase tracking-widest text-[#C5922E]">Stay Informed</span>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#F4F0E6]">
-            Subscribe to Iranian Pistachio Market Reports
-          </h2>
-          <p className="text-xs sm:text-sm text-[#F4F0E6]/70 max-w-xl mx-auto leading-relaxed">
-            Get monthly price updates, harvest reports, and regulatory compliance changes delivered directly to your inbox.
-          </p>
-
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2">
-            <input
-              type="email"
-              placeholder="Enter your corporate email..."
-              className="w-full bg-[#0B2B22] border border-[#1A4337] focus:border-[#C5922E] rounded-xl px-4 py-3 text-xs text-[#F4F0E6] outline-none transition"
-            />
-            <button
-              type="submit"
-              className="w-full sm:w-auto bg-[#C5922E] hover:bg-[#B38226] text-[#0B2B22] font-black text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shrink-0 shadow-lg"
+          <div className="flex flex-wrap items-center justify-center gap-3 z-10">
+            <Link
+              href="/repairs"
+              className="bg-[#F97316] hover:bg-[#EA580C] text-white px-6 py-3 rounded-full text-xs font-bold inline-flex items-center gap-2 transition shadow-md"
             >
-              Subscribe
-            </button>
-          </form>
+              <span>Book a Repair</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <a
+              href="https://wa.me/353896091839"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#22C55E] hover:bg-[#1ea950] text-white px-6 py-3 rounded-full text-xs font-bold inline-flex items-center gap-2 transition shadow-md"
+            >
+              <MessageCircle className="w-4 h-4 fill-white" />
+              <span>Chat on WhatsApp</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </section>
-
-    </div>
+    </main>
   );
 }
